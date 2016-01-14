@@ -33,8 +33,6 @@
       this.$element.on('input keyup', function(event) {
         var $window = $(window);
         var currentScrollPosition = $window.scrollTop();
-        console.log('height:', height);
-        console.log('other:', this.scrollHeight-diff);
 
         $(this)
           .height(0)
