@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+app.io = require('socket.io')();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,5 +57,15 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// Start listen with socket.io
+app.io.on('connection', function (socket) {
+  console.log('socket connection the dream');
+
+  // Socket listeners
+  socket.on('test msg', function (msg) {
+    console.log('received message:', msg);
+    app.io.emit('we did it reddit', 'hi client. love, server.');
+  });
+});
 
 module.exports = app;
