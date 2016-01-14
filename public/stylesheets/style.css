@@ -13,11 +13,20 @@ a {
   color: black;
   width: 100%;
   height: 100px;
+  vertical-align: bottom;
   outline: none;
   resize: none;
   padding: 10px;
   border: none;
-  background: #e6e6e6;
+  background: #f1f1f1;
+}
+.additions-meta-skip {
+  display: block;
+  margin-top: 4px;
+}
+.additions-meta-submit {
+  display: block;
+  margin-top: 4px;
 }
 .additions-main {
   display: inline-block;
