@@ -3,6 +3,9 @@
 
   <head>
     <title><%= title %></title>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
+    <script src='/javascripts/textarea_autosize.js'></script>
+    <script src='/javascripts/room.js'></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
 
@@ -20,6 +23,11 @@
         </div>
         <% if (userTurn) { %>
         <div class='user-additions'>
+          <div class='additions-meta'>
+          </div>
+          <div class='additions-main'>
+            <textarea class='user-addition-input' placeholder='Add your contribution here...'></textarea>
+          </div>
         </div>
         <% } %>
       </div>

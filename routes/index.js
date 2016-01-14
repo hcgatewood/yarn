@@ -24,7 +24,7 @@ router.get('/rooms/:roomName', function(req, res, next) {
             res.render('room', {
                 title: roomName,
                 contributions: room.contributions,
-                userTurn: false
+                userTurn: true
             });
         });
     });

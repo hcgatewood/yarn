@@ -7,25 +7,47 @@ a {
   color: #00B7FF;
 }
 
-
 /* Room page */
+.user-addition-input {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: black;
+  width: 100%;
+  height: 100px;
+  outline: none;
+  resize: none;
+  padding: 10px;
+  border: none;
+  background: #e6e6e6;
+}
+.additions-main {
+  display: inline-block;
+  width: 75%;
+}
+.additions-meta {
+  display: inline-block;
+  width: 20%;
+}
+.user-additions {
+  width: 100%;
+}
+
 .story-container {
-    width: 60%;
+  width: 60%;
 }
 .story-text {
-    white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 .contribution {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .contribution-username {
-    width: 20%;
-    /*float: left;*/
-    display: inline-block;
-    vertical-align: top;
+  width: 20%;
+  /*float: left;*/
+  display: inline-block;
+  vertical-align: top;
 }
 .contribution-text {
-    width: 75%;
-    /*float: right;*/
-    display: inline-block;
+  width: 75%;
+  /*float: right;*/
+  display: inline-block;
 }
