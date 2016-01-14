@@ -1,3 +1,10 @@
+# Db data file
+db-data
+
+# OURS
+#######
+# DEFAULT
+
 # Logs
 logs
 *.log
