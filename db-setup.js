@@ -6,14 +6,14 @@ var collections = {};
 var roomTextDir = 'bootstrap-data/room-text';
 
 mongo.connect(dbConnectionUrl, function (err, db) {
-    if (err) {
-        console.log('Can not connect to MongoDB. Did you run it?');
-        console.log(err.message);
-        return;
-    }
+  if (err) {
+    console.log('Can not connect to MongoDB. Did you run it?');
+    console.log(err.message);
+    return;
+  }
 
-    collections.users = db.collection('users');
-    collections.rooms = db.collection('rooms');
+  collections.users = db.collection('users');
+  collections.rooms = db.collection('rooms');
 });
 
 

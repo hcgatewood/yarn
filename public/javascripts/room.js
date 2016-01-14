@@ -1,3 +1,3 @@
 $(document).ready(function () {
-    $('.user-addition-input').textareaAutoSize();
+  $('.user-addition-input').textareaAutoSize();
 });
