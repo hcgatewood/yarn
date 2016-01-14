@@ -9,6 +9,23 @@ a {
 
 
 /* Room page */
+.story-container {
+    width: 60%;
+}
 .story-text {
     white-space: pre-wrap;
+}
+.contribution {
+    margin-bottom: 20px;
+}
+.contribution-username {
+    width: 20%;
+    /*float: left;*/
+    display: inline-block;
+    vertical-align: top;
+}
+.contribution-text {
+    width: 75%;
+    /*float: right;*/
+    display: inline-block;
 }

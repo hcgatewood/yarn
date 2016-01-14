@@ -11,13 +11,16 @@
     <div class='room-container'>
       <div class='story-container'>
         <div class='main-story'>
-          <div class='story-text'><%= storyText %></div>
-          <div class='contribution-tags'>
+          <% for (var idx = 0; idx < contributions.length; idx++) { %>
+          <div class='contribution'>
+            <div class='contribution-username'><%= contributions[idx].user %></div>
+            <div class='contribution-text'><%= contributions[idx].text %></div>
           </div>
+          <% } %>
         </div>
         <% if (userTurn) { %>
-          <div class='user-additions'>
-          </div>
+        <div class='user-additions'>
+        </div>
         <% } %>
       </div>
 
