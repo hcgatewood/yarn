@@ -34,9 +34,6 @@ a {
 .story-container {
   width: 60%;
 }
-.story-text {
-  white-space: pre-wrap;
-}
 .contribution {
   margin-bottom: 20px;
 }
@@ -50,4 +47,5 @@ a {
   width: 75%;
   /*float: right;*/
   display: inline-block;
+  white-space: pre-wrap;
 }
