@@ -10,12 +10,12 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET room page. */
-router.get('/room', function(req, res, next) {
+router.get('/rooms/:roomName', function(req, res, next) {
 
     bootstrapSync.reloadRoomData();
 
     // Serve room page with appropriate data
-    var roomName = req.query.roomname;
+    var roomName = req.params.roomName;
     db.rooms.find({_id: roomName}).toArray(function (err, rooms) {
         var numRoomsFound = 0;
         rooms.forEach(function (room) {
