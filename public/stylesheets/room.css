@@ -43,13 +43,11 @@ body {
 }
 .contribution-username {
   width: 20%;
-  /*float: left;*/
   display: inline-block;
   vertical-align: top;
 }
 .contribution-text {
   width: 75%;
-  /*float: right;*/
   display: inline-block;
   white-space: pre-wrap;
 }
