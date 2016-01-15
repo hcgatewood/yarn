@@ -9,6 +9,10 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+app.io = require('socket.io')();
+
+var db = require('./db-setup.js');
+var assert = require('assert');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,5 +60,26 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// Start listen with socket.io
+app.io.on('connection', function (socket) {
+  console.log('Socket connection successful.');
+
+  // Socket listeners
+  // Receiving story update
+  // TODO: gotta make sure user's allowed to post update, etc.
+  socket.on('room contribution', function (data) {
+    var roomName = data.roomName;
+    var text = data.userContribution;
+    console.log('There has been a room contribution');
+    console.log('server recieved:', roomName);
+    console.log('server received:', text);
+    db.rooms.update(
+      {_id: roomName},
+      {$push: {contributions: {user: 'default', text: text}}},
+      function (err) {}
+    );
+    socket.emit('story update', data);
+  });
+});
 
 module.exports = app;

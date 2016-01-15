@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title><%= title %></title>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'></script>
+    <script src='/javascripts/textarea_autosize.js'></script>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='/javascripts/room.js'></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+
+  <body>
+
+    <div class='room-container'>
+      <div class='story-container'>
+        <div class='main-story'>
+          <% for (var idx = 0; idx < contributions.length; idx++) { %>
+          <div class='contribution'>
+            <div class='contribution-username'><%= contributions[idx].user %></div>
+            <div class='contribution-text'><%= contributions[idx].text %></div>
+          </div>
+          <% } %>
+        </div>
+        <% if (userTurn) { %>
+        <div class='user-additions'>
+          <div class='additions-meta'>
+            <div class='additions-meta-timer'>0:16</div>
+            <button class='additions-meta-skip' type='button'>Skip</button>
+            <button class='additions-meta-submit' type='button'>Submit</button>
+          </div>
+          <div class='additions-main'>
+            <textarea class='user-addition-input' placeholder='Add your contribution here...'></textarea>
+          </div>
+        </div>
+        <% } %>
+      </div>
+
+      <div class='meta-container'>
+      </div>
+    </div>
+
+  </body>
+
+</html>
