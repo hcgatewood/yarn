@@ -44,6 +44,7 @@ body {
   margin-bottom: 20px;
 }
 .contribution-username {
+  overflow: hidden;
   width: 20%;
   display: inline-block;
   vertical-align: top;
