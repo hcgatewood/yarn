@@ -9,10 +9,14 @@
     <script src='/socket.io/socket.io.js'></script>
     <script src='/javascripts/room.js'></script>
     <link rel='stylesheet' href='/stylesheets/room.css' />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/navbar.css' />
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
 
+    <%- include partials/navbar.ejs %>
     <div class='room-container'>
       <div class='story-container'>
         <div class='main-story'>

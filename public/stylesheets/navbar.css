@@ -1,0 +1,89 @@
+/*navbar filling*/
+.navbar {
+  height: auto;
+  padding-bottom: 4px;
+  width: 100%; /*navbar fills width of page*/
+  border-radius: 0px;
+  background-color: #329ca9;
+  z-index: 0;
+  margin-bottom: 0px;
+}
+.navbar * {
+  text-decoration: none; /*no underline*/
+}
+.navbar .center {
+  display: table;
+  margin: auto;
+}
+.navbar-item {
+  display: inline-block;
+  white-space: nowrap;
+  margin: 0px 25px; 9px 18px;
+}
+.logo {
+  display: inline-block;
+  text-decoration: none;/*no underline*/
+  position: relative;/*positioned relative to its normal position*/
+  color: white;
+  border: none;
+  font-family: 'Amatic SC', 'HelveticaNeue-Light';
+  font-size: 40px;
+  z-index: 1;
+}
+
+.logo:hover {
+  color: #ff5a5f;
+  text-decoration: none;
+  transition: all 0.3s ease 0.1s;
+}
+/*search*/
+.search-bar {
+  width: 100%;
+  top: 3px;
+  display: table-cell;
+}
+.form-control{
+  border: 1px solid #c4c4c4;
+  border-radius: 2px;
+  background-color: #fff;
+  color: #565a5c;
+}
+.input-group {
+  width: 100%;
+}
+
+#search_button{
+  border-color: #ff5a5f;
+  border-bottom-color: #e00007;
+  background-color: #ff5a5f;
+  color: #fff;
+}
+
+/*settings and other stuff*/
+.navigation {
+  margin-left: 20px;
+  position: relative;
+  top: -5px;
+}
+.navigation .item {
+  position: relative;
+  text-decoration: none;
+  margin:0px 7px 0px 7px;
+  display: inline-block;
+  color: white;
+}
+.glyphicon {
+  font-size: 17px;
+}
+
+.name {
+  font-family: 'Amatic SC', 'HelveticaNeue-Light';
+  font-size: 30px;
+  top: 3px;
+}
+
+.navigation .item:hover {
+  color: #ff5a5f;
+  text-decoration: none;
+  transition: all 0.3s ease 0.1s;
+}

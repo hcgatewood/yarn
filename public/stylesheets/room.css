@@ -1,7 +1,9 @@
 /* Room page */
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 50px;
+}
+.room-container {
+  margin: 40px;
 }
 .user-addition-input {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
