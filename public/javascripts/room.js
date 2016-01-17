@@ -19,14 +19,30 @@ $(document).ready(function () {
   // Receiving story updates
   socket.on('story update', function (data) {
     console.log('story update:', data.userContribution);
+    var nearBottom = nearBottomOfPage();
+    // Add new element
     var contributionParent = $('.main-story');
     var newContribution = $('.contribution').first().clone()
     newContribution.children('.contribution-username').text('default');
     newContribution.children('.contribution-text').text(data.userContribution);
     contributionParent.append(newContribution);
-  })
+    // Scroll to bottom of page
+    if (nearBottom) {
+      $('html, body').animate(
+        {scrollTop: $(document).height()},
+        'slow'
+      );
+    }
+  });
 });
 
+
+function nearBottomOfPage() {
+  var proximityThreshold = 0;
+  var bottomWindow = $(window).scrollTop() + $(window).height();
+  var bottomDocument = $(document).height();
+  return bottomWindow >= bottomDocument - proximityThreshold;
+}
 
 //// Getting URL parameters. Stolen from
 //// http://stackoverflow.com/questions/19491336/get-url-parameter-jquery
