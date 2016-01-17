@@ -1,81 +1,52 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
-        <!--bootstrap-->
-         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <!--css styling--> 
-        <link rel="stylesheet" href="stylesheets/find.css">
-        <!--jquery-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!--client-side javascript-->
-        <script type="text/javascript" src="javascript/find.js"></script>
-        <!--google fonts-->
-        <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
-    </head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Find</title>
+    <!--bootstrap-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!--css styling-->
+    <link rel="stylesheet" href="stylesheets/find.css">
+    <link rel="stylesheet" href="stylesheets/navbar.css">
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!--client-side javascript-->
+    <script type="text/javascript" src="javascripts/find.js"></script>
+    <!--google fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+  </head>
 
-<body>
-<!-- NavBar -->
-    <div class="row" id="nav_bar">
-        <!-- LogoName -->
-        <div class="col-lg-4">
-           <h1 class="pull-left"><a href="http://localhost:3000/">The Rolling Story</a></h1>
-        </div>
+  <body>
+    <!-- NavBar -->
+    <%- include partials/navbar.ejs %>
 
-
-        <!--Search Bar -->
-        <div class="col-lg-4">
-            <div class="center-block">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Find a Story...">
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" id="search_button" type="button"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                     </span>
-                </div>
-            </div>
-        </div>
-
-        <!--Logout & Settings-->
-        <div class="col-lg-4">
-            <h2 class="pull-right" id="button1">
-                <a href="http://localhost:3000/" class="name">Username</a>
-                <a href="http://localhost:3000/" class="dropdown">
-                   <span class="glyphicon glyphicon-cog" style="background:#329CA9" aria-hidden="true"></span>
-                </a>
-                <a href="http://localhost:3000/">
-                    <span class="glyphicon glyphicon-log-out" style="background:#329CA9" aria-hidden="true"></span>
-                </a>
-            </h2>
-        </div>
-    </div>
-<!-- Jumbotron -->
+    <!-- Jumbotron -->
     <div class="jumbotron">
-        <div class="container">
-        </div>
+      <div class="container">
+      </div>
     </div>
-<!--Room Buttons-->
-        <div class="room_buttons">
-            <button id="button_one" type="button">Random Room</button>
-            <button id="button_one" type="button">Custom Room</button>
-        </div>
-<!--Active Friends Row-->
+    <!--Room Buttons-->
+    <div class="room_buttons">
+        <button id="button_one" type="button">Random Room</button>
+        <button id="button_one" type="button">Custom Room</button>
+    </div>
+    <!--Active Friends Row-->
     <h3>Active Friends</h3>
-    <div class="row friends"> 
-        <div class="col-lg-3">
-            <div class="block1"></div>
-        </div>
-        <div class="col-lg-3">
-            <div class="block2"></div>
-        </div>
-        <div class="col-lg-3">
-            <div class="block3"></div>
-        </div>
-        <div class="col-lg-3">
-            <div class="block4"></div>
-        </div>
+    <div class="row friends">
+      <div class="col-lg-3">
+        <div class="block1"></div>
+      </div>
+      <div class="col-lg-3">
+        <div class="block2"></div>
+      </div>
+      <div class="col-lg-3">
+        <div class="block3"></div>
+      </div>
+      <div class="col-lg-3">
+        <div class="block4"></div>
+      </div>
     </div>
 
-    </body>
+  </body>
 </html>

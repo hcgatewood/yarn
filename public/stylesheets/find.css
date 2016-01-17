@@ -1,97 +1,3 @@
-html {
-    color: #222;
-    font-size: 1em;
-    line-height: 1.4;
-}
-
-body{
-    font-family:'Arial';
-    font-size:20px;
-}
-
-/*navbar filling*/
-#nav_bar{
-    text-decoration: none; /*no underline*/
-    display: inline-block; /*coexist on the same line as other elements*/
-    width: 100%; /*navbar fills width of page*/
-    background: #329CA9;/*navbar is a teal-ish color*/
-    position: absolute; /*positioned relative to its first position ancestor*/
-    height:50px; /*height of element on page*/
-    margin: auto; /*center element within parent (the document in this case)*/ 
-    z-index: 0;
-
-}
-/*logo*/
-h1 a {
-    text-decoration: none;/*no underline*/
-    position: relative;/*positioned relative to its normal position*/
-    display: inline-block; /*coexist on the same line as other elements*/
-    color: white;
-    border: none;
-    top:-20px;
-    font: 40px 'Amatic SC';
-}
-
-h1 a:hover {
-    color: #ff5a5f;
-    text-decoration: none;
-    transition: all 0.3s ease 0.1s;
-}
-/*search*/
-.form-control{
-    border: 1px solid #c4c4c4;
-    border-radius: 2px;
-    background-color: #fff;
-    color: #565a5c;
-}
-
-.center_block{
-    position: relative; /*relative to original position*/
-    text-decoration: none; /*no underline*/
-    margin:auto; /*center element within parent (the document in this case)*/
-    display: inline-block; /*coexist on the same line as other elements*/
-    
-    color:white;
-    z-index: 0;
-}
-
-.input-group{
-    margin-top: 8px;
-
-}
-
-#search_button{
-    border-color: #ff5a5f;
-    border-bottom-color: #e00007;
-    background-color: #ff5a5f;
-    color: #fff;
-}
-
-/*settings and other stuff*/
-h2{
-    margin-top: 6px;
-}
-
-h2 a{
-    position: relative;
-    text-decoration: none;
-    margin:0px 40px 0px 0px;
-    display: inline-block;
-    font-size: 17px;
-    color:white;
-  }
-
-.name{
-     font-family: "HelveticaNeue-Light";
-     font-size: 15px;
-}
-
-h2 a:hover {
-    color: #ff5a5f;
-    text-decoration: none;
-    transition: all 0.3s ease 0.1s;
-}
-
 /*jumbotron*/
 .jumbotron {
   background-image: url("http://cdn.playbuzz.com/cdn/5a2b724b-1813-43ab-8f2d-ddee5e459dc6/0098192f-61cc-4c7c-8152-d55b81d13b93.jpg");
@@ -120,7 +26,6 @@ h2 a:hover {
 
 
 #button_one{
-
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 
@@ -177,4 +82,3 @@ h3{
     width: 150px;
     background-color: #B9F5CA;
 }
- 
