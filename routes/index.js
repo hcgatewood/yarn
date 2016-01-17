@@ -1,7 +1,7 @@
 module.exports = function (app, passport) {
   var db = require('../db-setup.js');
   var assert = require('assert');
-  var bootstrapSync = require('../lib/bootstrapSync.js');
+  var bootstrapSync = require('../config/bootstrapSync.js');
   var _ = require('underscore');
 
   // GET home page
