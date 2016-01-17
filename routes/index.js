@@ -16,7 +16,7 @@ router.get('/find', function(req,res){
 /* GET room page. */
 router.get('/rooms/:roomName', function(req, res, next) {
 
-  bootstrapSync.reloadRoomData();
+  //bootstrapSync.reloadRoomData();
 
   // Serve room page with appropriate data
   var roomName = req.params.roomName;

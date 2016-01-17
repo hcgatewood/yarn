@@ -1,4 +1,5 @@
 var express = require('express');
+var socket_io = require('socket.io');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -9,10 +10,10 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-app.io = require('socket.io')();
-
 var db = require('./db-setup.js');
 var assert = require('assert');
+
+app.io = require('socket.io')();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -71,14 +72,14 @@ app.io.on('connection', function (socket) {
     var roomName = data.roomName;
     var text = data.userContribution;
     console.log('There has been a room contribution');
-    console.log('server recieved:', roomName);
-    console.log('server received:', text);
+    console.log('room:', roomName);
+    console.log('text:', text);
     db.rooms.update(
       {_id: roomName},
       {$push: {contributions: {user: 'default', text: text}}},
       function (err) {}
     );
-    socket.emit('story update', data);
+    app.io.sockets.emit('story update', data);
   });
 });
 

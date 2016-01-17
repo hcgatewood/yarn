@@ -18,6 +18,7 @@ $(document).ready(function () {
   });
   // Receiving story updates
   socket.on('story update', function (data) {
+    console.log('story update:', data.userContribution);
     var contributionParent = $('.main-story');
     var newContribution = $('.contribution').first().clone()
     newContribution.children('.contribution-username').text('default');
