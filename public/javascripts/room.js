@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $('.user-addition-input').textareaAutoSize();
+  // var username already defined
 
   var socket = io();
 
@@ -12,6 +13,7 @@ $(document).ready(function () {
     textArea.val('');
     var data = {
       roomName: roomName,
+      username: username,
       userContribution: userContribution
     }
     socket.emit('room contribution', data);
@@ -23,7 +25,7 @@ $(document).ready(function () {
     // Add new element
     var contributionParent = $('.main-story');
     var newContribution = $('.contribution').first().clone()
-    newContribution.children('.contribution-username').text('default');
+    newContribution.children('.contribution-username').text(username);
     newContribution.children('.contribution-text').text(data.userContribution);
     contributionParent.append(newContribution);
     // Scroll to bottom of page

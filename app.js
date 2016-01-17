@@ -1,19 +1,31 @@
 var express = require('express');
-var socket_io = require('socket.io');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 var db = require('./db-setup.js');
 var assert = require('assert');
-
 app.io = require('socket.io')();
+
+// passport
+var mongoose = require('mongoose');
+var passport = require('passport');
+var flash = require('connect-flash');
+var configDB = require('./config/database.js');
+var session = require('express-session');
+mongoose.connect(configDB.url);
+app.use(session({
+  secret: 'be the reason someone smiles today',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());  // persistent login sessions
+require('./config/passport')(passport);  // pass passport for configuration
+app.use(flash());  // use connect-flash for flash messages stored in session
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,8 +39,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+//app.use('/', routes);
+//app.use('/users', users);
+
+// routes
+var routes = require('./routes/index')(app, passport);
+var users = require('./routes/users');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -70,13 +86,15 @@ app.io.on('connection', function (socket) {
   // TODO: gotta make sure user's allowed to post update, etc.
   socket.on('room contribution', function (data) {
     var roomName = data.roomName;
+    var username = data.username;
     var text = data.userContribution;
     console.log('There has been a room contribution');
     console.log('room:', roomName);
+    console.log('user:', username);
     console.log('text:', text);
     db.rooms.update(
       {_id: roomName},
-      {$push: {contributions: {user: 'default', text: text}}},
+      {$push: {contributions: {user: username, text: text}}},
       function (err) {}
     );
     app.io.sockets.emit('story update', data);
