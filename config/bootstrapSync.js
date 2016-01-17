@@ -9,7 +9,7 @@ module.exports = {
     var roomTextDir = 'bootstrap-data/room-text';
     db.rooms.remove();
     db.rooms.insert({
-      _id: 'main-room',
+      _id: 'main',
       contributions: []
     });
     var filenames = fs.readdirSync(roomTextDir);
@@ -22,7 +22,7 @@ module.exports = {
       filePath = path.join(roomTextDir, filename);
       text = fs.readFileSync(filePath, 'utf8');
       db.rooms.update(
-        {_id: 'main-room'},
+        {_id: 'main'},
         {$push: {contributions: {user: filename, text: text}}},
         function (err) {}
       );

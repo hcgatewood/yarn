@@ -17,7 +17,7 @@ module.exports = function (app, passport) {
   // GET room page
   app.get('/rooms/:roomName', function(req, res, next) {
 
-    //bootstrapSync.reloadRoomData();
+    bootstrapSync.reloadRoomData();
 
     var username;
     if (_.has(req, 'user')) {
@@ -63,7 +63,7 @@ module.exports = function (app, passport) {
   });
   // POST signup
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/passport-info',
+    successRedirect: '/rooms/main',
     failureRedirect: '/signup',
     failureFlash: true
   }));
