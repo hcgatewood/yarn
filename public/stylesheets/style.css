@@ -3,46 +3,54 @@ h1 {
     margin: 0;
     border: none;
     padding: 30px;
-    z-index: 0;
+    z-index: 200;
     display: block;
-    height:6.25%;
-    width:320%;
-    position: absolute;
-    left: 0px;
+    height:auto;
+    width:1280px;
+    position: fixed;
+    left: 0%;
     top: -20px; 
     background: #1C91A0;
-    color: white;
-    font: 7.5% "Cooper Std";
 }
 h1 a {
     text-decoration: none;
     margin: 0;
     border: none;
     padding: 20px;
-    z-index: 0;
+    z-index: 200;
     display: block;
-    position: absolute;
-    left: 0px;
-    top: 0px;
+    position: fixed;
+    left: 0%;
+    top: 0%;
     color: white;
     font: 85% "Cooper Std";
 }
-
 h1 a:hover {
     color: #F07450;
     transition: all 0.15s ease 0.1s;
     text-decoration: none;
 }
 
+div h2{
+	position: fixed;
+	text-decoration: none;
+	z-index: 200;
+	text-decoration: none;
+	margin-left: 65%;
+	right: 8px; 
+	color: white;
+	top: 2px;
+	font: 23px "Gill Sans";
+}
 h2 a{
-    position: relative;
-    text-decoration: none;
-    margin-right: 25px;
-    display: inline;
-    font: 23px "Gill Sans";
-    color: white;
-    left: 990px;
-    top: -98px;
+	color: white;
+	font: 23px "Gill Sans";
+	text-decoration: none;
+	margin-right: 20px;
+}
+div h2 :hover{
+	color: #F07450;
+	text-decoration: none;
 }
 h2 a:hover {
     color: #F07450;
@@ -51,30 +59,32 @@ h2 a:hover {
 }
 
 p {
-    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
     padding: 0;
-    color: black;
+    color: white;
     position: relative;
+    z-index: 100;
     text-align: center;
-    left: 390px;
-    top: 520px;
+    left: 25.5%;
+    top: 300px;
     list-style: none;
     margin right: 10px;
-    width: 500px;
+    width: 50%;
     line-height: 10px;
-    font: 25px "Steagal";
+    font: 30px "Steagal" bold;
 }
 
 h3 a {
+	position: relative;
     padding: 15px 15px 15px 15px;
     display: block;
-    width: 195px;
+    width: 16.5%;
     text-align: center;
     text-decoration: none;
 
-    position: relative;
-    top: 480px;
-    left: 536px;
+    top: 470px;
+    left: 41.5%;
 
     background: #F07450;
     /*background-image: -webkit-linear-gradient(top,#F07450,#C7482E);
@@ -90,7 +100,6 @@ h3 a {
     font-size: 20px;
     transition: all 0.15s ease 0.1s;
 }
-
 h3 a:hover {
     background: #1C91A0;
     /*background-image: -webkit-linear-gradient(top,#F45C38,#AA442D);
@@ -102,30 +111,75 @@ h3 a:hover {
     color: white;   
 }
 
-h4 {
-    position: relative;
-    top: 980px;
-    margin: 20px;
-    font: 14px "Times New Roman";
-  }
-
-h5 {
-    position: relative;
-    top: 1000px;
-    margin: 20px;
-    font: 14px "Times New Roman";
-}
-
-h6 p{
-    position: relative;
-    top: 700px;
-    font: 12px "Times New Roman";
-}
-
 #myCarousel {
-    position: relative;
+	position: relative;
+	z-index: 0;
     margin-left: auto;
     margin-right: auto;
-    top: -370px;
-    width: 700px;
+    top: -65px;
+    width: 60%;    
 }
+
+
+
+
+
+@import url(http://fonts.googleapis.com/css?family=Istok+Web);
+@keyframes slidy {
+0% { left: 0%; }
+20% { left: 0%; }
+25% { left: -100%; }
+45% { left: -100%; }
+50% { left: -200%; }
+70% { left: -200%; }
+75% { left: -300%; }
+95% { left: -300%; }
+100% { left: -400%; }
+}
+body, figure { 
+  margin: 0; background: #101010;
+  font-family: Istok Web, sans-serif;
+  font-weight: 100;
+}
+div#captioned-gallery { 
+  width: 90%; overflow: hidden;
+  margin-top: 590px;
+  margin-left: 5%
+
+}
+figure.slider { 
+  position: relative; width: 500%;
+  font-size: 0; animation: 30s slidy infinite; 
+}
+figure.slider figure { 
+  width: 10%; height: auto;
+  display: inline-block;  position: inherit; 
+}
+figure.slider img { width: 200%; height: auto; }
+figure.slider figure figcaption { 
+  position: absolute; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  color: #fff; width: 100%;
+  font-size: 2rem; padding: .6rem; 
+}
+
+div#Trending_Ongoing {
+	position: relative;
+	left: 10%;
+	top: 580px;
+	font: 30px "Steagal" bold;
+	color: black;
+
+}
+
+
+
+
+h6 p{
+	position: relative;
+	top: 700px;
+	font: 12px "Times New Roman";
+	left: 34%;
+	color: black
+}
+
