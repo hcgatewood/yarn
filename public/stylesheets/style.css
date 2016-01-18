@@ -165,9 +165,14 @@ figure.slider figure figcaption {
   font-size: 2rem; padding: .6rem; 
 }
 
-#captioned-gallery p{
+#captioned-gallery a{
 	font: 30px "Gill Sans";
 	color: black;
+}
+#captioned-gallery a:hover{
+	color: #F07450;
+	text-decoration: none;
+	transition: all 0.15s ease 0.1s; 
 }
 /*Trending-Published*/
 div#trending-published {
@@ -180,6 +185,11 @@ div#trending-published {
 #trending-published a{
 	font: 30px "Gill Sans"; 
 	color: black;
+}
+#trending-published a:hover {
+	color: #F07450;
+	text-decoration: none;
+	transition: all 0.15s ease 0.1s;
 }
 .Copyright {
 	position: relative;
