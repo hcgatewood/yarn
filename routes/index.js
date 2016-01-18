@@ -5,7 +5,7 @@ module.exports = function (app, passport) {
 
   // GET home page
   app.get('/', function(req, res, next) {
-    res.render('index', { title: 'The Rolling Story' });
+    res.render('index', { title: 'Rolling Story' });
   });
 
   // GET find page
