@@ -1,4 +1,30 @@
-h1 {
+/*overlay*/
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(255,255,255,0.80);
+}
+
+.modal {
+    width: 300px;
+    height: 200px;
+    /*line-height: 200px;*/
+    /*position: fixed;*/
+    top: 50%; 
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -150px;
+    background-color: #f1c40f;
+    border-radius: 5px;
+    /*text-align: center;*/
+    z-index: 11; /* 1px higher than the overlay layer */
+}
+
+.NavBar {
     text-decoration: none;
     margin: 0;
     border: none;
@@ -6,13 +32,13 @@ h1 {
     z-index: 200;
     display: block;
     height:auto;
-    width:1280px;
+    width:100%;
     position: fixed;
     left: 0%;
-    top: -20px; 
+    top: -2px; 
     background: #1C91A0;
 }
-h1 a {
+.NavBar a {
     text-decoration: none;
     margin: 0;
     border: none;
@@ -23,9 +49,9 @@ h1 a {
     left: 0%;
     top: 0%;
     color: white;
-    font: 85% "Cooper Std";
+    font: 27px "Cooper Std";
 }
-h1 a:hover {
+.NavBar a:hover {
     color: #F07450;
     transition: all 0.15s ease 0.1s;
     text-decoration: none;
@@ -58,7 +84,7 @@ h2 a:hover {
     text-decoration: none;
 }
 
-p {
+.Info {
     margin-left: auto;
     margin-right: auto;
     padding: 0;
@@ -66,7 +92,7 @@ p {
     position: relative;
     z-index: 100;
     text-align: center;
-    left: 25.5%;
+    
     top: 300px;
     list-style: none;
     margin right: 10px;
@@ -101,7 +127,7 @@ h3 a {
     transition: all 0.15s ease 0.1s;
 }
 h3 a:hover {
-    background: #1C91A0;
+    background: #E06346;
     /*background-image: -webkit-linear-gradient(top,#F45C38,#AA442D);
     background-image: -moz-linear-gradient(top,#F45C38,#AA442D);
     background-image: -ms-linear-gradient(top,#F45C38,#AA442D);
