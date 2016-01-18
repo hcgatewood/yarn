@@ -1,7 +1,6 @@
 /*navbar filling*/
 .navbar {
   height: auto;
-  padding-bottom: 4px;
   width: 100%; /*navbar fills width of page*/
   border-radius: 0px;
   background-color: #329ca9;
