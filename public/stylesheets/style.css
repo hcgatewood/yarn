@@ -177,7 +177,7 @@ div#trending-published {
   margin-left: auto;
   margin-right: auto;
 }
-#trending-published p{
+#trending-published a{
 	font: 30px "Gill Sans"; 
 	color: black;
 }
