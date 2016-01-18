@@ -1,6 +1,5 @@
 module.exports = function (app, passport) {
   var db = require('../db-setup.js');
-  var assert = require('assert');
   var bootstrapSync = require('../config/bootstrapSync.js');
   var _ = require('underscore');
 
@@ -23,15 +22,26 @@ module.exports = function (app, passport) {
 
     //bootstrapSync.reloadRoomData();
 
+    var roomName = req.params.roomName;
     var username = getUsername(req);
 
-    // Serve room page with appropriate data
-    var roomName = req.params.roomName;
-    db.rooms.find({_id: roomName}).toArray(function (err, rooms) {
-      var numRoomsFound = 0;
-      rooms.forEach(function (room) {
-        numRoomsFound++;
-        assert(numRoomsFound == 1);
+    var roomsCursor = db.rooms.find({_id: roomName});
+    roomsCursor.count(function (err, numRooms) {
+      if (numRooms === 0) {
+        // Insert new room
+        console.log('Generating new room:', roomName);
+        db.rooms.insert({
+          _id: roomName,
+          contributions: []
+        });
+      } else if (numRooms > 1) {
+        // Log that we have too many
+        console.log('Rip, duplicate rooms');
+      } else {
+        console.log('Rendering already existing room');
+      }
+      // Render the room
+      roomsCursor.nextObject(function (err, room) {
         res.render('room', {
           title: roomName,
           contributions: room.contributions,

@@ -40,8 +40,11 @@ body {
 .story-container {
   width: 60%;
 }
-.contribution {
+.contribution:not(.empty) {
   margin-bottom: 20px;
+}
+.contribution.empty {
+  height: 0px;
 }
 .contribution-username {
   overflow: hidden;

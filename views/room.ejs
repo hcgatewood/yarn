@@ -21,6 +21,10 @@
     <div class='room-container'>
       <div class='story-container'>
         <div class='main-story'>
+          <div class='contribution empty'>
+            <div class='contribution-username'></div>
+            <div class='contribution-text'></div>
+          </div>
           <% for (var idx = 0; idx < contributions.length; idx++) { %>
           <div class='contribution'>
             <div class='contribution-username'><%= contributions[idx].user %></div>
