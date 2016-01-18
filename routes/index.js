@@ -1,24 +1,29 @@
 module.exports = function (app, passport) {
   var db = require('../db-setup.js');
   var bootstrapSync = require('../config/bootstrapSync.js');
-  var _ = require('underscore');
 
   // GET home page
-  app.get('/', function(req, res, next) {
-    res.render('index', { title: 'Rolling Story' });
+  app.get('/', function (req, res, next) {
+    var username = getUsername(req);
+    res.render('index', {
+      title: 'Rolling Story',
+      username: username,
+      user: req.user
+    });
   });
 
   // GET find page
-  app.get('/find', function(req,res){
+  app.get('/find', function (req, res){
     var username = getUsername(req);
     res.render('find', {
       title:'Find a Story!',
-      username: username
+      username: username,
+      user: req.user
     });
   });
 
   // GET room page
-  app.get('/rooms/:roomName', function(req, res, next) {
+  app.get('/rooms/:roomName', function (req, res, next) {
 
     //bootstrapSync.reloadRoomData();
 
@@ -46,6 +51,7 @@ module.exports = function (app, passport) {
           title: roomName,
           contributions: room.contributions,
           username: username,
+          user: req.user,
           userTurn: true
         });
       });
@@ -95,7 +101,7 @@ module.exports = function (app, passport) {
 
   function getUsername(req) {
     var username;
-    if (_.has(req, 'user')) {
+    if (req.user) {
       username = req.user.local.username;
     } else {
       username = 'anonymous';

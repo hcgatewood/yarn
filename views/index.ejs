@@ -8,6 +8,8 @@
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
     <script src='https://code.jquery.com/jquery-2.2.0.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+    <link rel='stylesheet' href='/stylesheets/navbar.css' />
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
@@ -15,10 +17,7 @@
     <div class="overlay"></div>
     <div class="modal"></div>-->
 
-    <!--LogoName-->
-    <div class="NavBar">
-      <a href="/">Rolling Story</a>
-    </div>
+    <%- include partials/navbar.ejs %>
 
     <!--Brief Info-->
     <div class="Info">
@@ -29,15 +28,6 @@
   </div>
 
     <div>
-      <!--Login & Get Creative-->
-      <h2>
-        <id="button1">
-        <a href="/rooms/main">GET CREATIVE</a>
-
-        <id="button2">
-        <a href="/login">LOGIN</a>
-      </h2>
-
       <!--Big Get_Creative Btn-->
       <h3 id="button3">
         <a href="/rooms/main">GET CREATIVE</a>
