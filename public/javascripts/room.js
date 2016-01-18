@@ -25,6 +25,7 @@ $(document).ready(function () {
     // Add new element
     var contributionParent = $('.main-story');
     var newContribution = $('.contribution').first().clone()
+    newContribution.removeClass('empty');
     newContribution.children('.contribution-username').text(data.username);
     newContribution.children('.contribution-text').text(data.userContribution);
     contributionParent.append(newContribution);
