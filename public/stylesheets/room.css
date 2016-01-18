@@ -1,6 +1,7 @@
 /* Room page */
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin-top: 90px;
 }
 .room-container {
   margin: 40px;

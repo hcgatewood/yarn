@@ -90,7 +90,7 @@ h2 a:hover {
     padding: 0;
     color: white;
     position: relative;
-    z-index: 100;
+    z-index: 10;
     text-align: center;
 
     top: 300px;
@@ -162,9 +162,12 @@ h3 a:hover {
 100% { left: -400%; }
 }
 body, figure {
-  margin: 0; background: #101010;
+  margin: 0;
   font-family: Istok Web, sans-serif;
   font-weight: 100;
+}
+figure {
+  background: #101010;
 }
 /*Trending-Ongoing*/
 div#captioned-gallery {

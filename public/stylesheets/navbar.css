@@ -4,8 +4,10 @@
   width: 100%; /*navbar fills width of page*/
   border-radius: 0px;
   background-color: #329ca9;
-  z-index: 0;
+  z-index: 100;
   margin-bottom: 0px;
+  position: fixed;
+  top: 0px;
 }
 .navbar * {
   text-decoration: none; /*no underline*/
