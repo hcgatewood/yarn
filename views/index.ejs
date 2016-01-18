@@ -6,14 +6,64 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='Carousel-jQuery' href='public/javascripts/Carousel_jQuery' />
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
-    <script src='https://code.jquery.com/jquery-2.2.0.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!--client-side javascript-->
+    <script type="text/javascript" src="javascripts/tmp-login.js"></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
   </head>
 
   <body>
-  	<!--Overlay
+  	<!--Overlay-->
   	<div class="overlay"></div>
-  	<div class="modal"></div>-->
+  	<div id="modal">
+  		<div class="row">
+	        	<h3 id="login_form">Sign in or create an account</h3>
+	    </div>
+	  	<div class="col-lg-6">
+	        <div class="row" id="alignsignup_btn">
+	        	<button class="signin_btn" id="b1" type="button">Sign in with Email</button>
+	    	</div>
+
+	    	<div class="row" id="alignsignup_btn">
+	        	<button class="signin_btn" id="b2 "type="button">Sign in with Facebook</button>
+	    	</div>
+
+	    	<div class="row">
+	        	<button class="signin_btn" type="button">Sign in with Google</button>
+	    	</div>
+	    </div>
+
+	    <div class="col-lg-6">
+	    	<form action='/' method='post' id='form'>
+	    		<div class="row">
+		    		<div class='form-group'>
+	                    <input  id="login_input" type='text' class='form-control' placeholder="First Name" name='firstname'>
+	                </div>
+	            </div>  
+	            <div class="row">  
+	                <div class='form-group'>
+	                    <input id="login_input" type='text' class='form-control' placeholder="Last Name" name='lastname'>
+	                </div>
+	            </div>   
+	            <div class="row"> 
+	                <div class='form-group'>
+	                    <input id="login_input" type='text' class='form-control' placeholder="Username" name='username'>
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class='form-group'>
+	                    <input id="login_input" type='password' class='form-control'placeholder="Password" name='password'>
+	                </div>
+	            </div>    
+	            <div class="row">
+                	<a href="http://localhost:3000/find">
+                	<button id="login_button" type='submit' class="signin_btn">Login</button>
+                	</a>
+               	</div>
+            </form>
+	    </div>
+  	</div>
+
 
     <!--LogoName-->
     <div class="NavBar">
@@ -33,10 +83,10 @@
 	    <h2> 
 	      <id="button1">
 	      <a href="/rooms/main-room">GET CREATIVE</a>
-	    
-	      <id="button2">
-	      <a href="http://localhost:3000/login">LOGIN</a>
-	    </h2>
+	    	</id="button1">
+	      <id="button2"><a id="login">LOGIN</a></id="button2">
+	      </h2>
+
 
 	    <!--Big Get_Creative Btn-->
 	    <h3 id="button3">
