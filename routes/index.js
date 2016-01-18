@@ -11,22 +11,19 @@ module.exports = function (app, passport) {
 
   // GET find page
   app.get('/find', function(req,res){
-    res.render('find', {title:'Find a Story!'});
+    var username = getUsername(req);
+    res.render('find', {
+      title:'Find a Story!',
+      username: username
+    });
   });
 
   // GET room page
   app.get('/rooms/:roomName', function(req, res, next) {
 
-    bootstrapSync.reloadRoomData();
+    //bootstrapSync.reloadRoomData();
 
-    var username;
-    if (_.has(req, 'user')) {
-      username = req.user.local.username;
-    } else {
-      username = 'anonymous';
-    }
-    console.log('username:', username);
-    console.log('user:', req.user);
+    var username = getUsername(req);
 
     // Serve room page with appropriate data
     var roomName = req.params.roomName;
@@ -84,5 +81,17 @@ module.exports = function (app, passport) {
       return next();
     }
     res.redirect('/');
+  }
+
+  function getUsername(req) {
+    var username;
+    if (_.has(req, 'user')) {
+      username = req.user.local.username;
+    } else {
+      username = 'anonymous';
+    }
+    console.log('username:', username);
+    console.log('user:', req.user);
+    return username;
   }
 }
