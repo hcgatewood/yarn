@@ -6,6 +6,7 @@
   height: 100%;
   width: 100%;
   z-index: 10;
+<<<<<<< HEAD
   background-color: rgba(255,255,255,0.70);
 }
 
@@ -80,7 +81,7 @@
     width:100%;
     position: fixed;
     left: 0%;
-    top: -2px; 
+    top: -2px;
     background: #1C91A0;
 }
 .NavBar a {
@@ -103,25 +104,25 @@
 }
 
 div h2{
-	position: fixed;
-	text-decoration: none;
-	z-index: 200;
-	text-decoration: none;
-	margin-left: 65%;
-	right: 8px; 
-	color: white;
-	top: 0px;
-	font: 23px "Gill Sans";
+  position: fixed;
+  text-decoration: none;
+  z-index: 200;
+  text-decoration: none;
+  margin-left: 65%;
+  right: 8px;
+  color: white;
+  top: 0px;
+  font: 23px "Gill Sans";
 }
 h2 a{
-	color: white;
-	font: 23px "Gill Sans";
-	text-decoration: none;
-	margin-right: 20px;
+  color: white;
+  font: 23px "Gill Sans";
+  text-decoration: none;
+  margin-right: 20px;
 }
 div h2 :hover{
-	color: #F07450;
-	text-decoration: none;
+  color: #F07450;
+  text-decoration: none;
 }
 h2 a:hover {
     color: #F07450;
@@ -137,7 +138,7 @@ h2 a:hover {
     position: relative;
     z-index: 10;
     text-align: center;
-    
+
     top: 300px;
     list-style: none;
     margin right: 10px;
@@ -147,7 +148,7 @@ h2 a:hover {
 }
 
 h3 a {
-	position: relative;
+  position: relative;
     padding: 15px 15px 15px 15px;
     display: block;
     width: 16.5%;
@@ -179,10 +180,11 @@ h3 a:hover {
     background-image: -o-linear-gradient(top,#F45C38,#AA442D);
     background-image: linear-gradient(to bottom, #F45C38,#AA442D);*/
     text-decoration: none;
-    color: white;   
+    color: white;
 }
 
 #myCarousel {
+<<<<<<< HEAD
 	position: relative;
 	z-index: 0;
     margin-left: auto;
@@ -190,6 +192,13 @@ h3 a:hover {
     top: -65px;
     width: 60%; 
     z-index: -5;   
+=======
+  position: relative;
+  z-index: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+>>>>>>> ef02b330633d77450d9f38132eb877dd4b90a181
 }
 
 
@@ -208,56 +217,69 @@ h3 a:hover {
 95% { left: -300%; }
 100% { left: -400%; }
 }
-body, figure { 
-  margin: 0; background: #101010;
+body, figure {
+  margin: 0;
   font-family: Istok Web, sans-serif;
   font-weight: 100;
 }
+figure {
+  background: #101010;
+}
 /*Trending-Ongoing*/
 div#captioned-gallery {
-  position: relative; 
+  position: relative;
   width: 75%; overflow: hidden;
   top: 220px;
   margin-left: auto;
   margin-right: auto;
 }
-figure.slider { 
+figure.slider {
   position: relative; width: 500%;
-  font-size: 0; animation: 30s slidy infinite; 
+  font-size: 0; animation: 30s slidy infinite;
 }
-figure.slider figure { 
+figure.slider figure {
   width: 10%; height: auto;
-  display: inline-block;  position: inherit; 
+  display: inline-block;  position: inherit;
 }
 figure.slider img { width: 200%; height: auto; }
-figure.slider figure figcaption { 
+figure.slider figure figcaption {
   position: absolute; bottom: 0;
   background: rgba(0,0,0,0.4);
   color: #fff; width: 100%;
-  font-size: 2rem; padding: .6rem; 
+  font-size: 2rem; padding: .6rem;
 }
 
-#captioned-gallery p{
-	font: 30px "Gill Sans";
-	color: black;
+#captioned-gallery a{
+  font: 30px "Gill Sans";
+  color: black;
+}
+#captioned-gallery a:hover{
+  color: #F07450;
+  text-decoration: none;
+  transition: all 0.15s ease 0.1s;
 }
 /*Trending-Published*/
 div#trending-published {
-  position: relative; 
+  position: relative;
   width: 75%; overflow: hidden;
   top: 430px;
   margin-left: auto;
   margin-right: auto;
 }
 #trending-published a{
-	font: 30px "Gill Sans"; 
-	color: black;
+  font: 30px "Gill Sans";
+  color: black;
+}
+#trending-published a:hover {
+  color: #F07450;
+  text-decoration: none;
+  transition: all 0.15s ease 0.1s;
 }
 .Copyright {
-	position: relative;
-	top: 700px;
-	font: 12px "Times New Roman";
-	text-align: center;
-	color: black
+  position: relative;
+  top: 700px;
+  font: 12px "Times New Roman";
+  text-align: center;
+  color: black
 }
 

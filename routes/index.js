@@ -1,41 +1,60 @@
 module.exports = function (app, passport) {
   var db = require('../db-setup.js');
-  var assert = require('assert');
   var bootstrapSync = require('../config/bootstrapSync.js');
-  var _ = require('underscore');
 
   // GET home page
-  app.get('/', function(req, res, next) {
-    res.render('index', { title: 'The Rolling Story' });
+  app.get('/', function (req, res, next) {
+    var username = getUsername(req);
+    res.render('index', {
+      title: 'Rolling Story',
+      username: username,
+      user: req.user,
+      startWriting: true
+    });
   });
 
   // GET find page
-  app.get('/find', function(req,res){
+  app.get('/find', function (req, res){
     var username = getUsername(req);
     res.render('find', {
       title:'Find a Story!',
-      username: username
+      username: username,
+      startWriting: true,
+      user: req.user
     });
   });
 
   // GET room page
-  app.get('/rooms/:roomName', function(req, res, next) {
+  app.get('/rooms/:roomName', function (req, res, next) {
 
     //bootstrapSync.reloadRoomData();
 
+    var roomName = req.params.roomName;
     var username = getUsername(req);
 
-    // Serve room page with appropriate data
-    var roomName = req.params.roomName;
-    db.rooms.find({_id: roomName}).toArray(function (err, rooms) {
-      var numRoomsFound = 0;
-      rooms.forEach(function (room) {
-        numRoomsFound++;
-        assert(numRoomsFound == 1);
+    var roomsCursor = db.rooms.find({_id: roomName});
+    roomsCursor.count(function (err, numRooms) {
+      if (numRooms === 0) {
+        // Insert new room
+        console.log('Generating new room:', roomName);
+        db.rooms.insert({
+          _id: roomName,
+          contributions: []
+        });
+      } else if (numRooms > 1) {
+        // Log that we have too many
+        console.log('Rip, duplicate rooms');
+      } else {
+        console.log('Rendering already existing room');
+      }
+      // Render the room
+      roomsCursor.nextObject(function (err, room) {
         res.render('room', {
           title: roomName,
           contributions: room.contributions,
           username: username,
+          user: req.user,
+          startWriting: false,
           userTurn: true
         });
       });
@@ -53,6 +72,7 @@ module.exports = function (app, passport) {
   // TODO: permanent login
   app.get('/login', function (req, res) {
     res.render('tmp-login.ejs', {message: req.flash('loginMessage')});
+    //res.render('tmp-login.ejs', {message: ['pls']});
   });
   // GET signup
   app.get('/signup', function (req, res) {
@@ -73,7 +93,7 @@ module.exports = function (app, passport) {
   // POST logout
   app.get('/logout', function (req, res) {
     req.logout();
-    res.redirect('/');
+    res.redirect(req.get('referer'));  // Redirect back to same page
   });
 
   function isLoggedIn(req, res, next) {
@@ -85,7 +105,7 @@ module.exports = function (app, passport) {
 
   function getUsername(req) {
     var username;
-    if (_.has(req, 'user')) {
+    if (req.user) {
       username = req.user.local.username;
     } else {
       username = 'anonymous';

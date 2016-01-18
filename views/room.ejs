@@ -2,25 +2,23 @@
 <html>
 
   <head>
-    <title><%= title %></title>
-    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'></script>
+    <%- include partials/meta.ejs %>
     <script src='/javascripts/textarea_autosize.js'></script>
     <script src='/socket.io/socket.io.js'></script>
-    <%- include partials/variables.ejs %>
     <script src='/javascripts/room.js'></script>
-    <link rel='stylesheet' href='/stylesheets/room.css' />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/stylesheets/navbar.css' />
-    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='/stylesheets/room.css'/>
+    <link rel='stylesheet' href='/stylesheets/navbar.css'/>
   </head>
 
   <body>
-
     <%- include partials/navbar.ejs %>
     <div class='room-container'>
       <div class='story-container'>
         <div class='main-story'>
+          <div class='contribution empty'>
+            <div class='contribution-username'></div>
+            <div class='contribution-text'></div>
+          </div>
           <% for (var idx = 0; idx < contributions.length; idx++) { %>
           <div class='contribution'>
             <div class='contribution-username'><%= contributions[idx].user %></div>
@@ -45,7 +43,6 @@
       <div class='meta-container'>
       </div>
     </div>
-
   </body>
 
 </html>
