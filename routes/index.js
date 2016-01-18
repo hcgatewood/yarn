@@ -66,7 +66,7 @@ module.exports = function (app, passport) {
   }));
   // POST login
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/passport-info',
+    successRedirect: '/rooms/main',
     failureRedirect: '/login',
     failureFlash: true
   }));
