@@ -1,3 +1,29 @@
+/*overlay for login*/
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(255,255,255,0.80);
+}
+
+.modal {
+    width: 300px;
+    height: 200px;
+    /*line-height: 200px;*/
+    /*position: fixed;*/
+    top: 50%; 
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -150px;
+    background-color: #f1c40f;
+    border-radius: 5px;
+    /*text-align: center;*/
+    z-index: 11; /* 1px higher than the overlay layer */
+}
+
 .NavBar {
     text-decoration: none;
     margin: 0;
