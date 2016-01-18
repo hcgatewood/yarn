@@ -14,6 +14,10 @@
   display: table;
   margin: auto;
 }
+.nav-font {
+  font-family: 'Amatic SC', 'HelveticaNeue-Light';
+  font-size: 30px;
+}
 .navbar-item {
   display: inline-block;
   white-space: nowrap;
@@ -25,7 +29,6 @@
   position: relative;/*positioned relative to its normal position*/
   color: white;
   border: none;
-  font-family: 'Amatic SC', 'HelveticaNeue-Light';
   font-size: 40px;
   z-index: 1;
 }
@@ -40,6 +43,7 @@
   width: 100%;
   top: 3px;
   display: table-cell;
+  font-size: 30px;
 }
 .form-control{
   border: 1px solid #c4c4c4;
@@ -70,17 +74,8 @@
   margin:0px 7px 0px 7px;
   display: inline-block;
   color: white;
-}
-.glyphicon {
-  font-size: 17px;
-}
-
-.name {
-  font-family: 'Amatic SC', 'HelveticaNeue-Light';
-  font-size: 30px;
   top: 3px;
 }
-
 .navigation .item:hover {
   color: #ff5a5f;
   text-decoration: none;

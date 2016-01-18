@@ -8,7 +8,8 @@ module.exports = function (app, passport) {
     res.render('index', {
       title: 'Rolling Story',
       username: username,
-      user: req.user
+      user: req.user,
+      startWriting: true
     });
   });
 
@@ -18,6 +19,7 @@ module.exports = function (app, passport) {
     res.render('find', {
       title:'Find a Story!',
       username: username,
+      startWriting: true,
       user: req.user
     });
   });
@@ -52,6 +54,7 @@ module.exports = function (app, passport) {
           contributions: room.contributions,
           username: username,
           user: req.user,
+          startWriting: false,
           userTurn: true
         });
       });
@@ -69,6 +72,7 @@ module.exports = function (app, passport) {
   // TODO: permanent login
   app.get('/login', function (req, res) {
     res.render('tmp-login.ejs', {message: req.flash('loginMessage')});
+    //res.render('tmp-login.ejs', {message: ['pls']});
   });
   // GET signup
   app.get('/signup', function (req, res) {
@@ -89,7 +93,7 @@ module.exports = function (app, passport) {
   // POST logout
   app.get('/logout', function (req, res) {
     req.logout();
-    res.redirect('/');
+    res.redirect(req.get('referer'));  // Redirect back to same page
   });
 
   function isLoggedIn(req, res, next) {

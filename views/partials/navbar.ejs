@@ -1,31 +1,33 @@
-<div class="navbar">
+<div class='navbar'>
   <div class='center'>
     <!-- LogoName -->
-    <div class="navbar-item logoname">
-      <a class="logo" href="/">Rolling Story</a>
+    <div class='navbar-item logoname'>
+      <a class='logo nav-font' href='/'>Rolling Story</a>
     </div>
 
     <!--Search Bar -->
-    <div class="navbar-item search-bar input-group">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Find a Story...">
-        <span class="input-group-btn">
-        <button class="btn btn-default" id="search_button" type="button"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+    <div class='navbar-item search-bar input-group'>
+      <div class='input-group'>
+        <input type='text' class='form-control' placeholder='Find a story...'>
+        <span class='input-group-btn'>
+        <button class='btn btn-default' id='search_button' type='button'> <span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>
          </span>
       </div>
     </div>
 
     <!--Logout & Settings-->
-    <div class="navbar-item logout-settings navigation">
-      <a href="/find" class="name item">
-        <%= username %>
-      </a>
-      <a href="/" class="dropdown item">
-         <span class="glyphicon glyphicon-cog" style="background:#329CA9" aria-hidden="true"></span>
-      </a>
-      <a class='item' href="/">
-        <span class="glyphicon glyphicon-log-out" style="background:#329CA9" aria-hidden="true"></span>
-      </a>
+    <div class='navbar-item nav-font logout-settings navigation'>
+      <% if (startWriting) { %>
+      <a href='/rooms/main' class='writing item'>Start writing</a>
+      <% } %>
+      <a href='/rooms/main' class='current item'>Current room</a>
+      <% if (user) { %>
+      <a href='/find' class='name item'><%= username %></a>
+      <a href='/logout' class='login-choice item'>Sign out</a>
+      <% } else { %>
+      <a href='/login' class='login-choice item signin'>Sign in</a>
+      <a href='/signup' class='login-choice item signup'>Sign up</a>
+      <% } %>
     </div>
   </div>
 </div>
