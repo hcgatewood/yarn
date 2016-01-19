@@ -31,6 +31,7 @@ module.exports = function (app, passport) {
     console.log(process.env.RELOAD_DB);
     var reloadDb = process.env.RELOAD_DB || false;
     if (reloadDb) {
+      console.log('@@@ RELOADING ROOM DATA');
       bootstrapSync.reloadRoomData();
     }
 
