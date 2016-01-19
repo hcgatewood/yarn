@@ -32,6 +32,10 @@ module.exports = function (app, passport) {
     var roomName = req.params.roomName;
     var username = getUsername(req);
 
+    console.log('********');
+    console.log(db);
+    console.log(db.rooms);
+    console.log('********');
     var roomsCursor = db.rooms.find({_id: roomName});
     roomsCursor.count(function (err, numRooms) {
       if (numRooms === 0) {
