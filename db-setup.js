@@ -1,5 +1,5 @@
 var mongo = require('mongodb').MongoClient;
-var dbConnectionUrl = process.env.PROC_MONGODB || 'mongodb://localhost:27017/test';
+var dbConnectionUrl = process.env.PROD_MONGODB || 'mongodb://localhost:27017/test';
 var collections = {};
 
 //var defaultTextFilename = 'bootstrap-data/default-room-text.txt'
