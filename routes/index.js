@@ -27,15 +27,16 @@ module.exports = function (app, passport) {
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
 
-    //bootstrapSync.reloadRoomData();
+    console.log('###');
+    console.log(process.env.RELOAD_DB);
+    var reloadDb = process.env.RELOAD_DB || false;
+    if (reloadDb) {
+      bootstrapSync.reloadRoomData();
+    }
 
     var roomName = req.params.roomName;
     var username = getUsername(req);
 
-    console.log('********');
-    console.log(db);
-    console.log(db.rooms);
-    console.log('********');
     var roomsCursor = db.rooms.find({_id: roomName});
     roomsCursor.count(function (err, numRooms) {
       if (numRooms === 0) {
