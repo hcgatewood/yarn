@@ -35,7 +35,7 @@
 div h2{
   position: fixed;
   text-decoration: none;
-  z-index: 2;
+  z-index: 1;
   text-decoration: none;
   margin-left: 65%;
   right: 8px;
@@ -65,7 +65,7 @@ h2 a:hover {
     padding: 0;
     color: white;
     position: relative;
-    z-index: 2;
+    z-index: 1;
     text-align: center;
 
     top: 300px;

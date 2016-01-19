@@ -79,13 +79,13 @@ module.exports = function (app, passport) {
     res.render('index.ejs', {message: req.flash('signupMessage')});
   });
   // POST signup
-  app.post('/', passport.authenticate('local-signup', {
+  app.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/rooms/main',
     failureRedirect: '/signup',
     failureFlash: true
   }));
   // POST login
-  app.post('/', passport.authenticate('local-login', {
+  app.post('/login', passport.authenticate('local-login', {
     successRedirect: '/rooms/main',
     failureRedirect: '/login',
     failureFlash: true

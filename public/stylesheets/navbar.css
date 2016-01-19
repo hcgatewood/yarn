@@ -128,12 +128,14 @@
     margin-top: 50px;
     margin-bottom: -50px;
     font-size:18px;
+    z-index: 11
 }
 #login_footer{
     margin-top: -70px;
     margin-bottom: -50px;
     font-size:15px;
     color: #329ca9;
+    z-index: 11
 }
 
 .signin_btn{
@@ -153,12 +155,14 @@
   padding: 10px 16px;
   width: 180px;
   height: 35px;
+  z-index: 11
 }
   
 .btn-lg {
   font-size: 15px;
   line-height: 1.33;
   border-radius: 6px;
+  z-index: 11
 }
 
 .btn-primary {
