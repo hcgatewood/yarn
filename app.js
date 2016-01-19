@@ -14,7 +14,7 @@ app.io = require('socket.io')();
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
-var configDB = require('./config/database.js');
+var configDB = require('./config/database.js')();
 app.dbUrl = configDB.url;
 var session = require('express-session');
 mongoose.connect(app.dbUrl);
