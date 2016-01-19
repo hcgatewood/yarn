@@ -1,74 +1,3 @@
-/*overlay for login*/
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 10;
-<<<<<<< HEAD
-  background-color: rgba(255,255,255,0.70);
-}
-
-#modal {
-    font-size: 15px;
-    width: 500px;
-    height: 400px;
-    line-height: 200px;
-    position: fixed;
-    /* start centers modal */
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto; 
-    /* end */
-    background-color: white;
-    border-radius: 5px;
-    text-align: center;
-    z-index: 11; /* 1px higher than the overlay layer */
-
-}
-/* login */
-#form{
-    margin-top: 30px;
-}
-#login_input{
-    width: 200px;
-    height: 40px;
-}
-#login_button{
-    margin-top: -150px auto;
-    width: 200px;
-    height: 40px;
-}
-/* signup */
-#alignsignup_btn{
-    margin-bottom: -150px; 
-}
-
-.b2{
-    color:#3b5998;
-}
-
-.signin_btn{
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-
-    border-color: #ff5a5f;
-    border-bottom-color: #e00007;
-    background-color: #ff5a5f;
-    color: #fff;
-    width: 180px;
-    height: 40px;
-
-    font-size: 17px;
-    text-decoration: none;
-    cursor: pointer;
-
-    z-index: 200;
-}
-
 /*navbar*/
 .NavBar {
     text-decoration: none;
@@ -89,7 +18,7 @@
     margin: 0;
     border: none;
     padding: 20px;
-    z-index: 200;
+    z-index: 2;
     display: block;
     position: fixed;
     left: 0%;
@@ -106,7 +35,7 @@
 div h2{
   position: fixed;
   text-decoration: none;
-  z-index: 200;
+  z-index: 2;
   text-decoration: none;
   margin-left: 65%;
   right: 8px;
@@ -136,7 +65,7 @@ h2 a:hover {
     padding: 0;
     color: white;
     position: relative;
-    z-index: 10;
+    z-index: 2;
     text-align: center;
 
     top: 300px;
@@ -184,21 +113,11 @@ h3 a:hover {
 }
 
 #myCarousel {
-<<<<<<< HEAD
-	position: relative;
-	z-index: 0;
-    margin-left: auto;
-    margin-right: auto;
-    top: -65px;
-    width: 60%; 
-    z-index: -5;   
-=======
   position: relative;
   z-index: 0;
   margin-left: auto;
   margin-right: auto;
   width: 60%;
->>>>>>> ef02b330633d77450d9f38132eb877dd4b90a181
 }
 
 

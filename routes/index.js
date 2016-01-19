@@ -71,21 +71,21 @@ module.exports = function (app, passport) {
   // GET login
   // TODO: permanent login
   app.get('/login', function (req, res) {
-    res.render('tmp-login.ejs', {message: req.flash('loginMessage')});
+    res.render('index.ejs', {message: req.flash('loginMessage')});
     //res.render('tmp-login.ejs', {message: ['pls']});
   });
   // GET signup
   app.get('/signup', function (req, res) {
-    res.render('tmp-signup.ejs', {message: req.flash('signupMessage')});
+    res.render('index.ejs', {message: req.flash('signupMessage')});
   });
   // POST signup
-  app.post('/signup', passport.authenticate('local-signup', {
+  app.post('/', passport.authenticate('local-signup', {
     successRedirect: '/rooms/main',
     failureRedirect: '/signup',
     failureFlash: true
   }));
   // POST login
-  app.post('/login', passport.authenticate('local-login', {
+  app.post('/', passport.authenticate('local-login', {
     successRedirect: '/rooms/main',
     failureRedirect: '/login',
     failureFlash: true
