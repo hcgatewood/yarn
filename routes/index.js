@@ -27,9 +27,12 @@ module.exports = function (app, passport) {
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
 
-    console.log('###');
+    console.log('### db reload decision');
+    // If RELOAD_DB is defined, use it's value, otherwise choose a default value
+    var reloadDb = typeof process.env.RELOAD_DB !== 'undefined'
+      ? process.env.RELOAD_DB == 'true'
+      : false;
     console.log(process.env.RELOAD_DB);
-    var reloadDb = process.env.RELOAD_DB || false;
     if (reloadDb) {
       console.log('@@@ RELOADING ROOM DATA');
       bootstrapSync.reloadRoomData();
