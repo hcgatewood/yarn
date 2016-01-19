@@ -147,8 +147,8 @@ h2 a:hover {
     font: 30px "Steagal" bold;
 }
 
-h3 a {
-  position: relative;
+.Get_Creative {
+  	position: relative;
     padding: 15px 15px 15px 15px;
     display: block;
     width: 16.5%;
@@ -156,7 +156,9 @@ h3 a {
     text-decoration: none;
 
     top: 470px;
-    left: 41.5%;
+    /*left: 41.5%;*/
+    margin-right: auto;
+    margin-left: auto;
 
     background: #F07450;
     /*background-image: -webkit-linear-gradient(top,#F07450,#C7482E);
@@ -172,7 +174,14 @@ h3 a {
     font-size: 20px;
     transition: all 0.15s ease 0.1s;
 }
-h3 a:hover {
+.Get_Creative a {
+	color: white;
+	text-decoration: none;
+}
+.Get_Creative a:hover{
+	text-decoration: none;
+}
+.Get_Creative:hover {
     background: #E06346;
     /*background-image: -webkit-linear-gradient(top,#F45C38,#AA442D);
     background-image: -moz-linear-gradient(top,#F45C38,#AA442D);
@@ -200,84 +209,9 @@ h3 a:hover {
   width: 60%;
 >>>>>>> ef02b330633d77450d9f38132eb877dd4b90a181
 }
-
-
-
-
-/*Trending Image Sliders*/
-@import url(http://fonts.googleapis.com/css?family=Istok+Web);
-@keyframes slidy {
-0% { left: 0%; }
-20% { left: 0%; }
-25% { left: -100%; }
-45% { left: -100%; }
-50% { left: -200%; }
-70% { left: -200%; }
-75% { left: -300%; }
-95% { left: -300%; }
-100% { left: -400%; }
-}
-body, figure {
-  margin: 0;
-  font-family: Istok Web, sans-serif;
-  font-weight: 100;
-}
-figure {
-  background: #101010;
-}
-/*Trending-Ongoing*/
-div#captioned-gallery {
-  position: relative;
-  width: 75%; overflow: hidden;
-  top: 220px;
-  margin-left: auto;
-  margin-right: auto;
-}
-figure.slider {
-  position: relative; width: 500%;
-  font-size: 0; animation: 30s slidy infinite;
-}
-figure.slider figure {
-  width: 10%; height: auto;
-  display: inline-block;  position: inherit;
-}
-figure.slider img { width: 200%; height: auto; }
-figure.slider figure figcaption {
-  position: absolute; bottom: 0;
-  background: rgba(0,0,0,0.4);
-  color: #fff; width: 100%;
-  font-size: 2rem; padding: .6rem;
-}
-
-#captioned-gallery a{
-  font: 30px "Gill Sans";
-  color: black;
-}
-#captioned-gallery a:hover{
-  color: #F07450;
-  text-decoration: none;
-  transition: all 0.15s ease 0.1s;
-}
-/*Trending-Published*/
-div#trending-published {
-  position: relative;
-  width: 75%; overflow: hidden;
-  top: 430px;
-  margin-left: auto;
-  margin-right: auto;
-}
-#trending-published a{
-  font: 30px "Gill Sans";
-  color: black;
-}
-#trending-published a:hover {
-  color: #F07450;
-  text-decoration: none;
-  transition: all 0.15s ease 0.1s;
-}
 .Copyright {
   position: relative;
-  top: 700px;
+  top: 200px;
   font: 12px "Times New Roman";
   text-align: center;
   color: black
