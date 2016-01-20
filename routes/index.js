@@ -23,6 +23,8 @@ module.exports = function (app, passport) {
       user: req.user
     });
   });
+  app.post('/find',passport.authenticate('local-signup', { successRedirect: '/',failureRedirect: '/login' })
+  );
 
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
@@ -60,7 +62,24 @@ module.exports = function (app, passport) {
       });
     });
   });
+  // GET Facebook login
+  app.get('/auth/facebook', passport.authenticate('facebook',{ scope : 'email' }));
 
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect : '/rooms/main',
+            failureRedirect : '/'
+        }));
+  // GET Google login
+  app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+    // the callback after google has authenticated the user
+    app.get('/auth/google/callback',
+            passport.authenticate('google', {
+                    successRedirect : '/rooms/main',
+                    failureRedirect : '/'
+            }));
   // PASSPORT
   // GET passport-info
   app.get('/passport-info', function (req, res) {
@@ -70,26 +89,25 @@ module.exports = function (app, passport) {
   });
   // GET login
   // TODO: permanent login
-  app.get('/login', function (req, res) {
-    res.render('index.ejs', {message: req.flash('loginMessage')});
+  app.get('/', function (req, res) {
+    res.render('navbar.ejs', {message: req.flash('loginMessage')});
     //res.render('tmp-login.ejs', {message: ['pls']});
   });
-  // GET signup
-  app.get('/signup', function (req, res) {
-    res.render('index.ejs', {message: req.flash('signupMessage')});
-  });
-  // POST signup
-  app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/rooms/main',
-    failureRedirect: '/signup',
+  
+    // POST login
+  app.post('/signup', passport.authenticate("local-signup", {
+    successRedirect: '/find',
+    failureRedirect: '/',
     failureFlash: true
   }));
-  // POST login
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/rooms/main',
-    failureRedirect: '/login',
+
+  app.post('/login', passport.authenticate("local-login", {
+    successRedirect: '/find',
+    failureRedirect: '/',
     failureFlash: true
   }));
+
+
   // POST logout
   app.get('/logout', function (req, res) {
     req.logout();

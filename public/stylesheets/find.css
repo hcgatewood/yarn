@@ -26,18 +26,6 @@
 
 
 #button_one{
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-
-    border-color: #ff5a5f;
-    border-bottom-color: #e00007;
-    background-color: #ff5a5f;
-    color: #fff;
-
-    font-size: 17px;
-    text-decoration: none;
-    cursor: pointer;
-    color: white;
     width: 150px;
     height: 40px;
     margin-right: 30px;
@@ -81,4 +69,31 @@ h3{
     height: 150px;
     width: 150px;
     background-color: #B9F5CA;
+}
+.btn-lg {
+  font-size: 15px;
+  line-height: 1.33;
+  border-radius: 6px;
+  z-index: 11
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #ff5a5f;
+  border-color: #ff5a5f;
+}
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #ff5a5f;
+  border-color: #ff5a5f;
+}
+.btn-primary.raised {
+    box-shadow: 0 3px 0 0 #e00007;
+}
+.btn-primary.raised:active, .btn-primary1.raised.active {
+    background: #ff5a5f;
+    box-shadow: none;
+    margin-bottom: -3px;
+    margin-top: 3px;
 }
