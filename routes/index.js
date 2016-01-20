@@ -103,7 +103,7 @@ module.exports = function (app, passport) {
     res.render('navbar.ejs', {message: req.flash('loginMessage')});
     //res.render('tmp-login.ejs', {message: ['pls']});
   });
-  
+
     // POST login
   app.post('/signup', passport.authenticate("local-signup", {
     successRedirect: '/find',
@@ -134,12 +134,26 @@ module.exports = function (app, passport) {
   function getUsername(req) {
     var username;
     if (req.user) {
-      username = req.user.local.username;
+      var localName = req.user.local.username;
+      var fbUsername = firstName(req.user.facebook.name);
+      var googleUsername = firstName(req.user.google.name);
+      username = req.user.local.username ||
+        fbUsername ||
+        googleUsername;
     } else {
       username = 'anonymous';
     }
     console.log('username:', username);
     console.log('user:', req.user);
     return username;
+  }
+
+  function firstName(fullName) {
+    console.log('***', fullName)
+    if (typeof fullName == 'string') {
+      return fullName.split(' ')[0];
+    } else {
+      return fullName;
+    }
   }
 }
