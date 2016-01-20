@@ -26,6 +26,16 @@ module.exports = function (app, passport) {
   app.post('/find',passport.authenticate('local-signup', { successRedirect: '/',failureRedirect: '/login' })
   );
 
+  // GET user page
+  app.get('/user', function (req, res, next) {
+    var username = getUsername(req);
+    res.render('user_page', {
+      title: 'Rolling Story',
+      username: username,
+      user: req.user,
+      startWriting: true
+    });
+  });
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
 
