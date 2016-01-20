@@ -11,4 +11,23 @@ $(document).ready(function(){
 		$(".overlay, #modal2").show();
 	});
 
+$('.lg').click(function(e){
+	e.preventDefault();
+	$.ajax({
+		url: "/login",
+		type:"POST",
+		data:{username: $('#us').val(), password:$('#pass').val()}
+	}).done(function(){window.location='/find'});
+});
+
+$('.sp').click(function(e){
+	e.preventDefault();
+	$.ajax({
+		url: "/signup",
+		type:"POST",
+		data:{username: $('#us').val(),password:$('#pass').val()}
+	}).done(function(){window.location='/find'});
+
+});
+
 });

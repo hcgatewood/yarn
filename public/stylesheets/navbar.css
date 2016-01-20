@@ -158,6 +158,9 @@
   z-index: 11
 }
   
+.btn2{
+  width:100px;
+}
 .btn-lg {
   font-size: 15px;
   line-height: 1.33;
