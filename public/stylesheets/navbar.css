@@ -131,6 +131,8 @@
     z-index: 11
 }
 #login_footer{
+    text-align: center;
+    margin: auto;
     margin-top: -70px;
     margin-bottom: -50px;
     font-size:15px;
@@ -153,13 +155,15 @@
   border: 1px solid transparent;
   border-radius: 4px;
   padding: 10px 16px;
-  width: 180px;
+  width: 200px;
   height: 35px;
   z-index: 11
 }
   
 .btn2{
+  height:33px;
   width:100px;
+
 }
 .btn-lg {
   font-size: 15px;
@@ -201,7 +205,7 @@
   border-color: #3B5998;
 }
 .btn-primary1.raised {
-    box-shadow: 0 3px 0 0 #111a2d;
+    box-shadow: 0 3px 0 0 #293e6a;
 }
 .btn-primary1.raised:active, .btn-primary1.raised.active {
     background: #3B5998;
@@ -269,4 +273,12 @@
     text-align: center;
     z-index: 11; /* 1px higher than the overlay layer */
 
+}
+
+.fa-facebook:before {
+    content: "\f09a";
+    padding-right: 8px;
+}
+.fa-google-plus:before {
+    padding-right: 6px;
 }
