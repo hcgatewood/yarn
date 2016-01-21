@@ -7,23 +7,7 @@
   <script type="text/javascript" src="javascripts/navbar.js"></script>
 </head>
   <body>  
-    <div id='header'>
-        <!-- LogoName -->
-        <div class='sitename'>
-          <a href='/'>Rolling Story</a>
-        </div>
-
-        <!--Logout -->
-        <div class='logout'>
-          <a href='/logout' class='login-choice item'>Sign Out</a>
-        </div>
-
-        <!--UserName-->
-        <div class="username">
-          <p>TheMightyKam</p>
-        </div>  
-      </div>
-    </div>
+  <%- include partials/navbar.ejs %>
 
     <div id='container'>
       <div class='leftside'>
@@ -37,7 +21,6 @@
 
         <div class='accInfo'>
           <h1>Account Information</h1>
-
           <ul>
             <li>Joined: January 2016</li>
             <li>Published Articles: 2</li>
@@ -46,6 +29,8 @@
           </ul>
         </div>
       </div>
+
+
 
       <div class="rightside">
         <div class='crossbar'>
