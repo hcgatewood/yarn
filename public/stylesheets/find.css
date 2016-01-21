@@ -1,16 +1,33 @@
 /*jumbotron*/
-.jumbotron {
-  background-image: url("http://cdn.playbuzz.com/cdn/5a2b724b-1813-43ab-8f2d-ddee5e459dc6/0098192f-61cc-4c7c-8152-d55b81d13b93.jpg");
-  height: 400px;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.jumbotron .container {
+.autoplay{
   position: relative;
-  top:200px;
+  margin-top:66px;
+  height: 300px;
+  width: 100%;
+ 
 }
 
+.placeholder_image{
+  color: black;
+  text-align: center;
+  line-height: 300px;
+}
+a:hover{
+  text-decoration: none;
+}
+
+.img1{
+  background-color:#ee4035;
+}
+.img2{
+  background-color:#f37736;
+}
+.img3{
+  background-color:#fdf498;
+}
+.img4{
+  background-color:#0392cf;
+}
 
 /*room buttons*/
 .room_buttons{

@@ -23,8 +23,7 @@ module.exports = function (app, passport) {
       user: req.user
     });
   });
-  app.post('/find',passport.authenticate('local-signup', { successRedirect: '/',failureRedirect: '/login' })
-  );
+
 
   // GET user page
   app.get('/user', function (req, res, next) {
