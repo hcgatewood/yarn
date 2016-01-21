@@ -3,20 +3,65 @@
 <head>
   <%- include partials/meta.ejs %>
   <link rel='stylesheet' href='/stylesheets/navbar.css'/>
+  <link rel='stylesheet' type='text/css' href='UserPageStyle.css' />
   <script type="text/javascript" src="javascripts/navbar.js"></script>
 </head>
+  <body>  
+    <div id='header'>
+        <!-- LogoName -->
+        <div class='sitename'>
+          <a href='/'>Rolling Story</a>
+        </div>
 
-  <body>
-    <%- include partials/navbar.ejs %>
+        <!--Logout -->
+        <div class='logout'>
+          <a href='/logout' class='login-choice item'>Sign Out</a>
+        </div>
 
-    <div class='leftbar'>
-      <div class='UploadPic'>
-      <form action='upload.php' method='post' enctype='multipart/form-data'> 
-        Upload A Picture:
-        <input type='file' name='fileToUpload' id='fileToUpload'>
-        <input type='submit' value='Upload Image' name='submit'>
-      </form>
+        <!--UserName-->
+        <div class="username">
+          <p>TheMightyKam</p>
+        </div>  
       </div>
+    </div>
+
+    <div id='container'>
+      <div class='leftside'>
+        <div class='uploadPic'>
+          <form action='upload.php' method='post' enctype='multipart/form-data'>
+            Upload A Picture:
+            <input type='file' name='fileToUpload' id='fileToUpload'>
+            <input type='submit' value='Upload Image' name='submit'>
+          </form>
+        </div>
+
+        <div class='accInfo'>
+          <h1>Account Information</h1>
+
+          <ul>
+            <li>Joined: January 2016</li>
+            <li>Published Articles: 2</li>
+            <li>Friends: 3</li>
+            <li>Hearts: 3</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rightside">
+        <div class='crossbar'>
+        <ul>
+          <li>Published</li>
+          <li>Hearts</li>
+          <li>Recent</li>
+          <li>Friends</li>
+          <li><title>Search</title>
+          <meta name='ROBOTS' content="NOINDEX, NOFOLLOW"/>
+          </li>          
+
+      </div>
+      
+    </div>
+
     </div>
 
   </body>
