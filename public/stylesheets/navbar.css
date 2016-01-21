@@ -1,3 +1,7 @@
+@font-face { font-family: Circular; src: url('../CircularStd-Book.otf'); } 
+body{
+  font-family: Circular;
+}
 /*navbar filling*/
 .navbar {
   height: auto;
@@ -99,11 +103,11 @@
   height: 100%;
   width: 100%;
   z-index: 10;
-  background-color: rgba(255,255,255,0.70);
+  background-color: rgba(255,255,255,0.90);
 }
 
 #modal {
-    font-family:"HelveticaNeue-Light";
+    font-family:Circular;
     width: 400px;
     height: 400px;
     line-height: 200px;
@@ -161,8 +165,9 @@
 }
   
 .btn2{
-  height:33px;
+  height:35px;
   width:100px;
+  font-family: Circular;
 
 }
 .btn-lg {
@@ -257,7 +262,7 @@
 }
 
 #modal2 {
-    font-family:"HelveticaNeue-Light";
+    font-family:Circular;
     width: 400px;
     height: 400px;
     line-height: 200px;
