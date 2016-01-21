@@ -128,13 +128,16 @@ body{
     margin-bottom: -150px; 
 }
 #login_header{
+  font-family:Circular;
     color:rgba(0,0,0,0.6);
+    margin: auto;
     margin-top: 50px;
     margin-bottom: -50px;
     font-size:18px;
     z-index: 11
 }
 #login_footer{
+  font-family:Circular;
     text-align: center;
     margin: auto;
     margin-top: -70px;
@@ -278,6 +281,10 @@ body{
     text-align: center;
     z-index: 11; /* 1px higher than the overlay layer */
 
+}
+
+.b2{
+  font-family: Circular;
 }
 
 .fa-facebook:before {
