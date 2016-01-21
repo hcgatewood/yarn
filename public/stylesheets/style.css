@@ -1,138 +1,67 @@
-/*navbar*/
-.NavBar {
-    text-decoration: none;
-    margin: 0;
-    border: none;
-    padding: 30px;
-    z-index: 2;
-    display: block;
-    height:auto;
-    width:100%;
-    position: fixed;
-    left: 0%;
-    top: -2px;
-    background: #1C91A0;
-}
-.NavBar a {
-    text-decoration: none;
-    margin: 0;
-    border: none;
-    padding: 20px;
-    z-index: 2;
-    display: block;
-    position: fixed;
-    left: 0%;
-    top: 0%;
-    color: white;
-    font: 27px "Cooper Std";
-}
-.NavBar a:hover {
-    color: #F07450;
-    transition: all 0.15s ease 0.1s;
-    text-decoration: none;
+@font-face { font-family: Circular; src: url('../CircularStd-Book.otf'); } 
+body{
+  font-family: Circular;
 }
 
-div h2{
-  position: fixed;
-  text-decoration: none;
-  z-index: 1;
-  text-decoration: none;
-  margin-left: 65%;
-  right: 8px;
-  color: white;
-  top: 0px;
-  font: 23px "Gill Sans";
-}
-h2 a{
-  color: white;
-  font: 23px "Gill Sans";
-  text-decoration: none;
-  margin-right: 20px;
-}
-div h2 :hover{
-  color: #F07450;
-  text-decoration: none;
-}
-h2 a:hover {
-    color: #F07450;
-    transition: all 0.15s ease 0.1s;
-    text-decoration: none;
-}
-
-.Info {
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-    color: white;
-    position: relative;
-    z-index: 0;
-    text-align: center;
-
-    top: 300px;
-    list-style: none;
-    margin right: 10px;
-    width: 50%;
-    line-height: 10px;
-    font: 30px "Steagal" bold;
-}
-
-.Get_Creative {
-  	position: relative;
-    padding: 15px 15px 15px 15px;
-    display: block;
-    width: 16.5%;
-    text-align: center;
-    text-decoration: none;
-
-    top: 470px;
-    /*left: 41.5%;*/
-    margin-right: auto;
-    margin-left: auto;
-
-    background: #F07450;
-    /*background-image: -webkit-linear-gradient(top,#F07450,#C7482E);
-    background-image: -moz-linear-gradient(top,#F07450,#C7482E);
-    background-image: -ms-linear-gradient(top,#F07450,#C7482E);
-    background-image: -o-linear-gradient(top,#F07450,#C7482E);
-    background-image: linear-gradient(to bottom, #F07450,#C7482E);*/
-    -webkit-border-radius: 5;
-    -moz-border-radius: 5;
-    border-radius: 5px;
-    font-family: "Gill Sans";
-    color: white;
-    font-size: 20px;
-    transition: all 0.15s ease 0.1s;
-}
-.Get_Creative a {
-	color: white;
-	text-decoration: none;
-}
-.Get_Creative a:hover{
-	text-decoration: none;
-}
-.Get_Creative:hover {
-    background: #E06346;
-    /*background-image: -webkit-linear-gradient(top,#F45C38,#AA442D);
-    background-image: -moz-linear-gradient(top,#F45C38,#AA442D);
-    background-image: -ms-linear-gradient(top,#F45C38,#AA442D);
-    background-image: -o-linear-gradient(top,#F45C38,#AA442D);
-    background-image: linear-gradient(to bottom, #F45C38,#AA442D);*/
-    text-decoration: none;
-    color: white;
-}
-
-#myCarousel {
+.image{
   position: relative;
-  z-index: -5;
-  margin-left: auto;
-  margin-right: auto;
-  width: 60%;
+  margin: auto;
+  height: 150px;
+  width: 150px;
+  background-color:   #ffcc5c;
+}
+
+.responsive-layer{
+  margin-top: 100px;
+}
+
+.jumbotron{
+  background-color:#EBEAEE;
+  height: 650px;
+}
+
+.blurb{
+   text-align: center;
+   padding-top: 100px;
+}
+
+.btn_position{
+  margin: 0 auto;
+  width: 230px;
+  margin-top: 100px;
+  font-size: 9px;
+}
+
+.row{
+    text-align: center;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #ff5a5f;
+  border-color: #ff5a5f;
+}
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #ff5a5f;
+  border-color: #ff5a5f;
+}
+.btn-primary.raised {
+    box-shadow: 0 3px 0 0 #e00007;
+}
+.btn-primary.raised:active, .btn-primary1.raised.active {
+    background: #ff5a5f;
+    box-shadow: none;
+    margin-bottom: -3px;
+    margin-top: 3px;
 }
 .Copyright {
   position: relative;
   top: 200px;
-  font: 12px "Times New Roman";
+  font-size: 12px;
   text-align: center;
+  margin: 0 auto;
   color: black
 }
 
