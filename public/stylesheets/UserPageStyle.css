@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700');
+@import url(https://fonts.googleapis.com/css?family=Amatic+SC:400,700);
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+div#header{
+	position: fixed;
+	z-index:1;
+	width: 100%;
+	height:68px;
+	background-color: #1C91A0;
+	margin-top: 0 auto;
+	margin: 0 auto;
+}
+.sitename {
+	float: left;
+	margin-top: 8px;
+	margin-left: 15px;
+}
+.sitename a{
+	font-size: 2.5em;
+	font-family: 'Amatic SC';
+	color: white;
+	text-decoration: none;
+}
+.sitename a:hover{
+	color: #F07450;
+	transition: all 0.15s ease 0.1s;
+    text-decoration: none;
+}
+.username {
+	margin-top: 8px;
+	margin: center;
+}
+.username p{
+	font-size: 2.5em;
+	font-family: 'Amatic SC';
+	color: white;
+	text-decoration: none;
+	text-align: center;
+}
+.username p:hover{
+	color: #F07450;
+	transition: all 0.15s ease 0.1s;
+    text-decoration: none;
+}
+.logout {
+	float: right;
+	margin-top: 8px;
+	margin-right: 15px;
+}
+.logout a{
+	font-size: 2.5em;
+	font-family: 'Amatic SC';
+	color: white;
+	text-decoration: none;
+}
+.logout a:hover{
+	color: #F07450;
+	transition: all 0.15s ease 0.1s;
+    text-decoration: none;
+}
+.leftside{
+	position: relative;
+	width: 35%;
+	height:900px;
+	background-color: #E9EAED;
+	margin-left: 0;
+}
+
+.accInfo{
+	position: relative;
+	top: 370px;
+	margin: 9%;
+}
+.accInfo h1 {
+	font-family: 'Amatic SC';
+	font-size: 2em;
+}
+.accInfo ul{
+	list-style-type: none;
+}
+.accInfo li {
+	font-family: 'Amatic SC';
+	font-size:1.5em;
+}
+
