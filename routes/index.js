@@ -26,12 +26,14 @@ module.exports = function (app, passport) {
   });
   // GET user page
   app.get('/user/:_id', function (req, res, next) {
+    var id=req.params._id
     var username = getUsername(req);
     var user_since = getInsertDate(req);
     res.render('user_page', {
       title: 'Rolling Story',
       username: username,
       user: req.user,
+      id: id,
       user_since: user_since,
       startWriting: true
     });
