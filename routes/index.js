@@ -24,21 +24,24 @@ module.exports = function (app, passport) {
       user: req.user
     });
   });
-  app.post('/find',passport.authenticate('local-signup', { successRedirect: '/',failureRedirect: '/login' })
-  );
-
   // GET user page
-  app.get('/user', function (req, res, next) {
+  app.get('/user/:_id', function (req, res, next) {
+    var id=req.params._id
     var username = getUsername(req);
     var user_since = getInsertDate(req);
     res.render('user_page', {
       title: 'Rolling Story',
       username: username,
       user: req.user,
+      id: id,
       user_since: user_since,
       startWriting: true
     });
   });
+  app.post('/user/:_id',passport.authenticate('local-signup', { successRedirect: '/',failureRedirect: '/login' })
+  );
+
+
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
 
@@ -90,10 +93,13 @@ module.exports = function (app, passport) {
 
     // handle the callback after facebook has authenticated the user
     app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect : '/user',
-            failureRedirect : '/'
-        }));
+        passport.authenticate('facebook', {failureRedirect : '/'}),
+          function (req, res){
+            if (req.user){
+            return res.redirect('/user/'+req.user._id)
+            }
+          }
+        );
   // GET Google login
   app.get('/auth/google', passport.authenticate('google', {
     scope: ['profile', 'email']
@@ -101,10 +107,12 @@ module.exports = function (app, passport) {
 
     // the callback after google has authenticated the user
     app.get('/auth/google/callback',
-            passport.authenticate('google', {
-                    successRedirect : '/user',
-                    failureRedirect : '/'
-            }));
+            passport.authenticate('google', {failureRedirect : '/'}),
+            function (req, res){
+              if (req.user){
+              return res.redirect('/user/'+req.user._id)
+        }
+    });
   // PASSPORT
   // GET passport-info
   app.get('/passport-info', function (req, res) {
@@ -119,18 +127,28 @@ module.exports = function (app, passport) {
     //res.render('tmp-login.ejs', {message: ['pls']});
   });
 
-    // POST login
+    // POST signup-login
   app.post('/signup', passport.authenticate("local-signup", {
-    successRedirect: '/find',
     failureRedirect: '/',
-    failureFlash: true
-  }));
+    failureFlash: true }),
+    function (req, res){
+      if (req.user){
+        return res.redirect('/user/'+req.user._id)
+      }
+    }
+    );
+
 
   app.post('/login', passport.authenticate("local-login", {
-    successRedirect: '/find',
     failureRedirect: '/',
     failureFlash: true
-  }));
+  }),
+    function (req, res){
+      if (req.user){
+        return res.redirect('/user/'+req.user._id)
+      }
+    }
+  );
 
 
   // POST logout
@@ -138,6 +156,7 @@ module.exports = function (app, passport) {
     req.logout();
     res.redirect(req.get('referer'));  // Redirect back to same page
   });
+
 
   function getInsertDate(req){
     if (req.user){

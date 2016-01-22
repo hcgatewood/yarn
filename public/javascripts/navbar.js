@@ -16,8 +16,8 @@ $(document).ready(function(){
     $.ajax({
       url: "/login",
       type:"POST",
-      data:{username: $('#us').val(), password:$('#pass').val()}
-    }).done(function(){window.location='/find'});
+      data:{username: $('#us').val(), password:$('#pass').val(), _id: _id}
+    }).done(function(){window.location='/user/:_id}'});
   });
 
   $('.sp').click(function(e){
@@ -26,7 +26,7 @@ $(document).ready(function(){
       url: "/signup",
       type:"POST",
       data:{username: $('#us').val(),password:$('#pass').val()}
-    }).done(function(){window.location='/find'});
+    }).done(function(){window.location='/user/:_id'});
   });
 
   // close overlay with <esc>
