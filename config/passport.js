@@ -90,6 +90,7 @@ module.exports = function (passport) {
 
 // FACEBOOK 
  passport.use(new FacebookStrategy({
+
         // pull in our app id and secret from our auth.js file
         clientID        : configAuth.facebookAuth.clientID,
         clientSecret    : configAuth.facebookAuth.clientSecret,
@@ -129,11 +130,14 @@ module.exports = function (passport) {
 
  // GOOGLE 
 passport.use(new GoogleStrategy({
+
         clientID        : configAuth.googleAuth.clientID,
         clientSecret    : configAuth.googleAuth.clientSecret,
         callbackURL     : configAuth.googleAuth.callbackURL,
+
     },
     function(token, refreshToken, profile, done) {
+
         // make the code asynchronous
         // User.findOne won't fire until we have all our data back from Google
         process.nextTick(function() {
