@@ -1,6 +1,8 @@
-@font-face { font-family: Circular; src: url('../CircularStd-Book.otf'); } 
+@font-face { font-family: Circular; src: url('../CircularStd-Book.otf'); }
 body{
   font-family: Circular;
+  margin: 0px;
+  padding: 0px;
 }
 /*navbar filling*/
 .navbar {
@@ -107,54 +109,38 @@ body{
   background-color: rgba(255,255,255,0.90);
 }
 
-#modal {
+.modal {
     font-family:Circular;
-    width: 400px;
-    height: 400px;
-    line-height: 200px;
-    position: fixed;
-    /* start centers modal */
-    top:0;
-    bottom: 0;
+    top: 21%;
     left: 0;
     right: 0;
-    margin: auto; 
-    /* end */
+    display: block;
     border-radius: 5px;
     text-align: center;
-    z-index: 11; /* 1px higher than the overlay layer */
-
+    z-index: 11; /* 1 higher than the overlay layer */
 }
-#alignsignup_btn{
-    margin-bottom: -150px; 
+.modal > {
+  display: inline-block;
 }
 #login_header{
   font-family:Circular;
-    color:rgba(0,0,0,0.6);
-    margin: auto;
-    margin-top: 50px;
-    margin-bottom: -50px;
-    font-size:18px;
-    z-index: 11
+  color:rgba(0,0,0,0.6);
+  font-size:18px;
+  z-index: 11
 }
 #login_footer{
+  cursor: pointer;
   font-family:Circular;
-    text-align: center;
-    margin: auto;
-    margin-top: -70px;
-    margin-bottom: -50px;
-    font-size:15px;
-    color: #329ca9;
-    z-index: 11
+  text-align: center;
+  font-size:15px;
+  color: #329ca9;
+  z-index: 11
 }
 
-.signin_btn{
+.signin-btn{
   display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;
-  line-height: 1.42857143;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -164,12 +150,11 @@ body{
   border-radius: 4px;
   padding: 10px 16px;
   width: 200px;
-  height: 35px;
+  height: auto;
   z-index: 11
 }
-  
+
 .btn2{
-  height:35px;
   width:100px;
   font-family: Circular;
 
@@ -244,6 +229,7 @@ body{
     margin-bottom: -3px;
     margin-top: 3px;
 }
+
 /*overlay for signup/signin*/
 .glyphicon-remove {
     z-index: 15;
@@ -253,37 +239,10 @@ body{
 .glyphicon-remove:hover {
     color:black;
 }
-#align_btn{
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto; 
-    margin-top: 100px;
-    margin-bottom: -80px; 
-    width: 220px;
-    height: 35px;
+.align-btn{
+    width: 300px;
+    margin: 10px auto;
 }
-
-#modal2 {
-    font-family:Circular;
-    width: 400px;
-    height: 400px;
-    line-height: 200px;
-    position: fixed;
-    /* start centers modal */
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto; 
-    /* end */
-    border-radius: 5px;
-    text-align: center;
-    z-index: 11; /* 1px higher than the overlay layer */
-
-}
-
 .b2{
   font-family: Circular;
 }

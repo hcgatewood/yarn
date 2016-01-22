@@ -1,4 +1,4 @@
-<div class='navbar'>
+<div class='navbar navbar-default'>
   <div class='center'>
     <!-- LogoName -->
     <div class='navbar-item logoname'>
@@ -25,44 +25,44 @@
       <a href='/find' class='name item'><%= username %></a>
       <a href='/logout' class='login-choice item'>Sign out</a>
       <% } else { %>
-      <a class='login-choice item signin'>Sign in</a>
+      <a class='login-choice item signin'>Sign in/Sign up</a>
       <% } %>
 
     <!--Overlay #1-->
     <div class='overlay'>
       <span class='glyphicon glyphicon-remove pull-right' aria-hidden='true'></span>
     </div>
-    <div id='modal'>
+    <div class='modal' id='modal1'>
       <div class='row'>
         <h3 id='login_header'>Sign in or create an account</h3>
       </div>
         <div class="row" id="alignsignup_btn">
-            <a href="/auth/facebook"><button class="btn btn-primary1 btn-lg raised signin_btn fa fa-facebook" type="button"><span class="b2">Sign in with Facebook</span></button></a>
+            <a href="/auth/facebook"><button class="btn btn-primary1 btn-lg raised signin-btn fa fa-facebook" type="button"><span class="b2">Sign in with Facebook</span></button></a>
         </div>
 
         <div class="row">
-           <a href="/auth/google"> <button class="btn btn-primary2 btn-lg raised signin_btn fa fa-google-plus" id="b2" type="button"><span class="b2">Sign in with Google</span></button></a>
+           <a href="/auth/google"> <button class="btn btn-primary2 btn-lg raised signin-btn fa fa-google-plus" id="b2" type="button"><span class="b2">Sign in with Google</span></button></a>
         </div>
         <div class="row">
-      <h3 id="login_footer">Sign in or sign with email</h3>
+      <h3 id="login_footer">Or with a username and password</h3>
         </div>
     </div>
 
     <!--Overlay #2-->
-    <div id="modal2">
+    <div class='modal' id="modal2">
       <div class="row">
-            <h3 id="login_header">Sign in/Sign up</h3>
+            <h3 id="login_header">Sign in or create an account</h3>
       </div>
      <form action='/find' method='post'>
-                <div id="align_btn" class='form-group'>
+                <div class="align-btn" class='form-group'>
                     <input id="us" placeholder="Username" type='text' class='form-control' name='username'>
                 </div>
-                <div id="align_btn" class='form-group'>
+                <div class="align-btn" class='form-group'>
                     <input id="pass" placeholder="Password" type='password' class='form-control' name='password'>
                 </div>
 
-                <a href="/find"><button type='submit' class="btn btn-primary btn-lg raised signin_btn btn2 fa lg">Sign in</button></a>
-                <a href="/find"><button type='submit' class="btn btn-primary btn-lg raised signin_btn btn2 fa sp">Sign up</button></a>
+                <a href="/find"><button type='submit' class="btn btn-primary btn-lg raised signin-btn btn2 fa lg">Sign in</button></a>
+                <a href="/find"><button type='submit' class="btn btn-primary btn-lg raised signin-btn btn2 fa sp">Sign up</button></a>
             </form>
      </div>
     </div>
