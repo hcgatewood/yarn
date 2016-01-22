@@ -8,7 +8,8 @@ var bodyParser = require('body-parser');
 var app = express();
 var db = require('./config/db-setup.js');
 var assert = require('assert');
-app.io = require('socket.io')();
+var io = require('socket.io')();
+app.io = io;
 
 // passport
 var mongoose = require('mongoose');
@@ -93,12 +94,12 @@ app.io.on('connection', function (socket) {
     console.log('room:', roomName);
     console.log('user:', username);
     console.log('text:', text);
-    db.rooms.update(
-      {_id: roomName},
-      {$push: {contributions: {user: username, text: text}}},
-      function (err) {}
-    );
-    app.io.sockets.emit('story update', data);
+    //db.rooms.update(
+      //{_id: roomName},
+      //{$push: {contributions: {user: username, text: text}}},
+      //function (err) {}
+    //);
+    io.sockets.emit('story update', data);
   });
 });
 
