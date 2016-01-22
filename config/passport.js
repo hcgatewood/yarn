@@ -88,7 +88,7 @@ module.exports = function (passport) {
     )
   );
 
-// FACEBOOK 
+// FACEBOOK
  passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
@@ -112,8 +112,8 @@ module.exports = function (passport) {
                     // if there is no user found with that facebook id, create them
                     var newUser            = new User();
                     // set all of the facebook information in our user model
-                    newUser.facebook.id    = profile.id; // set the users facebook id                   
-                    newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
+                    newUser.facebook.id    = profile.id; // set the users facebook id
+                    newUser.facebook.token = token; // we will save the token that facebook provides to the user
                     newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
                     //newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
                     // save our user to the database
@@ -128,7 +128,7 @@ module.exports = function (passport) {
         });
     }));
 
- // GOOGLE 
+ // GOOGLE
 passport.use(new GoogleStrategy({
 
         clientID        : configAuth.googleAuth.clientID,
