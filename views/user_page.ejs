@@ -4,17 +4,13 @@
   <%- include partials/meta.ejs %>
   <link rel='stylesheet' href='/stylesheets/navbar.css'/>
   <link rel='stylesheet' type='text/css' href='/stylesheets/userPage.css' />
-<<<<<<< HEAD
-   <script src='/javascripts/userPage.js'>
-   </script>
-=======
-   <link rel='jQuery' href='/javascripts/userPage.js'/>
->>>>>>> 98286d8b10fb42a28477ef3a0e83d3d5d532645d
+   <script src='/javascripts/userPage.js'></script>
   <script type="text/javascript" src="javascripts/navbar.js"></script>
 </head>
   <body>  
   <%- include partials/navbar.ejs %>
-
+  <div class='row'>
+    <div class-'col-lg-3'>
     <div id='container'>
       <div class='leftside'>
         <div class='uploadPic'>
@@ -35,8 +31,10 @@
           </ul>
         </div>
       </div>
+      </div>
 
-      <div class="tabs">
+      <div class="col-lg-9">
+          <div class="tabs">
           <ul class="tab-links">
                   <li class="active"><a href="#tab1">Published</a></li>
                   <li><a href="#tab2">Hearts</a></li>
@@ -65,6 +63,8 @@
                       <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum risus ornare mollis. In hac habitasse platea dictumst. Ut euismod tempus hendrerit. Morbi ut adipiscing nisi. Etiam rutrum sodales gravida! Aliquam tellus orci, iaculis vel.</p>
                   </div>
               </div>
+            </div>
+        </div>
         </div>
   </body>
 </html>
