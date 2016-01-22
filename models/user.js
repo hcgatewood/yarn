@@ -46,48 +46,25 @@ userSchema.virtual('username').get(function () {
 // methods
 // ours
 // add follower
-userSchema.methods.addFollower = function (followerId, followeeId) {
-  this.model('User').findByIdAndUpdate(
-    this.id,
-    {$push: {following: followeeId}},
-    {},  // opitons
-    function (err, model) {
-      if (err) console.err(err);
-    }
-  );
+userSchema.methods.addFollower = function (followeeId) {
+  this.following.push(followeeId);
+  this.save();
 }
 // add recently viewed story
 userSchema.methods.addRecentlyViewedStory = function (storyId) {
-  this.model('User').findByIdAndUpdate(
-    this.id,
-    {$push: {recentlyViewedStories: storyId}},
-    {},  // opitons
-    function (err, model) {
-      if (err) console.err(err);
-    }
-  );
+  this.recentlyViewedStories.push(storyId);
+  this.save();
 }
 // add contributed story
 userSchema.methods.addContributedStory = function (storyId) {
-  this.model('User').findByIdAndUpdate(
-    this.id,
-    {$push: {contributedStories: storyId}},
-    {},  // opitons
-    function (err, model) {
-      if (err) console.err(err);
-    }
-  );
+  this.contributedStories.push(storyId);
+  this.save();
 }
 // add saved story
 userSchema.methods.addSavedStory = function (storyId) {
-  this.model('User').findByIdAndUpdate(
-    this.id,
-    {$push: {savedStories: storyId}},
-    {},  // opitons
-    function (err, model) {
-      if (err) console.err(err);
-    }
-  );
+  this.savedStories.push(storyId);
+  this.save();
+}
 
 
 // passport.js
