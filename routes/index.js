@@ -23,15 +23,18 @@ module.exports = function (app, passport) {
       user: req.user
     });
   });
-
+  app.post('/find',passport.authenticate('local-signup', { successRedirect: '/',failureRedirect: '/login' })
+  );
 
   // GET user page
   app.get('/user', function (req, res, next) {
     var username = getUsername(req);
+    var user_since = getInsertDate(req);
     res.render('user_page', {
       title: 'Rolling Story',
       username: username,
       user: req.user,
+      user_since: user_since,
       startWriting: true
     });
   });
@@ -77,7 +80,7 @@ module.exports = function (app, passport) {
     // handle the callback after facebook has authenticated the user
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect : '/rooms/main',
+            successRedirect : '/user',
             failureRedirect : '/'
         }));
   // GET Google login
@@ -86,7 +89,7 @@ module.exports = function (app, passport) {
     // the callback after google has authenticated the user
     app.get('/auth/google/callback',
             passport.authenticate('google', {
-                    successRedirect : '/rooms/main',
+                    successRedirect : '/user',
                     failureRedirect : '/'
             }));
   // PASSPORT
@@ -122,6 +125,14 @@ module.exports = function (app, passport) {
     req.logout();
     res.redirect(req.get('referer'));  // Redirect back to same page
   });
+
+  function getInsertDate(req){
+    if (req.user){
+    var date=req.user._id.getTimestamp()
+    var user_since=(date.getMonth()+1)+"/"+ date.getDate()+"/"+date.getFullYear();
+    return user_since
+    }
+  }
 
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
