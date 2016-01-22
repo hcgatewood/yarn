@@ -21,6 +21,7 @@ body{
   margin: auto;
 }
 .nav-font {
+  font-weight: bold;
   font-family: 'Amatic SC', 'HelveticaNeue-Light';
   font-size: 30px;
 }
