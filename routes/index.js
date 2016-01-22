@@ -1,5 +1,5 @@
 module.exports = function (app, passport) {
-  var db = require('../db-setup.js');
+  var db = require('../config/db-setup.js');
   var bootstrapSync = require('../config/bootstrapSync.js');
 
   // GET home page

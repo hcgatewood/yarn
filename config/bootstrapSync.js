@@ -1,4 +1,4 @@
-var db = require('../db-setup.js');
+var db = require('./db-setup.js');
 var fs = require('fs');
 var path = require('path');
 

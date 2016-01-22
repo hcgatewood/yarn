@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
-var db = require('./db-setup.js');
+var db = require('./config/db-setup.js');
 var assert = require('assert');
 app.io = require('socket.io')();
 
