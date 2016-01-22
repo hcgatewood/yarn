@@ -45,25 +45,28 @@ userSchema.virtual('username').get(function () {
 
 // methods
 // ours
+var defaultCallback = function (err) {
+  if (err) {console.log(err)}
+}
 // add follower
 userSchema.methods.addFollower = function (followeeId) {
   this.following.push(followeeId);
-  this.save();
+  this.save(defaultCallback);
 }
 // add recently viewed story
 userSchema.methods.addRecentlyViewedStory = function (storyId) {
   this.recentlyViewedStories.push(storyId);
-  this.save();
+  this.save(defaultCallback);
 }
 // add contributed story
 userSchema.methods.addContributedStory = function (storyId) {
   this.contributedStories.push(storyId);
-  this.save();
+  this.save(defaultCallback);
 }
 // add saved story
 userSchema.methods.addSavedStory = function (storyId) {
   this.savedStories.push(storyId);
-  this.save();
+  this.save(defaultCallback);
 }
 
 
