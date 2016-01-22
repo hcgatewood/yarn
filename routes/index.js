@@ -1,6 +1,7 @@
 module.exports = function (app, passport) {
   var db = require('../config/db-setup.js');
   var bootstrapSync = require('../config/bootstrapSync.js');
+  var helpers = require('../lib/helpers.js');
 
   // GET home page
   app.get('/', function (req, res, next) {
@@ -41,7 +42,6 @@ module.exports = function (app, passport) {
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
 
-    console.log('### db reload decision');
     // If RELOAD_DB is defined, use it's value, otherwise choose a default value
     var reloadDb = typeof process.env.RELOAD_DB !== 'undefined'
       ? process.env.RELOAD_DB == 'true'
@@ -84,7 +84,9 @@ module.exports = function (app, passport) {
     });
   });
   // GET Facebook login
-  app.get('/auth/facebook', passport.authenticate('facebook',{ scope : 'email' }));
+  app.get('/auth/facebook', passport.authenticate('facebook',{
+    scope: ['public_profile', 'email']
+  }));
 
     // handle the callback after facebook has authenticated the user
     app.get('/auth/facebook/callback',
@@ -93,7 +95,9 @@ module.exports = function (app, passport) {
             failureRedirect : '/'
         }));
   // GET Google login
-  app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+  app.get('/auth/google', passport.authenticate('google', {
+    scope: ['profile', 'email']
+  }));
 
     // the callback after google has authenticated the user
     app.get('/auth/google/callback',
@@ -150,29 +154,11 @@ module.exports = function (app, passport) {
     res.redirect('/');
   }
 
+  // Gets the user's username, defaulting to 'anonymous'
+  // if they are not logged in
   function getUsername(req) {
-    var username;
-    if (req.user) {
-      var localName = req.user.local.username;
-      var fbUsername = firstName(req.user.facebook.name);
-      var googleUsername = firstName(req.user.google.name);
-      username = req.user.local.username ||
-        fbUsername ||
-        googleUsername;
-    } else {
-      username = 'anonymous';
-    }
-    console.log('username:', username);
-    console.log('user:', req.user);
+    var username = req.user ? req.user.username : 'anonymous';
     return username;
   }
 
-  function firstName(fullName) {
-    console.log('***', fullName)
-    if (typeof fullName == 'string') {
-      return fullName.split(' ')[0];
-    } else {
-      return fullName;
-    }
-  }
 }
