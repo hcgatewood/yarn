@@ -9,7 +9,7 @@ var userSchema = mongoose.Schema({
   recentlyViewedStories: [String],  // story ids
   contributedStories: [String],  // story ids
   savedStories: [String],  // story ids
-  friends: [String],  // user ids
+  following: [String],  // user ids
   // authentications/credentials
   local: {
     username: String,
@@ -30,6 +30,7 @@ var userSchema = mongoose.Schema({
 
 });
 
+
 // virtuals
 // TODO: this eventually shouldn't need to be a virtual because
 // we'll force new users to pick a username even if they
@@ -41,7 +42,34 @@ userSchema.virtual('username').get(function () {
   return username;
 });
 
-// methods
+
+//// methods
+//// ours
+//var defaultCallback = function (err) {
+  //if (err) {console.log(err)}
+//}
+//// add follower
+//userSchema.methods.addFollower = function (followeeId) {
+  //this.following.push(followeeId);
+  //this.save(defaultCallback);
+//}
+//// add recently viewed story
+//userSchema.methods.addRecentlyViewedStory = function (storyId) {
+  //this.recentlyViewedStories.push(storyId);
+  //this.save(defaultCallback);
+//}
+//// add contributed story
+//userSchema.methods.addContributedStory = function (storyId) {
+  //this.contributedStories.push(storyId);
+  //this.save(defaultCallback);
+//}
+//// add saved story
+//userSchema.methods.addSavedStory = function (storyId) {
+  //this.savedStories.push(storyId);
+  //this.save(defaultCallback);
+//}
+
+
 // passport.js
 // generating a hash
 userSchema.methods.generateHash = function (password) {
