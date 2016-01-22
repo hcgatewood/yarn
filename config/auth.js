@@ -1,5 +1,6 @@
 // config/auth.js
 
+//var rootDir = process.env.APP_URL || 'http://localhost:3000';
 var rootDir = process.env.APP_URL || 'http://localhost:3000';
 
 // expose our config directly to our application using module.exports
