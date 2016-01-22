@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
-var db = require('./db-setup.js');
+var db = require('./config/db-setup.js');
 var assert = require('assert');
 app.io = require('socket.io')();
 
@@ -14,9 +14,10 @@ app.io = require('socket.io')();
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
-var configDB = require('./config/database.js');
+var configDB = require('./config/database.js')();
+app.dbUrl = configDB.url;
 var session = require('express-session');
-mongoose.connect(configDB.url);
+mongoose.connect(app.dbUrl);
 app.use(session({
   secret: 'be the reason someone smiles today',
   resave: true,

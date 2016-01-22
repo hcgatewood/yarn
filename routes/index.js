@@ -1,5 +1,5 @@
 module.exports = function (app, passport) {
-  var db = require('../db-setup.js');
+  var db = require('../config/db-setup.js');
   var bootstrapSync = require('../config/bootstrapSync.js');
 
   // GET home page
@@ -41,7 +41,16 @@ module.exports = function (app, passport) {
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
 
-    //bootstrapSync.reloadRoomData();
+    console.log('### db reload decision');
+    // If RELOAD_DB is defined, use it's value, otherwise choose a default value
+    var reloadDb = typeof process.env.RELOAD_DB !== 'undefined'
+      ? process.env.RELOAD_DB == 'true'
+      : false;
+    console.log(process.env.RELOAD_DB);
+    if (reloadDb) {
+      console.log('@@@ RELOADING ROOM DATA');
+      bootstrapSync.reloadRoomData();
+    }
 
     var roomName = req.params.roomName;
     var username = getUsername(req);
