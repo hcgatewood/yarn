@@ -2,13 +2,15 @@ $(document).ready(function () {
   $('.user-addition-input').textareaAutoSize();
   // var username already defined
 
+  var pathname = window.location.pathname;
+  var roomName = _.last(pathname.split('/'));
+
   var socket = io();
+  socket.emit('join room', {room: roomName});
 
   // Adding to the story
   var textArea = $('.user-addition-input');
   $('.additions-meta-submit').click(function () {
-    var pathname = window.location.pathname;
-    var roomName = _.last(pathname.split('/'));
     var userContribution = textArea.val()
     textArea.val('');
     var data = {

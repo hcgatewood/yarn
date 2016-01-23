@@ -84,6 +84,9 @@ app.use(function(err, req, res, next) {
 // Start listen with socket.io
 app.io.on('connection', function (socket) {
   console.log('Socket connection successful.');
+  socket.on('join room', function (data) {
+    socket.join(data.room);
+  })
 
   // Socket listeners
   // Receiving story update
@@ -101,7 +104,7 @@ app.io.on('connection', function (socket) {
       //{$push: {contributions: {user: username, text: text}}},
       //function (err) {}
     //);
-    io.sockets.emit('story update', data);
+    io.to(data.roomName).emit('story update', data);
   });
 });
 
