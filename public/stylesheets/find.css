@@ -29,10 +29,15 @@ a:hover{
 }
 
 /*room buttons*/
+.container-fluid {
+  margin: 0px;
+  padding: 0px;
+}
 .room_buttons{
     position: relative;/*relative to original position*/
     margin: 0px auto;
-    width: 380px;
+    /*width: 380px;*/
+    width: 100%;
     height: 100px;
     top: 0;
     right: 0;
