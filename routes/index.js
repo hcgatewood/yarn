@@ -6,6 +6,7 @@ module.exports = function (app, passport) {
   // GET home page
   app.get('/', function (req, res, next) {
     var id=getUserId(req);
+    console.log('***',id)
     var username = getUsername(req);
     res.render('index', {
       title: 'Rolling Story',
@@ -188,7 +189,7 @@ module.exports = function (app, passport) {
 
   function getUserId(req) {
     if (req.user){
-      return req.params._id
+      return req.user._id
     }
   }
 
