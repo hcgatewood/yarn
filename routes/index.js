@@ -5,10 +5,12 @@ module.exports = function (app, passport) {
 
   // GET home page
   app.get('/', function (req, res, next) {
+    var id=getUserId(req);
     var username = getUsername(req);
     res.render('index', {
       title: 'Rolling Story',
       username: username,
+      id: id,
       user: req.user,
       startWriting: true
     });
@@ -16,35 +18,37 @@ module.exports = function (app, passport) {
 
   // GET find page
   app.get('/find', function (req, res){
+    var id= getUserId(req);
     var username = getUsername(req);
     res.render('find', {
       title:'Find a Story!',
       username: username,
+      id: id,
       startWriting: true,
       user: req.user
     });
   });
   // GET user page
-  app.get('/user/:_id', function (req, res, next) {
-    var id=req.params._id
+  app.get('/user/:id', function (req, res, next) {
+    var id=getUserId(req);
     var username = getUsername(req);
     var user_since = getInsertDate(req);
     res.render('user_page', {
       title: 'Rolling Story',
       username: username,
-      user: req.user,
       id: id,
+      user: req.user,
       user_since: user_since,
       startWriting: true
     });
+
   });
-  app.post('/user/:_id',passport.authenticate('local-signup', { successRedirect: '/',failureRedirect: '/login' })
+  app.post('/user/:id',passport.authenticate('local-signup', { successRedirect: '/',failureRedirect: '/login' })
   );
 
 
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
-
     // If RELOAD_DB is defined, use it's value, otherwise choose a default value
     var reloadDb = typeof process.env.RELOAD_DB !== 'undefined'
       ? process.env.RELOAD_DB == 'true'
@@ -57,6 +61,7 @@ module.exports = function (app, passport) {
 
     var roomName = req.params.roomName;
     var username = getUsername(req);
+    var id = getUserId(req);
 
     var roomsCursor = db.rooms.find({_id: roomName});
     roomsCursor.count(function (err, numRooms) {
@@ -79,6 +84,7 @@ module.exports = function (app, passport) {
           title: roomName,
           contributions: room.contributions,
           username: username,
+          id: id,
           user: req.user,
           startWriting: false,
           userTurn: true
@@ -178,6 +184,12 @@ module.exports = function (app, passport) {
   function getUsername(req) {
     var username = req.user ? req.user.username : 'anonymous';
     return username;
+  }
+
+  function getUserId(req) {
+    if (req.user){
+      return req.params._id
+    }
   }
 
 }
