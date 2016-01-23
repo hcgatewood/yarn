@@ -164,3 +164,20 @@ background:#fff;
   background-color: #ff5a5f;
   border-color: #ff5a5f;
 }
+.btn-primary.raised {
+    box-shadow: 0 3px 0 0 #e00007;
+}
+.btn-primary.raised:active, .btn-primary.raised.active {
+    background: #ff5a5f;
+    box-shadow: none;
+    margin-bottom: -3px;
+    margin-top: 3px;
+}
+
+/*******Follow Button*******/
+.follow_btn{
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 100px; 
+}
