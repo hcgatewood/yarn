@@ -2,14 +2,19 @@
 <html>
   <head>
     <%- include partials/meta.ejs %>
+    <script>
+    var page_id= "<%= page_id %>"
+    var id= "<%= id %>"
+    </script>
     <link rel='stylesheet' href='/stylesheets/navbar.css'/>
     <link rel='stylesheet' type='text/css' href='/stylesheets/userPage.css' />
+    <script src="javascripts/navbar.js"></script>
      <script src='/javascripts/userPage.js'></script>
-    <script type="text/javascript" src="javascripts/navbar.js"></script>
   </head>
 
   <body>  
   <%- include partials/navbar.ejs %>
+
     <div class-'col-lg-3'>
       <div class='leftside'>
         <div class='upload_pic'>

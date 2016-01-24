@@ -14,7 +14,8 @@ module.exports = function (app, passport) {
 })
   var upload = multer({ storage: storage})
   var MAU = require('../lib/modify-and-upload.js');
-
+  //var User = require('mongoose').model('User').schema
+  var User = require('../models/user.js');
 
 
   // GET home page
@@ -46,15 +47,33 @@ module.exports = function (app, passport) {
   // GET user page
   app.get('/user/:id', upload.single('image'),function (req, res, next) {
     var id=getUserId(req);
+    var page_id=req.params.id
     var username = getUsername(req);
     var user_since = getInsertDate(req);
-    console.log('******',req.params.id, id)
-    var belongs_to_user = (id==req.params.id)
+    var belongs_to_user = (id==req.params.id);
+    var submit;
+
+    if (submit){
+      User.findById(id, function (err, user) {
+      user.addFollower(page_id, function(err){
+        console.log(user.following)
+        });
+      });
+    }
+
+    else{
+      User.findById(id, function (err, user) {
+      user.removeFollower(page_id, function(err){
+        console.log(user.following)
+        });
+      })
+    }
 
     res.render('user_page', {
       title: 'Rolling Story',
       username: username,
       id: id,
+      page_id: page_id,
       status: 'Ready to upload',
       newImage: 'http://placehold.it/175x175',
       user: req.user,
@@ -67,6 +86,7 @@ module.exports = function (app, passport) {
   //POST image upload
   app.post('/user/:id', upload.single('image'),function (req,res) {
     var id= getUserId(req);
+    var page_id=req.params.id
     var username = getUsername(req);
     var user_since = getInsertDate(req);
     var belongs_to_user = (id==req.params.id)
@@ -79,9 +99,10 @@ module.exports = function (app, passport) {
       newImage: './uploads/'+req.file.filename,
       title: 'Rolling Story',
       username: username,
+      page_id: page_id,
       id: id,
       user: req.user,
-      follow_btn: belongs_to_user,
+      belongs_to_user: belongs_to_user,
       user_since: user_since,
       startWriting: true
         });
@@ -185,7 +206,7 @@ module.exports = function (app, passport) {
     function (req, res){
       if (req.user){
         res.send(req.user._id)
-        res.redirect('/user/'+req.user._id)
+        //res.redirect('/user/'+req.user._id)
       }
     }
     );
@@ -198,7 +219,7 @@ module.exports = function (app, passport) {
     function (req, res){
       if (req.user){
         res.send(req.user._id)
-        res.redirect('/user/'+req.user._id)
+        //res.redirect('/user/'+req.user._id)
       }
     }
   );
