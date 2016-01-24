@@ -15,6 +15,7 @@ $(document).ready(function () {
     textArea.val('');
     var data = {
       roomName: roomName,
+      storyId: storyId,
       username: username,
       userContribution: userContribution
     }

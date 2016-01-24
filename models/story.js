@@ -1,24 +1,32 @@
 var mongoose = require('mongoose');
 
 // schema for the story model
-var storySchema = mongoose.Schema({
+var storySchema = new mongoose.Schema({
 
-  title: String,
-  isFinished: Boolean,
-  associatedRoomId: String,
+  title: {type: String, default: 'Untitled'},
+  isFinished: {type: Boolean, default: false},
   // dateStamp automatically handled by mongoose
-  constributorIds: [String],
-  orderedContributions: [{userId: String, text: String}]
+  orderedContributions: [{
+    //username: {type: Schema.Types.ObjectId, ref: 'User'},
+    username: String,
+    text: String
+  }],
+
+  // counts
+  views: {type: Number, default: 0},
+  saves: {type: Number, default: 0}
 
 });
 
-
-// methods
-// add contribution to the story
-storySchema.methods.addContribution = function (userId, text) {
-  this.contributorIds.push(userId);
-  this.contributions.push({'userId': userId, 'text': text});
-  this.save();
+// statics
+storySchema.statics.addContribution = function (storyId, username, text) {
+  this.findOneAndUpdate(
+    {_id: storyId},
+    {$push:
+      {orderedContributions: {username: username, text: text}}
+    },
+    function (err) {if (err) console.log(err)}
+  );
 }
 
 // create and export the story model
