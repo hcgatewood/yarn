@@ -16,10 +16,12 @@
         <div class="container">
           <img class="img_container" src="<%= newImage %>">
             <br><br>
+            <% if (belongs_to_user) { %>
             <form id = "uploadForm" enctype = "multipart/form-data" action = "/user/<%= id %>"method = "POST">
             <span class="file-input btn btn-primary btn-file upload-btn">Choose photo<input type="file" name="image"/></span>
             <input class="btn btn-primary btn-lg upload-btn upload-btn upload" type="submit" value="Upload" name="submit">
-        </form>
+            <% } %>
+          </form>
         </div>
       </div>
 
@@ -32,7 +34,9 @@
               <li>Follows:12</li>
               <li>Hearts: 3</li>
             </ul>
+            <% if (!belongs_to_user) { %>
             <button class="follow_btn btn btn-primary raised follow-toggle">Follow</button>
+            <% } %>
         </div>
       </div>
     </div>

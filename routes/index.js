@@ -48,6 +48,9 @@ module.exports = function (app, passport) {
     var id=getUserId(req);
     var username = getUsername(req);
     var user_since = getInsertDate(req);
+    console.log('******',req.params.id, id)
+    var belongs_to_user = (id==req.params.id)
+
     res.render('user_page', {
       title: 'Rolling Story',
       username: username,
@@ -55,6 +58,7 @@ module.exports = function (app, passport) {
       status: 'Ready to upload',
       newImage: 'http://placehold.it/175x175',
       user: req.user,
+      belongs_to_user: belongs_to_user,
       user_since: user_since,
       startWriting: true
     });
@@ -65,6 +69,8 @@ module.exports = function (app, passport) {
     var id= getUserId(req);
     var username = getUsername(req);
     var user_since = getInsertDate(req);
+    var belongs_to_user = (id==req.params.id)
+
     console.log(req.file)
     var mau = new MAU(req.file, function (err, newImagePath){
     if(req.file){
@@ -75,6 +81,7 @@ module.exports = function (app, passport) {
       username: username,
       id: id,
       user: req.user,
+      follow_btn: belongs_to_user,
       user_since: user_since,
       startWriting: true
         });
@@ -202,7 +209,6 @@ module.exports = function (app, passport) {
     req.logout();
     res.redirect(req.get('referer'));  // Redirect back to same page
   });
-
 
   function getInsertDate(req){
     if (req.user){
