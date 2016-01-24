@@ -1,38 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <%- include partials/meta.ejs %>
-  <link rel='stylesheet' href='/stylesheets/navbar.css'/>
-  <link rel='stylesheet' type='text/css' href='/stylesheets/userPage.css' />
-   <script src='/javascripts/userPage.js'></script>
-  <script type="text/javascript" src="javascripts/navbar.js"></script>
-</head>
+  <head>
+    <%- include partials/meta.ejs %>
+    <link rel='stylesheet' href='/stylesheets/navbar.css'/>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/userPage.css' />
+     <script src='/javascripts/userPage.js'></script>
+  </head>
+
   <body>  
   <%- include partials/navbar.ejs %>
-  <div class='row'>
     <div class-'col-lg-3'>
-    <div id='container'>
       <div class='leftside'>
-        <div class='uploadPic'>
-          <form action='upload.php' method='post' enctype='multipart/form-data'>
-            Upload A Picture:
-            <input type='file' name='fileToUpload' id='fileToUpload'>
-            <input type='submit' value='Upload Image' name='submit'>
+        <div class='upload_pic'>
+        <div class="container">
+          <img class="img_container" src="<%= newImage %>">
+            <br><br>
+            <% if (belongs_to_user) { %>
+            <form id = "uploadForm" enctype = "multipart/form-data" action = "/user/<%= id %>"method = "POST">
+            <span class="file-input btn btn-primary btn-file upload-btn">Choose photo<input type="file" name="image"/></span>
+            <input class="btn btn-primary btn-lg upload-btn upload-btn upload" type="submit" value="Upload" name="submit">
+            <% } %>
           </form>
         </div>
+      </div>
 
         <div class='accInfo'>
           <h1>Account Information</h1>
-          <ul>
-            <li>Joined: <%= user_since %></li>
-            <li>Published Articles: 2</li>
-            <li>Followers: 3</li>
-            <li>Follows:12</li>
-            <li>Hearts: 3</li>
-          </ul>
+            <ul>
+              <li>Joined: <%= user_since %></li>
+              <li>Published Articles: 2</li>
+              <li>Followers: 3</li>
+              <li>Follows:12</li>
+              <li>Hearts: 3</li>
+            </ul>
+            <% if (!belongs_to_user) { %>
+            <button class="follow_btn btn btn-primary raised follow-toggle">Follow</button>
+            <% } %>
         </div>
       </div>
-      </div>
+    </div>
 
       <div class="col-lg-9">
           <div class="tabs">
@@ -40,7 +46,7 @@
                   <li class="active"><a href="#tab1">Published</a></li>
                   <li><a href="#tab2">Hearts</a></li>
                   <li><a href="#tab3">Recent</a></li>
-                  <li><a href="#tab4">Friends</a></li>
+                  <li><a href="#tab4">Followers</a></li>
               </ul>
            
               <div class="tab-content">
@@ -51,7 +57,7 @@
            
                   <div id="tab2" class="tab">
                       <p>Tab #2 content goes here!</p>
-                      <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum risus ornare mollis. In hac habitasse platea dictumst. Ut euismod tempus hendrerit. Morbi ut adipiscing nisi. Etiam rutrum sodales gravida! Aliquam tellus orci, iaculis vel.</p>
+                      <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! </p>
                   </div>
            
                   <div id="tab3" class="tab">
@@ -61,11 +67,10 @@
            
                   <div id="tab4" class="tab">
                       <p>Tab #4 content goes here!</p>
-                      <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum risus ornare mollis. In hac habitasse platea dictumst. Ut euismod tempus hendrerit. Morbi ut adipiscing nisi. Etiam rutrum sodales gravida! Aliquam tellus orci, iaculis vel.</p>
-                  </div>
-              </div>
+                      <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! .</p>
             </div>
+          </div>
         </div>
-        </div>
+      </div>
   </body>
 </html>

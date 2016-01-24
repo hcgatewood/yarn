@@ -1,4 +1,6 @@
 <script>
   var username = '<%= username %>';
-  var storyId = '<%= storyId %>';
+  <% if (typeof storyId !== 'undefined') { %>
+    var storyId = '<%= storyId %>';
+  <% } %>
 </script>

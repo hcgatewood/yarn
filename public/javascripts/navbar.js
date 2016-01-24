@@ -16,8 +16,8 @@ $(document).ready(function(){
     $.ajax({
       url: "/login",
       type:"POST",
-      data:{username: $('#us').val(), password:$('#pass').val(), _id: _id}
-    }).done(function(){window.location='/user/:_id}'});
+      data:{username: $('#us').val(), password:$('#pass').val(), _id: _id},
+    }).done(function (id){window.location='/user/'+id});
   });
 
   $('.sp').click(function(e){
@@ -25,8 +25,8 @@ $(document).ready(function(){
     $.ajax({
       url: "/signup",
       type:"POST",
-      data:{username: $('#us').val(),password:$('#pass').val()}
-    }).done(function(){window.location='/user/:_id'});
+      data:{username: $('#us').val(),password:$('#pass').val()},
+    }).done(function (id){window.location='/user/'+id});
   });
 
   // close overlay with <esc>

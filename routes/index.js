@@ -3,6 +3,20 @@ module.exports = function (app, passport) {
   var Story = require('../models/story');
   var bootstrapSync = require('../config/bootstrapSync.js');
   var helpers = require('../lib/helpers.js');
+  //User Upload Files
+  var multer  = require('multer')
+  var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+  var upload = multer({ storage: storage})
+  var MAU = require('../lib/modify-and-upload.js');
+
+
 
   // GET home page
   app.get('/', function (req, res, next) {
@@ -19,7 +33,7 @@ module.exports = function (app, passport) {
 
   // GET find page
   app.get('/find', function (req, res){
-    var id= getUserId(req);
+    var id = getUserId(req);
     var username = getUsername(req);
     res.render('find', {
       title:'Find a Story!',
@@ -29,23 +43,54 @@ module.exports = function (app, passport) {
       user: req.user
     });
   });
+
   // GET user page
-  app.get('/user/:id', function (req, res, next) {
-    var id=getUserId(req);
+  app.get('/user/:id', upload.single('image'),function (req, res, next) {
+    var id = getUserId(req);
+    console.log('id:', id);
     var username = getUsername(req);
     var user_since = getInsertDate(req);
+    console.log('******',req.params.id, id)
+    var belongs_to_user = (id == req.params.id)
+
     res.render('user_page', {
       title: 'Rolling Story',
       username: username,
       id: id,
+      status: 'Ready to upload',
+      newImage: 'http://placehold.it/175x175',
       user: req.user,
+      belongs_to_user: belongs_to_user,
       user_since: user_since,
       startWriting: true
     });
-
   });
-  app.post('/user/:id',passport.authenticate('local-signup', { successRedirect: '/',failureRedirect: '/login' })
-  );
+
+  //POST image upload
+  app.post('/user/:id', upload.single('image'),function (req,res) {
+    var id= getUserId(req);
+    var username = getUsername(req);
+    var user_since = getInsertDate(req);
+    var belongs_to_user = (id==req.params.id)
+
+    console.log(req.file)
+    var mau = new MAU(req.file, function (err, newImagePath){
+    if(req.file){
+      res.render('user_page', {
+      status: 'Finished uploading',
+      newImage: './uploads/'+req.file.filename,
+      title: 'Rolling Story',
+      username: username,
+      id: id,
+      user: req.user,
+      follow_btn: belongs_to_user,
+      user_since: user_since,
+      startWriting: true
+        });
+      }
+    });
+  });
+
 
 
   // GET room page
@@ -68,6 +113,7 @@ module.exports = function (app, passport) {
       });
     });
   });
+
   // GET Facebook login
   app.get('/auth/facebook', passport.authenticate('facebook',{
     scope: ['public_profile', 'email']
@@ -78,7 +124,7 @@ module.exports = function (app, passport) {
         passport.authenticate('facebook', {failureRedirect : '/'}),
           function (req, res){
             if (req.user){
-            return res.redirect('/user/'+req.user._id)
+            res.redirect('/user/'+req.user._id)
             }
           }
         );
@@ -92,7 +138,7 @@ module.exports = function (app, passport) {
             passport.authenticate('google', {failureRedirect : '/'}),
             function (req, res){
               if (req.user){
-              return res.redirect('/user/'+req.user._id)
+              res.redirect('/user/'+req.user._id)
         }
     });
   // PASSPORT
@@ -115,7 +161,8 @@ module.exports = function (app, passport) {
     failureFlash: true }),
     function (req, res){
       if (req.user){
-        return res.redirect('/user/'+req.user._id)
+        res.send(req.user._id)
+        res.redirect('/user/'+req.user._id)
       }
     }
     );
@@ -127,7 +174,8 @@ module.exports = function (app, passport) {
   }),
     function (req, res){
       if (req.user){
-        return res.redirect('/user/'+req.user._id)
+        res.send(req.user._id)
+        res.redirect('/user/'+req.user._id)
       }
     }
   );
@@ -138,7 +186,6 @@ module.exports = function (app, passport) {
     req.logout();
     res.redirect(req.get('referer'));  // Redirect back to same page
   });
-
 
   function getInsertDate(req){
     if (req.user){
@@ -163,7 +210,7 @@ module.exports = function (app, passport) {
   }
 
   function getUserId(req) {
-    if (req.user){
+    if (req.user) {
       return req.user._id
     }
   }
