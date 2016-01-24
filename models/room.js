@@ -23,10 +23,10 @@ var roomSchema = new mongoose.Schema({
   bannedFromWriting: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
 
   // counts
-  numReaders: {type: Number, default: 0},
-  maxWriters: {type: Number, default: 0},
-  totalTurns: {type: Number, default: 0},
-  currentTurns: {type: Number, default: 0}
+  numReaders: {type: Number, min: 0, default: 0},
+  maxWriters: {type: Number, min: 0, default: 0},
+  totalTurns: {type: Number, min: 0, default: 0},
+  currentTurns: {type: Number, min: 0, default: 0}
 
 });
 roomSchema.plugin(findOrCreate);
@@ -37,6 +37,7 @@ roomSchema.statics.requireRoom = function (roomName, callback) {
   var roomModel = this;
   this.findOrCreate({name: roomName}, function (err, room, created) {
     if (err) console.log('err:', count);
+    // add reader
     // make new story and room if necessary
     console.log('type of room.story', typeof room.story);
     if (typeof room.story === 'undefined') {
@@ -45,15 +46,22 @@ roomSchema.statics.requireRoom = function (roomName, callback) {
       room.story = story;
       room.save();
       story.save(function () {
-        roomModel.findOne({name: roomName}).populate('story').exec(function (err, room) {
-          callback(room, room.story);
-        });
+        roomModel
+          .findOne({name: roomName})
+          .populate('story')
+          .exec(function (err, room) {
+            callback(room, room.story);
+          });
       });
     } else {
+      room.save();
       console.log('@@@ using existing story @@@');
-      roomModel.findOne({name: roomName}).populate('story').exec(function (err, room) {
-        callback(room, room.story);
-      });
+      roomModel
+        .findOne({name: roomName})
+        .populate('story')
+        .exec(function (err, room) {
+          callback(room, room.story);
+        });
     }
   });
 }
@@ -94,17 +102,40 @@ roomSchema.methods.removeWriter = function (userId) {
 }
 
 // add reader to the room
-roomSchema.methods.addReader = function (user) {
-  if (typeof user !== 'undefined') this.readerIds[user.id] = true;
-  this.numReaders++;
-  this.save(helpers.genericErrCallback);
+roomSchema.statics.addReader = function (roomId, userId) {
+  if (userId) {
+    console.log('adding reader:', roomId, userId);
+    this.findById(roomId, function (err, room) {
+      if (err) {
+        console.log('err:', err);
+        return;
+      }
+      room.readers.addToSet(userId);
+      room.numReaders = room.readers.length;
+      room.save(function (err) {if (err) console.log('err:', err)});
+    });
+  } else {
+    console.log('not adding reader');
+  }
 }
 
 // remove reader from the room
-roomSchema.methods.removeReader = function (user) {
-  if (typeof user !== 'undefined') delete this.readerIds[user.id];
-  this.numReaders--;
-  this.save(helpers.genericErrCallback);
+roomSchema.statics.removeReader = function (roomId, userId) {
+  if (userId) {
+    console.log('removing reader:', roomId, userId);
+    this.findById(roomId, function (err, room) {
+      if (err) {
+        console.log('err:', err);
+        return;
+      }
+      room.readers.pull(userId);
+      room.numReaders = room.readers.length;
+      room.save(function (err) {if (err) console.log('err:', err)});
+    });
+  } else {
+    console.log('not removing reader');
+  }
 }
+
 
 module.exports = mongoose.model('Room', roomSchema);

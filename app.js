@@ -13,6 +13,7 @@ app.io = io;
 var bootstrapSync = require('./config/bootstrapSync');
 
 // db models
+var Room = require('./models/room');
 var Story = require('./models/story');
 
 // passport
@@ -98,11 +99,16 @@ app.use(function(err, req, res, next) {
 // Start listen with socket.io
 app.io.on('connection', function (socket) {
   console.log('Socket connection successful.');
-  socket.on('join room', function (data) {
-    socket.join(data.room);
-  })
 
-  // Socket listeners
+  socket.on('join room', function (data) {
+    Room.addReader(data.roomId, data.userId);
+    socket.join(data.room);
+  });
+
+  socket.on('leaving room', function (data) {
+    Room.removeReader(data.roomId, data.userId);
+  });
+
   // Receiving story update
   // TODO: gotta make sure user's allowed to post update, etc.
   socket.on('room contribution', function (data) {

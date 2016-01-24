@@ -12,6 +12,8 @@ var userSchema = new mongoose.Schema({
   savedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
   following: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
 
+  //currentStory: {type: Schema.Types.ObjectId, ref: 'Story'},
+
   // authentications/credentials
   local: {
     username: String,

@@ -47,10 +47,8 @@ module.exports = function (app, passport) {
   // GET user page
   app.get('/user/:id', upload.single('image'),function (req, res, next) {
     var id = getUserId(req);
-    console.log('id:', id);
     var username = getUsername(req);
     var user_since = getInsertDate(req);
-    console.log('******',req.params.id, id)
     var belongs_to_user = (id == req.params.id)
 
     res.render('user_page', {
@@ -92,12 +90,12 @@ module.exports = function (app, passport) {
   });
 
 
-
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
     var roomName = req.params.roomName;
     var username = getUsername(req);
     var id = getUserId(req);
+    var userId = typeof req.user !== 'undefined' ? req.user.id : '';
     Room.requireRoom(roomName, function (room, story) {
       // render the room
       res.render('room', {
@@ -105,6 +103,8 @@ module.exports = function (app, passport) {
         contributions: story.orderedContributions,
         username: username,
         storyId: story.id,
+        roomId: room.id,
+        userId: userId,
         id: id,
         user: req.user,
         startWriting: false,
