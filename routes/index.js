@@ -1,3 +1,5 @@
+var ObjectID = require('mongodb').ObjectID;
+
 module.exports = function (app, passport) {
   var Room = require('../models/room');
   var Story = require('../models/story');
@@ -47,40 +49,48 @@ module.exports = function (app, passport) {
 
   // GET user page
   app.get('/user/:id', upload.single('image'),function (req, res, next) {
+
     var id=getUserId(req);
     var page_id=req.params.id
     var username = getUsername(req);
     var user_since = getInsertDate(req);
     var belongs_to_user = (id==req.params.id);
-    var submit;
 
-    if (submit){
-      User.findById(id, function (err, user) {
-      user.addFollower(page_id, function(err){
-        console.log(user.following)
+    User.findById(id, function (err, user) {
+      console.log(user)
+      if (user) {
+        var userIds = [];
+        user.following.forEach(function(item) {
+          userIds.push(ObjectID(item));
         });
-      });
-    }
 
-    else{
-      User.findById(id, function (err, user) {
-      user.removeFollower(page_id, function(err){
-        console.log(user.following)
-        });
-      })
-    }
+        User.find({ _id: {$in : userIds}},function (err, follow_user)  {
 
-    res.render('user_page', {
-      title: 'Rolling Story',
-      username: username,
-      id: id,
-      page_id: page_id,
-      status: 'Ready to upload',
-      newImage: 'http://placehold.it/175x175',
-      user: req.user,
-      belongs_to_user: belongs_to_user,
-      user_since: user_since,
-      startWriting: true
+          var user_follow = [];
+          follow_user.forEach(function(item) {
+            if (item.local.username){
+              user_follow.push([item.local.username, item._id])
+            }if (item.facebook.name){
+              user_follow.push([item.google.name, item._id])
+            }if (item.google.name){
+              user_follow.push([item.facebook.name, item._id])
+            }
+          });
+          res.render('user_page', {
+            title: 'Rolling Story',
+            username: username,
+            id: id,
+            follow: user_follow,
+            page_id: page_id,
+            status: 'Ready to upload',
+            newImage: 'http://placehold.it/175x175',
+            user: req.user,
+            belongs_to_user: belongs_to_user,
+            user_since: user_since,
+            startWriting: true
+          });   
+        });  
+      }
     });
   });
 
@@ -92,7 +102,6 @@ module.exports = function (app, passport) {
     var user_since = getInsertDate(req);
     var belongs_to_user = (id==req.params.id)
 
-    console.log(req.file)
     var mau = new MAU(req.file, function (err, newImagePath){
     if(req.file){
       res.render('user_page', {
@@ -110,6 +119,36 @@ module.exports = function (app, passport) {
       }
     });
   });
+
+  app.post('/follow', function(req,res){
+    var id= getUserId(req);
+    var page_id=req.body.page_id
+
+      if (req.body.submit){
+      User.findById(id, function (err, user) {
+      user.addFollower(page_id, function(err){
+        console.log(user.following)
+        });
+      console.log(user.following)
+      });
+    }
+
+
+  })
+
+    app.post('/unfollow', function(req,res){
+    var id= getUserId(req);
+    var page_id=req.body.page_id
+
+      if (req.body.submit){
+      User.findById(id, function (err, user) {
+      user.removeFollower(page_id, function(err){
+        console.log(user.following)
+        });
+            console.log(user.following)
+      });
+    }
+  })
 
 
 

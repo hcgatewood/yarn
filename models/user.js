@@ -12,7 +12,7 @@ var userSchema = new mongoose.Schema({
   recentlyViewedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
   contributedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
   savedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
-  following: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
+  following: [String],
 
   // authentications/credentials
   local: {
@@ -54,7 +54,9 @@ userSchema.virtual('username').get(function () {
 //}
 //// add follower
 userSchema.methods.addFollower = function (followeeId) {
+  if (!(followeeId in this.following)){
   this.following.push(followeeId);
+  }
   this.save(function (err){
     if (err) return console.error(err);
   });

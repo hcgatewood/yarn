@@ -13,7 +13,7 @@ $(document).ready(function() {
  
         e.preventDefault();
     });
-    	
+    	//if (id in user.following) make button certain color
 
     $('.follow_btn').on('click', function (e){
 		e.preventDefault();
@@ -25,9 +25,9 @@ $(document).ready(function() {
 	        $this.removeClass('btn-primary2') 
 
 	        $.ajax({
-		    url: "/user/:id",
-		    type:"GET",
-		    data:{submit:false} 
+		    url: "/unfollow",
+		    type:"POST",
+		    data:{submit:true, page_id:page_id} 
 	    	})
 
 	    }
@@ -36,9 +36,9 @@ $(document).ready(function() {
 	        $this.addClass('btn-primary2')
 
 	        $.ajax({
-		    url: "/user/:id",
-		    type:"GET",
-		    data:{submit:true}
+		    url: "/follow",
+		    type:"POST",
+		    data:{submit:true, page_id:page_id}
 			})
 	    }
     });
