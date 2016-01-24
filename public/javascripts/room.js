@@ -6,13 +6,30 @@ $(document).ready(function () {
   var roomName = _.last(pathname.split('/'));
 
   var socket = io();
-  socket.emit('join room', {room: roomName});
+  socket.emit('join room', {
+    room: roomName,
+    roomId: roomId,
+    userId: userId
+  });
+
+  // Reduce room's num users on leaving the page; stolen from
+  // http://stackoverflow.com/questions/7080269/javascript-before-leaving-the-page
+  $(window).bind('beforeunload', function () {
+    socket.emit('leaving room', {
+      roomId: roomId,
+      userId: userId
+    });
+  })
 
   // Adding to the story
   var textArea = $('.user-addition-input');
   $('.additions-meta-submit').click(function () {
     var userContribution = textArea.val()
     textArea.val('');
+    console.log('roomName:', roomName);
+    console.log('storyId:', storyId);
+    console.log('username:', username);
+    console.log('userContribution:', userContribution);
     var data = {
       roomName: roomName,
       storyId: storyId,
@@ -21,6 +38,7 @@ $(document).ready(function () {
     }
     socket.emit('room contribution', data);
   });
+
   // Receiving story updates
   socket.on('story update', function (data) {
     console.log('story update:', data.userContribution);
@@ -40,6 +58,7 @@ $(document).ready(function () {
       );
     }
   });
+
 });
 
 
@@ -49,20 +68,3 @@ function nearBottomOfPage() {
   var bottomDocument = $(document).height();
   return bottomWindow >= bottomDocument - proximityThreshold;
 }
-
-//// Getting URL parameters. Stolen from
-//// https://stackoverflow.com/questions/19491336/get-url-parameter-jquery
-//var getUrlParameter = function getUrlParameter(sParam) {
-  //var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-    //sURLVariables = sPageURL.split('&'),
-    //sParameterName,
-    //i;
-
-  //for (i = 0; i < sURLVariables.length; i++) {
-    //sParameterName = sURLVariables[i].split('=');
-
-    //if (sParameterName[0] === sParam) {
-      //return sParameterName[1] === undefined ? true : sParameterName[1];
-    //}
-  //}
-//};

@@ -1,5 +1,6 @@
 <script>
   var username = '<%= username %>';
+
   <% if (typeof storyId !== 'undefined') { %>
     var storyId = '<%= storyId %>';
   <% } %>
@@ -16,5 +17,12 @@
     var follow= "<%= follow %>";
   <% } %>
 
+  <% if (typeof roomId !== 'undefined') { %>
+    var roomId = '<%= roomId %>';
+  <% } %>
+
+  <% if (typeof userId !== 'undefined') { %>
+    var userId = '<%= userId %>';
+  <% } %>
 
 </script>
