@@ -1,5 +1,6 @@
 module.exports = function (app, passport) {
-  var db = require('../config/db-setup.js');
+  var Room = require('../models/room');
+  var Story = require('../models/story');
   var bootstrapSync = require('../config/bootstrapSync.js');
   var helpers = require('../lib/helpers.js');
   //User Upload Files
@@ -20,7 +21,7 @@ module.exports = function (app, passport) {
 
   // GET home page
   app.get('/', function (req, res, next) {
-    var id=getUserId(req);
+    var id = getUserId(req);
     var username = getUsername(req);
     res.render('index', {
       title: 'Rolling Story',
@@ -33,7 +34,7 @@ module.exports = function (app, passport) {
 
   // GET find page
   app.get('/find', function (req, res){
-    var id= getUserId(req);
+    var id = getUserId(req);
     var username = getUsername(req);
     res.render('find', {
       title:'Find a Story!',
@@ -114,46 +115,21 @@ module.exports = function (app, passport) {
 
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
-    // If RELOAD_DB is defined, use it's value, otherwise choose a default value
-    var reloadDb = typeof process.env.RELOAD_DB !== 'undefined'
-      ? process.env.RELOAD_DB == 'true'
-      : false;
-    console.log(process.env.RELOAD_DB);
-    if (reloadDb) {
-      console.log('@@@ RELOADING ROOM DATA');
-      bootstrapSync.reloadRoomData();
-    }
-
     var roomName = req.params.roomName;
     var username = getUsername(req);
     var id = getUserId(req);
-
-    var roomsCursor = db.rooms.find({_id: roomName});
-    roomsCursor.count(function (err, numRooms) {
-      if (numRooms === 0) {
-        // Insert new room
-        console.log('Generating new room:', roomName);
-        db.rooms.insert({
-          _id: roomName,
-          contributions: []
-        });
-      } else if (numRooms > 1) {
-        // Log that we have too many
-        console.log('Rip, duplicate rooms');
-      } else {
-        console.log('Rendering already existing room');
-      }
-      // Render the room
-      roomsCursor.nextObject(function (err, room) {
-        res.render('room', {
-          title: roomName,
-          contributions: room.contributions,
-          username: username,
-          id: id,
-          user: req.user,
-          startWriting: false,
-          userTurn: true
-        });
+    Room.requireRoom(roomName, function (room, story) {
+      // render the room
+      res.render('room', {
+        title: roomName,
+        contributions: story.orderedContributions,
+        username: username,
+        storyId: story.id,
+        id: id,
+        user: req.user,
+        startWriting: false,
+        // TODO below needs to change
+        userTurn: true
       });
     });
   });
@@ -254,9 +230,8 @@ module.exports = function (app, passport) {
   }
 
   function getUserId(req) {
-    if (req.user){
+    if (req.user) {
       return req.user._id
     }
   }
-
 }

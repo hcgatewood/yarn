@@ -1,4 +1,16 @@
 <script>
   var username = '<%= username %>';
-  
+  <% if (typeof storyId !== 'undefined') { %>
+    var storyId = '<%= storyId %>';
+  <% } %>
+
+  <% if (typeof page_id !== 'undefined') { %>
+    var page_id= "<%= page_id %>";
+  <% } %>
+
+  <% if (typeof page_id !== 'undefined') { %>
+    var id= "<%= id %>";
+  <% } %>
+
+
 </script>

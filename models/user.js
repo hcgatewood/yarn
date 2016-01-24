@@ -1,17 +1,19 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 var helpers = require('../lib/helpers');
 var Schema = mongoose.Schema;
 
 
 // define the schema for our user model
-var userSchema = mongoose.Schema({
+var userSchema = new mongoose.Schema({
 
-  //username: String,
-  recentlyViewedStories: [String],  // story ids
-  contributedStories: [String],  // story ids
-  savedStories: [String],  // story ids
-  following: [String],  // user ids
+  //username: {type: String, default: 'todo'},
+  recentlyViewedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
+  contributedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
+  savedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
+  following: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
+
   // authentications/credentials
   local: {
     username: String,

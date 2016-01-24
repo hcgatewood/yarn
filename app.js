@@ -6,10 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
-var db = require('./config/db-setup.js');
 var assert = require('assert');
 var io = require('socket.io')();
 app.io = io;
+
+var bootstrapSync = require('./config/bootstrapSync');
+
+// db models
+var Story = require('./models/story');
 
 // passport
 var mongoose = require('mongoose');
@@ -45,6 +49,16 @@ var image = require('./routes/index.js');
 
 //app.use('/', routes);
 //app.use('/users', users);
+
+
+// If RELOAD_DB is defined, use it's value, otherwise choose a default value
+var reloadDb = typeof process.env.RELOAD_DB !== 'undefined'
+  ? process.env.RELOAD_DB == 'true'
+  : false;
+if (reloadDb) {
+  console.log('@@@ RELOADING ROOM DATA');
+  bootstrapSync.reloadRoomData();
+}
 
 // routes
 var routes = require('./routes/index')(app, passport);
@@ -92,18 +106,12 @@ app.io.on('connection', function (socket) {
   // Receiving story update
   // TODO: gotta make sure user's allowed to post update, etc.
   socket.on('room contribution', function (data) {
-    var roomName = data.roomName;
-    var username = data.username;
-    var text = data.userContribution;
     console.log('There has been a room contribution');
-    console.log('room:', roomName);
-    console.log('user:', username);
-    console.log('text:', text);
-    //db.rooms.update(
-      //{_id: roomName},
-      //{$push: {contributions: {user: username, text: text}}},
-      //function (err) {}
-    //);
+    console.log('room:', data.roomName);
+    console.log('storyId:', data.storyId);
+    console.log('user:', data.username);
+    console.log('text:', data.userContribution);
+    Story.addContribution(data.storyId, data.username, data.userContribution);
     io.to(data.roomName).emit('story update', data);
   });
 });
