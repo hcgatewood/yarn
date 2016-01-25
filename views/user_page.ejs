@@ -2,6 +2,8 @@
 <html>
   <head>
     <%- include partials/meta.ejs %>
+    <%- include ../public/javascripts/capitalize.js %>
+    <script src='/socket.io/socket.io.js'></script>
     <link rel='stylesheet' href='/stylesheets/navbar.css'/>
     <link rel='stylesheet' type='text/css' href='/stylesheets/userPage.css' />
       <script src="javascripts/navbar.js"></script>
@@ -11,22 +13,19 @@
   <body>  
   <%- include partials/navbar.ejs %>
     <div class="row-fluid">
-      <div class='leftside'>
-        <div class='upload_pic'>
-        <div class="container">
-          <img class="img_container" src="<%= newImage %>">
-            <br><br>
-            <% if (belongs_to_user) { %>
-            <form id = "uploadForm" enctype = "multipart/form-data" action = "/user/<%= id %>"method = "POST">
-            <span class="file-input btn btn-primary btn-file upload-btn">Choose photo<input type="file" name="image"/></span>
-            <input class="btn btn-primary btn-lg upload-btn upload-btn upload" type="submit" value="Upload" name="submit">
-            <% } %>
-          </form>
+      <div class="col-md-3">
+      <div class='panel space-4'>
+        <div class='panel-body'>
+            <img class="img_container"></img>
+            <h2><%= page_username %></h2>
         </div>
       </div>
 
-        <div class='accInfo'>
-          <h1>Account Information</h1>
+        <div class='accInfo panel row-space-4'>
+          <div class="panel-header">
+          <h1>Account Info</h1>
+          </div>
+          <div class="panel-body">
             <ul>
               <li>Joined: <%= user_since %></li>
               <li>Published Articles: 2</li>
@@ -36,10 +35,11 @@
             <% if (!belongs_to_user) { %>
             <button class="follow_btn btn btn-primary raised follow-toggle">Follow</button>
             <% } %>
+          </div>
         </div>
       </div>
 
-      <div class="col-lg-9">
+      <div class="col-md-9">
           <div class="tabs clearfix">
           <div class="container-fluid">
               <ul class="tab-links">
@@ -73,7 +73,7 @@
                       <% for (var idx = 0; idx < follow.length; idx++) { %>
                       <ul class="user-list">
                       <% if (typeof follow[idx][0] !== 'undefined') {%>
-                      <a class="user" href="/user/<%= follow[idx][1]%>"><li><%= follow[idx][0].capitalize() %></li></a>
+                      <a class="user" href="/user/<%= follow[idx][1]%>"><li><%= follow[idx][0] %></li></a>
                       <% } %>
                       </ul>
                       <% } %>
@@ -87,15 +87,13 @@
                       <% for (var idx = 0; idx < follower.length; idx++) { %>
                       <ul class="user-list">
                       <% if (typeof follower[idx][0] !== 'undefined') {%>
-                      <a class="user" href="/user/<%= follower[idx][1]%>"><li><%= follower[idx][0].capitalize() %></li></a>
+                      <a class="user" href="/user/<%= follower[idx][1]%>"><li><%= follower[idx][0] %></li></a>
                       <% } %>
                       </ul>
                       <% } %>
-                 </div>
-              </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+      </div>
   </body>
 </html>
