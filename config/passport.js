@@ -3,13 +3,14 @@ var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-// load up the user model
-var User = require('../models/user');
 // load the auth variables
 var configAuth = require('./auth');
 
 // expose this function to our app
-module.exports = function (passport) {
+module.exports = function (app, passport) {
+  // load up the user model
+  var User = app.models.user;
+
   // SESSION SETUP
   passport.serializeUser(function (user, done) {
     done(null, user.id);

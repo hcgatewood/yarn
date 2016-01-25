@@ -39,7 +39,11 @@ body {
   width: 100%;
 }
 
+.meta-container {
+  display: inline-block;
+}
 .story-container {
+  display: inline-block;
   width: 60%;
 }
 .contribution:not(.empty) {

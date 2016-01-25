@@ -1,9 +1,9 @@
 var ObjectID = require('mongodb').ObjectID;
 
 module.exports = function (app, passport) {
-  var Room = require('../models/room');
-  var Story = require('../models/story');
-  var bootstrapSync = require('../config/bootstrapSync.js');
+  var Room = app.models.room;
+  var Story = app.models.story;
+  var bootstrapSync = require('../config/bootstrapSync')(app);
   var helpers = require('../lib/helpers.js');
   //User Upload Files
   var multer  = require('multer')
@@ -173,6 +173,7 @@ module.exports = function (app, passport) {
         username: username,
         storyId: story.id,
         roomId: room.id,
+        roomInterval: room.turnLenMs,
         userId: userId,
         id: id,
         user: req.user,

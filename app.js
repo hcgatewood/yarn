@@ -6,15 +6,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
-var assert = require('assert');
 var io = require('socket.io')();
 app.io = io;
 
-var bootstrapSync = require('./config/bootstrapSync');
-
 // db models
-var Room = require('./models/room');
+app.models = {};
+var user = require('./models/user');
+app.models.user = user;
 var Story = require('./models/story');
+app.models.story = Story;
+var Room = require('./models/room')(app);
+app.models.room = Room;
+
+var bootstrapSync = require('./config/bootstrapSync')(app);
 
 // passport
 var mongoose = require('mongoose');
@@ -31,7 +35,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());  // persistent login sessions
-require('./config/passport')(passport);  // pass passport for configuration
+require('./config/passport')(app, passport);  // pass passport for configuration
 app.use(flash());  // use connect-flash for flash messages stored in session
 
 // view engine setup
@@ -98,29 +102,44 @@ app.use(function(err, req, res, next) {
 
 // Start listen with socket.io
 app.io.on('connection', function (socket) {
-  console.log('Socket connection successful.');
 
   socket.on('join room', function (data) {
     Room.addReader(data.roomId, data.userId);
-    socket.join(data.room);
+    socket.join(data.roomId);
   });
-
   socket.on('leaving room', function (data) {
     Room.removeReader(data.roomId, data.userId);
   });
 
+  socket.on('join as writer', function (data) {
+    console.log('receiving join as writer request:', data.userId);
+    Room.addWriter(data.roomId, data.userId, function () {
+      Room.ifUserTurn(data.roomId, data.userId, function (orderedWriters) {
+        io.to(socket.id).emit('your turn', {orderedWriters: orderedWriters});
+      });
+    });
+  });
+  socket.on('leave as writer', function (data) {
+    console.log('receiving leave as writer request:', data.userId);
+    Room.removeWriter(data.roomId, data.userId);
+  })
+
   // Receiving story update
-  // TODO: gotta make sure user's allowed to post update, etc.
   socket.on('room contribution', function (data) {
-    console.log('There has been a room contribution');
-    console.log('room:', data.roomName);
-    console.log('storyId:', data.storyId);
-    console.log('user:', data.username);
-    console.log('text:', data.userContribution);
-    Story.addContribution(data.storyId, data.username, data.userContribution);
-    io.to(data.roomName).emit('story update', data);
+    console.log('app.js userid:', data.userId);
+    Room.ifUserTurn(data.roomId, data.userId, function (orderedWriters) {
+      console.log('There has been a room contribution');
+      console.log('room:', data.roomName);
+      console.log('storyId:', data.storyId);
+      console.log('user:', data.username);
+      console.log('text:', data.userContribution);
+      // add the contribution
+      Room.changeWriterTurns(data.roomId);
+      Story.addContribution(data.storyId, data.username, data.userContribution);
+      data.orderedWriters = orderedWriters;
+      io.to(data.roomId).emit('story update', data);
+    });
   });
 });
 
 module.exports = app;
-
