@@ -30,9 +30,8 @@
             <ul>
               <li>Joined: <%= user_since %></li>
               <li>Published Articles: 2</li>
-              <li>Followers: 3</li>
+              <li>Followers: <%= follower.length %></li>
               <li>Follows:<%= follow.length %></li>
-              <li>Hearts: 3</li>
             </ul>
             <% if (!belongs_to_user) { %>
             <button class="follow_btn btn btn-primary raised follow-toggle">Follow</button>
@@ -68,6 +67,9 @@
                   </div>
            
                   <div id="tab4" class="tab">
+                  <% if (follow.length==0) { %>
+                    <p class="friends">No followers, just yet!</p>
+                    <% } %>
                       <% for (var idx = 0; idx < follow.length; idx++) { %>
                       <ul class="user-list">
                       <a class="user" href="/user/<%= follow[idx][1]%>"><li><%= follow[idx][0] %></li></a>
@@ -76,9 +78,10 @@
                  </div>
 
                  <div id="tab5" class="tab">
-                      <% for (var idx = 0; idx < follow.length; idx++) { %>
+                      <h4> Followers: <%= follower.length %> </h4>
+                      <% for (var idx = 0; idx < follower.length; idx++) { %>
                       <ul class="user-list">
-                      <a class="user" href="/user/<%= follow[idx][1]%>"><li><%= follow[idx][0] %></li></a>
+                      <a class="user" href="/user/<%= follower[idx][1]%>"><li><%= follower[idx][0] %></li></a>
                       </ul>
                       <% } %>
                  </div>

@@ -21,7 +21,6 @@ body{
     width: 28%;
     min-width: 300px;
     height:1000px;
-    background-color: #E9EAED;
     margin-left: 0;
     margin-bottom: 0;
 }
@@ -203,4 +202,9 @@ background:#fff;
     margin-top: 20px;
     margin-left: 30px;
     width: 100px; 
+}
+
+.friends{
+    color:gray;
+    text-align: center;
 }
