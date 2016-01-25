@@ -3,6 +3,7 @@ var ObjectID = require('mongodb').ObjectID;
 module.exports = function (app, passport) {
   var Room = app.models.room;
   var Story = app.models.story;
+  var User = app.models.user;
   var bootstrapSync = require('../config/bootstrapSync')(app);
   var helpers = require('../lib/helpers.js');
   //User Upload Files
@@ -17,8 +18,6 @@ module.exports = function (app, passport) {
 })
   var upload = multer({ storage: storage})
   var MAU = require('../lib/modify-and-upload.js');
-  //var User = require('mongoose').model('User').schema
-  var User = require('../models/user.js');
   var mongodb = require("mongodb")
 
 
