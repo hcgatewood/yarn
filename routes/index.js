@@ -62,9 +62,6 @@ module.exports = function (app, passport) {
     }
     User.getFollowingUsername(page_id, function (followerIds) {
       User.getFollowerUsername(page_id, function (followingIds){
-        console.log("THIS WORKS")
-        console.log(followingIds)
-
         res.render('user_page', {
           title: 'Rolling Story',
           username: username,

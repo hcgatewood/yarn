@@ -18,15 +18,15 @@
             <br><br>
             <% if (belongs_to_user) { %>
             <form id = "uploadForm" enctype = "multipart/form-data" action = "/user/<%= id %>"method = "POST">
-            <span class="file-input btn btn-primary btn-file upload-btn">Choose photo<input type="file" name="image"/></span>
+            <span class="file-input btn btn-primary btn-file upload-btn ">Choose Photo<input type="file" name="image"/></span>
             <input class="btn btn-primary btn-lg upload-btn upload-btn upload" type="submit" value="Upload" name="submit">
             <% } %>
           </form>
         </div>
-      </div>
+        </div>
 
         <div class='accInfo'>
-          <h1>Account Information</h1>
+          <h1>Account Info</h1>
             <ul>
               <li>Joined: <%= user_since %></li>
               <li>Published Articles: 2</li>
@@ -37,8 +37,8 @@
             <button class="follow_btn btn btn-primary raised follow-toggle">Follow</button>
             <% } %>
         </div>
-      </div>
 
+      </div>
       <div class="col-lg-9">
           <div class="tabs clearfix">
           <div class="container-fluid">
