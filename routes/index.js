@@ -166,6 +166,14 @@ module.exports = function (app, passport) {
     var id = getUserId(req);
     var userId = typeof req.user !== 'undefined' ? req.user.id : '';
     Room.requireRoom(roomName, function (room, story) {
+      var currentWriterId = room.orderedWriters[0];
+      var isUserTurn = (typeof currentWriterId !== 'undefined') &&
+        (userId == currentWriterId);
+      var isWriter = false;
+      for (var idx = 0; idx < room.orderedWriters.length; idx++) {
+        if (room.orderedWriters[idx] == userId) isWriter = true;
+      }
+      console.log('is user turn, is writer:', isUserTurn, isWriter);
       // render the room
       res.render('room', {
         title: roomName,
@@ -177,9 +185,9 @@ module.exports = function (app, passport) {
         userId: userId,
         id: id,
         user: req.user,
-        startWriting: false,
-        // TODO below needs to change
-        userTurn: true
+        startWriting: true,
+        isWriter: isWriter,
+        isUserTurn: isUserTurn
       });
     });
   });

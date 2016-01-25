@@ -28,7 +28,6 @@
           </div>
           <% } %>
         </div>
-        <% if (userTurn) { %>
         <div class='visible-on-turn user-additions'>
           <div class='additions-meta'>
             <div class='additions-meta-timer'>0:16</div>
@@ -39,12 +38,11 @@
             <textarea class='user-addition-input' placeholder='Add your contribution here...'></textarea>
           </div>
         </div>
-        <% } %>
       </div>
 
       <div class='meta-container'>
-        <button class='join-room btn btn-primary1 btn-lg raised' type='button'>Join story</button>
-        <button class='leave-room btn btn-primary1 btn-lg raised' type='button'>Leave story</button>
+        <button class='join-room invisible-as-writer btn btn-primary1 btn-lg raised' type='button'>Join story</button>
+        <button class='leave-room visible-as-writer btn btn-primary1 btn-lg raised' type='button'>Leave story</button>
       </div>
     </div>
   </body>

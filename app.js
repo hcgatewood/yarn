@@ -113,11 +113,7 @@ app.io.on('connection', function (socket) {
 
   socket.on('join as writer', function (data) {
     console.log('receiving join as writer request:', data.userId);
-    Room.addWriter(data.roomId, data.userId, function () {
-      Room.ifUserTurn(data.roomId, data.userId, function (orderedWriters) {
-        io.to(socket.id).emit('your turn', {orderedWriters: orderedWriters});
-      });
-    });
+    Room.addWriter(data.roomId, data.userId);
   });
   socket.on('leave as writer', function (data) {
     console.log('receiving leave as writer request:', data.userId);
@@ -136,7 +132,6 @@ app.io.on('connection', function (socket) {
       // add the contribution
       Room.changeWriterTurns(data.roomId);
       Story.addContribution(data.storyId, data.username, data.userContribution);
-      data.orderedWriters = orderedWriters;
       io.to(data.roomId).emit('story update', data);
     });
   });
