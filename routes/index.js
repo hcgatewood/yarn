@@ -56,7 +56,7 @@ module.exports = function (app, passport) {
     var user_since = getInsertDate(req);
     var belongs_to_user = (id==req.params.id);
 
-    console.log(ObjectID.isValid('123'));
+    //redirects to 404 page
     if(!(ObjectID.isValid(page_id))){
       res.redirect('/error')
     }
@@ -253,13 +253,15 @@ module.exports = function (app, passport) {
       }
     }
   );
-
-
   // POST logout
   app.get('/logout', function (req, res) {
     req.logout();
     res.redirect(req.get('referer'));  // Redirect back to same page
   });
+
+  app.get('*', function(req, res){
+      res.redirect('/error')
+});
 
   function getInsertDate(req){
     if (req.user){

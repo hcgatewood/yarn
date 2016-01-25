@@ -13,6 +13,7 @@ var userSchema = new mongoose.Schema({
   contributedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
   savedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
   following: [String],
+  follower: [String],
 
   //currentStory: {type: Schema.Types.ObjectId, ref: 'Story'},
 
