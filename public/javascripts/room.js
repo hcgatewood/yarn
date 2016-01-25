@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $('.user-addition-input').textareaAutoSize();
+  $('.remaining-turns').hide();
   isUserTurn = isUserTurn === 'true';
   isWriter = isWriter === 'true';
   handleUserTurn();
@@ -95,6 +96,7 @@ $(document).ready(function () {
     }
     secondsLeft = parseInt(data.turnLenMs/1000, 10);
     updateTimer();
+    updateTurnsRemaining(data.remainingTurns);
     handleWriterStatus();
   });
   socket.on('new story', function (data) {
@@ -137,7 +139,10 @@ $(document).ready(function () {
 
 });
 
-
+function updateTurnsRemaining(remainingTurns) {
+  $('.remaining-turns').show();
+  $('.remaining-turns-number').text(remainingTurns);
+}
 // updates the writers list with the passed array of writer names
 function updateWriters(writerNames) {
   console.log('writer names:', writerNames);

@@ -30,8 +30,8 @@ module.exports = function (app) {
     // counts
     numReaders: {type: Number, min: 0, default: 0},
     // TODO: set these values
-    maxWriters: {type: Number, min: 1, default: 2},
-    totalTurns: {type: Number, min: 1, default: 2},
+    maxWriters: {type: Number, min: 1, default: 7},
+    totalTurns: {type: Number, min: 1, default: 10},
     currentTurns: {type: Number, min: 0, default: 0}
 
   });
@@ -140,7 +140,8 @@ module.exports = function (app) {
           currentWriter: room.orderedWriters[0],
           writerNames: room.orderedWriterNames,
           waiterNames: room.orderedWaiterNames,
-          turnLenMs: room.turnLenMs
+          turnLenMs: room.turnLenMs,
+          remainingTurns: room.totalTurns - room.currentTurns
         });
       });
     });
@@ -163,7 +164,8 @@ module.exports = function (app) {
           currentWriter: userId,
           writerNames: room.orderedWriterNames,
           waiterNames: room.orderedWaiterNames,
-          turnLenMs: room.turnLenMs
+          turnLenMs: room.turnLenMs,
+          remainingTurns: room.totalTurns - room.currentTurns
         });
       }
       // add as either writer or reader
