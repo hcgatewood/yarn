@@ -5,9 +5,18 @@ $(document).ready(function () {
   handleUserTurn();
   handleWriterStatus();
 
+  // TODO assign this intentionally
+  var secondsLeft = 120;
+  var showTime = false;
   var pathname = window.location.pathname;
   var roomName = _.last(pathname.split('/'));
   console.log('ready user id:', userId);
+
+  // set the timer going
+  var timerRefresh = setInterval(function () {
+    secondsLeft--;
+    updateTimer();
+  }, 1000);
 
   var socket = io();
   socket.emit('join room', {
@@ -70,6 +79,7 @@ $(document).ready(function () {
 
   socket.on('turn update', function (data) {
     console.log('TURN UPDATE:', data.orderedWriters);
+    showTime = true;
     var tmp = (userId !== '' && data.orderedWriters[0] == userId);
     isUserTurn = tmp;
     handleUserTurn();
@@ -78,6 +88,8 @@ $(document).ready(function () {
     for (var idx = 0; idx < data.orderedWriters.length; idx++) {
       if (data.orderedWriters[idx] == userId) isWriter = true;
     }
+    secondsLeft = parseInt(data.turnLenMs/1000, 10);
+    updateTimer();
     handleWriterStatus();
   });
   socket.on('new story', function (data) {
@@ -103,6 +115,21 @@ $(document).ready(function () {
       );
     }
   });
+
+  function updateTimer() {
+    // hide the timer if thing's are looking grim
+    if (secondsLeft < 0) {
+      showTime = false;
+    } else {
+      showTime = true;
+    }
+    // below stolen from:
+    // http://stackoverflow.com/questions/1322732/convert-seconds-to-hh-mm-ss-with-javascript
+    var time = (showTime === true)
+      ? (new Date).clearTime().addSeconds(secondsLeft).toString('mm:ss')
+      : '';
+    $('.additions-meta-timer').text(time);
+  }
 
 });
 

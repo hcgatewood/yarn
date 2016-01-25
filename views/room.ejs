@@ -3,10 +3,11 @@
 
   <head>
     <%- include partials/meta.ejs %>
-    <script src='/javascripts/textarea_autosize.js'></script>  
+    <script src='/javascripts/textarea_autosize.js'></script>
     <script src='/socket.io/socket.io.js'></script>
     <script src='/javascripts/room.js'></script>
     <script src='/javascripts/navbar.js'></script>
+    <script src='/javascripts/date.js'></script>
     <link rel='stylesheet' href='/stylesheets/room.css'/>
     <link rel='stylesheet' href='/stylesheets/navbar.css'/>
 
@@ -31,7 +32,7 @@
         </div>
         <div class='visible-on-turn user-additions'>
           <div class='additions-meta'>
-            <div class='additions-meta-timer'>0:16</div>
+            <div class='additions-meta-timer'></div>
             <button class='additions-meta-skip btn btn-primary1 raised' type='button'>Skip</button>
             <button class='additions-meta-submit btn btn-primary1 raised' type='button'>Submit</button>
           </div>

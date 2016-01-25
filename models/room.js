@@ -132,7 +132,8 @@ module.exports = function (app) {
         console.log('writers:', room.orderedWriters);
         app.io.to(roomId).emit('turn update', {
           orderedWriters: room.orderedWriters,
-          currentWriter: room.orderedWriters[0]
+          currentWriter: room.orderedWriters[0],
+          turnLenMs: room.turnLenMs
         });
       });
     });
@@ -152,7 +153,8 @@ module.exports = function (app) {
         IdToInterval.update(room.id, room.turnLenMs, roomModel);
         app.io.to(roomId).emit('turn update', {
           orderedWriters: [userId],
-          currentWriter: userId
+          currentWriter: userId,
+          turnLenMs: room.turnLenMs
         });
       }
       // add as either writer or reader
