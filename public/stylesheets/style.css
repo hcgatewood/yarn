@@ -16,7 +16,7 @@ body{
   margin: auto;
   height: 200px;
   width: 200px;
-  background-image: url("../siteArt/Spool.png");
+  background-image: url("../siteArt/Spool.svg");
 }
 
 #img2{
@@ -24,7 +24,7 @@ body{
   margin: auto;
   height: 200px;
   width: 200px;
-  background-image: url("../siteArt/weave_circle.png");
+  background-image: url("../siteArt/Weave.svg");
 }
 
 #img3{
@@ -32,7 +32,7 @@ body{
   margin: auto;
   height: 200px;
   width: 200px;
-  background-image: url("../siteArt/Spin.png");
+  background-image: url("../siteArt/Spin.svg");
 }
 
 .responsive-layer{
