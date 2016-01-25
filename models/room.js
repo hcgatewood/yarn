@@ -132,7 +132,8 @@ module.exports = function (app) {
         console.log('writers:', room.orderedWriters);
         app.io.to(roomId).emit('turn update', {
           orderedWriters: room.orderedWriters,
-          currentWriter: room.orderedWriters[0]
+          currentWriter: room.orderedWriters[0],
+          turnLenMs: room.turnLenMs
         });
       });
     });
@@ -152,7 +153,8 @@ module.exports = function (app) {
         IdToInterval.update(room.id, room.turnLenMs, roomModel);
         app.io.to(roomId).emit('turn update', {
           orderedWriters: [userId],
-          currentWriter: userId
+          currentWriter: userId,
+          turnLenMs: room.turnLenMs
         });
       }
       // add as either writer or reader
@@ -173,6 +175,8 @@ module.exports = function (app) {
       this.findById(roomId, function (err, room) {
         if (err) console.log('err:', err);
         console.log('REMOVING WRITER');
+        // TODO below is causing a fixable document lock-violation
+        // when the current user leaves the room
         if (room.orderedWriters[0] == userId) {
           roomModel.changeWriterTurns(roomId, true);
         }
