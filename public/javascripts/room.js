@@ -1,6 +1,8 @@
 $(document).ready(function () {
   $('.user-addition-input').textareaAutoSize();
-  $('.visible-on-turn').hide();
+  console.log('###', isUserTurn);
+  handleUserTurn();
+  handleWriterStatus();
 
   var pathname = window.location.pathname;
   var roomName = _.last(pathname.split('/'));
@@ -16,6 +18,8 @@ $(document).ready(function () {
   // join the story as a writer/waiter
   $('.join-room').click(function () {
     console.log('join as writer');
+    isWriter = true;
+    handleWriterStatus();
     socket.emit('join as writer', {
       roomId: roomId,
       userId: userId
@@ -24,6 +28,9 @@ $(document).ready(function () {
   // leave the story as a writer/waiter
   $('.leave-room').click(function () {
     console.log('leave as writer');
+    isWriter = false;
+    isUserTurn = false;
+    handleWriterStatus();
     handleUserTurn();
     socket.emit('leave as writer', {
       roomId: roomId,
@@ -61,7 +68,16 @@ $(document).ready(function () {
   });
 
   socket.on('turn update', function (data) {
-    handleUserTurn(data.orderedWriters);
+    console.log('TURN UPDATE:', data.orderedWriters);
+    var tmp = (userId !== '' && data.orderedWriters[0] == userId);
+    isUserTurn = tmp;
+    handleUserTurn();
+    // update isWriter
+    isWriter = false;
+    for (var idx = 0; idx < data.orderedWriters.length; idx++) {
+      if (data.orderedWriters[idx] == userId) isWriter = true;
+    }
+    handleWriterStatus();
   });
 
   // receiving story updates
@@ -87,8 +103,22 @@ $(document).ready(function () {
 });
 
 
-function handleUserTurn(writers) {
-  if ((userId) &&(writers) && (writers[0] == userId)) {
+function handleWriterStatus() {
+  if (userId == '') {
+    $('.visible-as-writer').hide();
+    $('.invisible-as-writer').hide();
+  } else if (isWriter === true) {
+    console.log('YES WRITER');
+    $('.visible-as-writer').show();
+    $('.invisible-as-writer').hide();
+  } else {
+    $('.visible-as-writer').hide();
+    $('.invisible-as-writer').show();
+  }
+}
+function handleUserTurn() {
+  if ((userId !== '') && (isUserTurn === true)) {
+    console.log('YES TURN');
     $('.visible-on-turn').show();
   } else {
     $('.visible-on-turn').hide();

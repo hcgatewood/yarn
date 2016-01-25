@@ -14,7 +14,7 @@ module.exports = function (app) {
     // meta
     name: String,
     story: {type: Schema.Types.ObjectId, ref: 'Story'},
-    turnLenMs: {type: Number, min: 1*1000, default: 6*1000},
+    turnLenMs: {type: Number, min: 1*1000, default: 12*1000},
     //isActive: Boolean,
 
     // user lists
@@ -90,63 +90,73 @@ module.exports = function (app) {
     });
   }
   // change writer turns
-  roomSchema.statics.changeWriterTurns = function (roomId) {
+  roomSchema.statics.changeWriterTurns = function (roomId, dropUser) {
     console.log('\n\n\nCHANGING WRITER TURN:', roomId, '\n\n\n');
+    var roomModel = this;
     this.findById(roomId, function (err, room) {
       if (room === null) {
         console.log('\n\ncannot find room by id:', roomId, '\n\n');
+        IdToInterval.remove(room.id);
         return;
       }
+      IdToInterval.update(room.id, room.turnLenMs, roomModel);
       if (room.orderedWriters.length > 0) {
         var recentWriter = room.orderedWriters[0];
         room.orderedWriters.pull(recentWriter);
-        room.orderedWriters.addToSet(recentWriter);
+        if (! dropUser === true) {
+          room.orderedWriters.addToSet(recentWriter);
+        }
       }
       room.currentTurns++;
       room.save(function (err) {
         if (err) console.log('err:', err);
         console.log('writers:', room.orderedWriters);
         app.io.to(roomId).emit('turn update', {
-          orderedWriters: room.orderedWriters
+          orderedWriters: room.orderedWriters,
+          currentWriter: room.orderedWriters[0]
         });
       });
     });
   }
 
   // add user to writers list / waitlist
-  roomSchema.statics.addWriter = function (roomId, userId, callback) {
+  roomSchema.statics.addWriter = function (roomId, userId) {
     // if there's room on the writers list add the user as a
     // writer, otherwise add the to the waitlist
+    if (userId === '') return;
     var roomModel = this;
-    if (userId) {
-      this.findById(roomId, function (err, room) {
-        if (err) console.log('err:', err);
-        // reset interval if they're the current writer now
-        if (room.orderedWriters.length === 0) {
-          IdToInterval.update(room.id, room.turnLenMs, roomModel);
-          app.io.to(roomId).emit('turn update', {
-            orderedWriters: [userId]
-          });
-        }
-        // add as either writer or reader
-        if (room.orderedWriters.length < room.maxWriters) {
-          room.orderedWriters.addToSet(userId);
-        } else {
-          room.orderedWaiters.addToSet(userId);
-        }
-        room.save(function (err) {if (err) console.log('err:', err)});
-      });
-    }
-    if (callback) callback();
+    this.findById(roomId, function (err, room) {
+      if (err) console.log('err:', err);
+      // reset interval if they're the current writer now
+      if (room.orderedWriters.length === 0) {
+        console.log('SINGLE WRITER:', userId);
+        IdToInterval.update(room.id, room.turnLenMs, roomModel);
+        app.io.to(roomId).emit('turn update', {
+          orderedWriters: [userId],
+          currentWriter: userId
+        });
+      }
+      // add as either writer or reader
+      if (room.orderedWriters.length <= room.maxWriters) {
+        console.log('ADDING ROOM WRITER');
+        room.orderedWriters.addToSet(userId);
+      } else {
+        room.orderedWaiters.addToSet(userId);
+      }
+      room.save(function (err) {if (err) console.log('err:', err)});
+    });
   }
 
   // remove user from writers / readers
   roomSchema.statics.removeWriter = function (roomId, userId) {
     var roomModel = this;
-    if (userId) {
+    if (userId !== '') {
       this.findById(roomId, function (err, room) {
         if (err) console.log('err:', err);
         console.log('REMOVING WRITER');
+        if (room.orderedWriters[0] == userId) {
+          roomModel.changeWriterTurns(roomId, true);
+        }
         room.orderedWriters.pull(userId);
         room.orderedWaiters.pull(userId);
         room.save(function (err) {if (err) console.log('err:', err)});

@@ -5,7 +5,7 @@ var IdToInterval = module.exports = {
   update: function (id, length, roomModel) {
     clearInterval(IdToInterval.intervals[id]);
     IdToInterval.intervals[id] = setInterval(function () {
-      roomModel.changeWriterTurns(id);
+      roomModel.changeWriterTurns(id, true);
     }, length);
     console.log('new interval');
   },
