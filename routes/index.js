@@ -19,6 +19,7 @@ module.exports = function (app, passport) {
   var MAU = require('../lib/modify-and-upload.js');
   //var User = require('mongoose').model('User').schema
   var User = require('../models/user.js');
+  var mongodb = require("mongodb")
 
 
   // GET home page
@@ -55,8 +56,13 @@ module.exports = function (app, passport) {
     var user_since = getInsertDate(req);
     var belongs_to_user = (id==req.params.id);
 
+    console.log(ObjectID.isValid('123'));
+    if(!(ObjectID.isValid(page_id))){
+      res.redirect('/error')
+    }
 
-    User.findById(id, function (err, user) {
+    //get follower ids
+    User.findById(page_id, function (err, user) {
       console.log(user)
       if (user) {
         var userIds = [];
@@ -64,31 +70,33 @@ module.exports = function (app, passport) {
           userIds.push(ObjectID(item));
         });
 
-        User.find({ _id: {$in : userIds}},function (err, follow_user)  {
+    User.find({ _id: {$in : userIds}},function (err, follow_user)  {
 
-          var user_follow = [];
-          follow_user.forEach(function(item) {
-            if (item.local.username){
-              user_follow.push([item.local.username, item._id])
-            }if (item.facebook.name){
-              user_follow.push([item.google.name, item._id])
-            }if (item.google.name){
-              user_follow.push([item.facebook.name, item._id])
-            }
-          });
-          res.render('user_page', {
-            title: 'Rolling Story',
-            username: username,
-            id: id,
-            follow: user_follow,
-            page_id: page_id,
-            status: 'Ready to upload',
-            newImage: 'http://placehold.it/175x175',
-            user: req.user,
-            belongs_to_user: belongs_to_user,
-            user_since: user_since,
-            startWriting: true
-          });   
+      //get follower ids/usernames
+      var user_follow = [];
+      follow_user.forEach(function(item) {
+        if (item.local.username){
+          user_follow.push([item.local.username, item._id])
+        }if (item.facebook.name){
+          user_follow.push([item.google.name, item._id])
+        }if (item.google.name){
+          user_follow.push([item.facebook.name, item._id])
+        }
+      });
+
+      res.render('user_page', {
+        title: 'Rolling Story',
+        username: username,
+        id: id,
+        follow: user_follow,
+        page_id: page_id,
+        status: 'Ready to upload',
+        newImage: 'http://placehold.it/175x175',
+        user: req.user,
+        belongs_to_user: belongs_to_user,
+        user_since: user_since,
+        startWriting: true
+      });   
         });  
       }
     });
@@ -175,6 +183,20 @@ module.exports = function (app, passport) {
     });
   });
 
+
+  //GET error page
+  app.get('/error', function (req, res, next) {
+    var id = getUserId(req);
+    var username = getUsername(req);
+    res.render('errorpage', {
+      title: 'Rolling Story',
+      username: username,
+      id: id,
+      user: req.user,
+      startWriting: true
+    });
+  });
+
   // GET Facebook login
   app.get('/auth/facebook', passport.authenticate('facebook',{
     scope: ['public_profile', 'email']
@@ -202,13 +224,6 @@ module.exports = function (app, passport) {
               res.redirect('/user/'+req.user._id)
         }
     });
-  // PASSPORT
-  // GET passport-info
-  app.get('/passport-info', function (req, res) {
-    res.render('passport-info', {
-      user: req.user
-    });
-  });
   // GET login
   // TODO: permanent login
   app.get('/', function (req, res) {
@@ -227,8 +242,6 @@ module.exports = function (app, passport) {
       }
     }
     );
-
-
   app.post('/login', passport.authenticate("local-login", {
     failureRedirect: '/',
     failureFlash: true
