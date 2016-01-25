@@ -11,6 +11,21 @@ body{
   background-color:   #ffcc5c;
 }
 
+#img1{
+  position: relative;
+  margin: auto;
+  height: 150px;
+  width: 150px;
+  background-image: url("../siteArt/Spool.jpg");
+}
+#img3{
+  position: relative;
+  margin: auto;
+  height: 150px;
+  width: 150px;
+  background-image: url("../siteArt/Spin.jpg");
+}
+
 .responsive-layer{
   margin-top: 100px;
 }

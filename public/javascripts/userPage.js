@@ -27,7 +27,7 @@ $(document).ready(function() {
 	        $.ajax({
 		    url: "/unfollow",
 		    type:"POST",
-		    data:{submit:true, page_id:page_id} 
+		    data:{submit:true, page_id:page_id, id:id} 
 	    	})
 
 	    }
@@ -38,7 +38,7 @@ $(document).ready(function() {
 	        $.ajax({
 		    url: "/follow",
 		    type:"POST",
-		    data:{submit:true, page_id:page_id}
+		    data:{submit:true, page_id:page_id, id:id}
 			})
 	    }
     });
