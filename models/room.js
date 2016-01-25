@@ -14,7 +14,7 @@ module.exports = function (app) {
     // meta
     name: String,
     story: {type: Schema.Types.ObjectId, ref: 'Story'},
-    turnLenMs: {type: Number, min: 1*1000, default: 12*1000},
+    turnLenMs: {type: Number, min: 1*1000, default: 50*1000},
     //isActive: Boolean,
 
     // user lists
@@ -29,7 +29,7 @@ module.exports = function (app) {
     numReaders: {type: Number, min: 0, default: 0},
     // TODO: set these values
     maxWriters: {type: Number, min: 1, default: 2},
-    totalTurns: {type: Number, min: 0, default: 0},
+    totalTurns: {type: Number, min: 1, default: 2},
     currentTurns: {type: Number, min: 0, default: 0}
 
   });
@@ -96,7 +96,7 @@ module.exports = function (app) {
     this.findById(roomId, function (err, room) {
       if (room === null) {
         console.log('\n\ncannot find room by id:', roomId, '\n\n');
-        IdToInterval.remove(room.id);
+        IdToInterval.remove(roomId);
         return;
       }
       IdToInterval.update(room.id, room.turnLenMs, roomModel);
@@ -105,9 +105,28 @@ module.exports = function (app) {
         room.orderedWriters.pull(recentWriter);
         if (! dropUser === true) {
           room.orderedWriters.addToSet(recentWriter);
+          room.currentTurns++;
         }
       }
-      room.currentTurns++;
+      // publish the story if it's finished
+      console.log('room num turns:', room.currentTurns, room.totalTurns);
+      if (room.currentTurns === room.totalTurns) {
+        var oldStoryId = room.story;
+        Story.findById(oldStoryId, function (err, story) {
+          if (err) console.log('err:', err);
+          story.isFinished = true;
+          story.save(function (err) {if (err) console.log('err:', err)});
+        });
+        console.log('\n\n### NEW STORY IN ROOM ###');
+        var newStory = new Story();
+        room.story = newStory;
+        room.currentTurns = 0;
+        newStory.save(function () {
+          app.io.to(roomId).emit('new story', {
+            storyId: room.story.id
+          });
+        });
+      }
       room.save(function (err) {
         if (err) console.log('err:', err);
         console.log('writers:', room.orderedWriters);
