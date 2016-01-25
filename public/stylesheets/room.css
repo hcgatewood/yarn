@@ -9,8 +9,8 @@ body {
 }
 .meta-background {
   position: absolute;
-  left: 59%;
-  width: 41%;
+  left: 60%;
+  width: 40%;
   height: 100%;
   background-color: #f1f1f1;
   z-index: -1;
@@ -40,10 +40,12 @@ body {
 }
 .additions-main {
   display: inline-block;
+  vertical-align: top;
   width: 75%;
 }
 .additions-meta {
   display: inline-block;
+  vertical-align: top;
   width: 20%;
 }
 .user-additions {
@@ -52,6 +54,7 @@ body {
 
 .meta-container {
   display: inline-block;
+  vertical-align: top;
   width: 39%;
 }
 .meta-item {
@@ -61,7 +64,7 @@ body {
 }
 .story-container {
   display: inline-block;
-  padding-left: 40px;
+  padding-left: 20px;
   width: 60%;
 }
 .contribution:not(.empty) {
