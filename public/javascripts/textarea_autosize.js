@@ -2,6 +2,8 @@
  * jQuery Textarea AutoSize plugin
  * Author: Javier Julio
  * Licensed under the MIT license
+ *
+ * Small changes by Hunter Gatewood
  */
 ;(function ($, window, document, undefined) {
 
@@ -20,10 +22,10 @@
 
   Plugin.prototype = {
     init: function() {
+      var originalHeight = this.$element.height();
       var height = this.$element.outerHeight();
       var diff = parseInt(this.$element.css('paddingBottom')) +
                  parseInt(this.$element.css('paddingTop')) || 0;
-      var originalHeight = this.$element.height() - diff;
 
       if (containsText(this.element.value)) {
         this.$element.height(this.element.scrollHeight - diff);

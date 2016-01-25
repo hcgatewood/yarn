@@ -19,6 +19,7 @@
     <div class='room-container'>
       <div class='story-container'>
         <div class='main-story'>
+          <div class='new-story-prompt meta-prompt'>No contributions to this story right now :(</div>
           <div class='contribution empty'>
             <div class='contribution-username'></div>
             <div class='contribution-text'></div>
@@ -43,8 +44,37 @@
       </div>
 
       <div class='meta-container'>
+        <% if (user) { %>
+        <div class='turn-prompt meta-prompt visible-on-turn'>It's your turn!</div>
+        <div class='turn-prompt meta-prompt visible-as-writer-not-on-turn'>It's not your turn yet</div>
+        <% } else { %>
+        <div class='signup-prompt meta-prompt'>Sign up/in to get started!</div>
+        <% } %>
         <button class='join-room meta-item invisible-as-writer btn btn-primary1 btn-lg raised' type='button'>Join story</button>
         <button class='leave-room meta-item visible-as-writer btn btn-primary1 btn-lg raised' type='button'>Leave story</button>
+        <a href='/stories/<%= recentStory %>' class='recent-story'>
+          <button class='meta-item btn btn-primary1 btn-lg raised' type='button'>This room's last story</button>
+        </a>
+        <div class='remaining-turns meta-prompt'>
+          <span class='remaining-turns-text'>Remaining turns:</span>
+          <span class='remaining-turns-number'></span>
+        </div>
+        <div class='writers-panel panel panel-default'>
+          <div class='panel-heading'>
+            <h3 class='panel-title'>Writers</h3>
+          </div>
+          <ul class='list-group'>
+            <li class='empty writers-item list-group-item'></li>
+          </ul>
+        </div>
+        <div class='waiters-panel panel panel-default'>
+          <div class='panel-heading'>
+            <h3 class='panel-title'>Waiters</h3>
+          </div>
+          <ul class='list-group'>
+            <li class='empty waiters-item list-group-item'></li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>
