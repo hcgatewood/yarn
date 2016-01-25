@@ -70,10 +70,10 @@ $(document).ready(function () {
   $('.additions-meta-submit').click(function () {
     var userContribution = textArea.val()
     textArea.val('');
-    console.log('roomName:', roomName);
-    console.log('storyId:', storyId);
-    console.log('username:', username);
-    console.log('userContribution:', userContribution);
+    //console.log('roomName:', roomName);
+    //console.log('storyId:', storyId);
+    //console.log('username:', username);
+    //console.log('userContribution:', userContribution);
     var data = {
       roomName: roomName,
       roomId: roomId,
@@ -88,7 +88,7 @@ $(document).ready(function () {
   socket.on('turn update', function (data) {
     //console.log('TURN UPDATE:', data.orderedWriters);
     showTime = true;
-    console.log('data:', data);
+    //console.log('data:', data);
     //data.recentStory
     updateWriters(data.writerNames);
     updateWaiters(data.waiterNames);
@@ -108,13 +108,13 @@ $(document).ready(function () {
   socket.on('new story', function (data) {
     $('.new-story-prompt').show();
     $('.contribution').not('.empty').remove();
-    console.log('GETTING NEW STORY:', storyId);
+    //console.log('GETTING NEW STORY:', storyId);
     $('.recent-story').attr('href', '/stories/' + storyId);
     storyId = data.storyId;
   });
   // receiving story updates
   socket.on('story update', function (data) {
-    console.log('story update:', data.userContribution);
+    //console.log('story update:', data.userContribution);
     $('.new-story-prompt').hide();
     // add new element
     var contributionParent = $('.main-story');
@@ -125,7 +125,7 @@ $(document).ready(function () {
     contributionParent.append(newContribution);
     // scroll to bottom of page
     var nearBottom = nearBottomOfPage();
-    console.log('near bottom:', nearBottom);
+    //console.log('near bottom:', nearBottom);
     if (nearBottom) {
       $('html, body').animate(
         {scrollTop: $(document).height()},
@@ -156,7 +156,7 @@ function updateTurnsRemaining(remainingTurns) {
 }
 // updates the writers list with the passed array of writer names
 function updateWriters(writerNames) {
-  console.log('writer names:', writerNames);
+  //console.log('writer names:', writerNames);
   $('.writers-item').not('.empty').remove();
   var parent = $('.writers-panel');
   var writerName;
@@ -166,14 +166,14 @@ function updateWriters(writerNames) {
     newContribution = $('.writers-item').clone();
     newContribution.removeClass('empty');
     newContribution.text(writerName);
-    console.log('new contribution:');
-    console.log(newContribution);
+    //console.log('new contribution:');
+    //console.log(newContribution);
     parent.append(newContribution);
   }
 }
 // updates the waiters list with the passed array of waiter names
 function updateWaiters(waiterNames) {
-  console.log('waiter names:', waiterNames);
+  //console.log('waiter names:', waiterNames);
   $('.waiters-item').not('.empty').remove();
   var parent = $('.waiters-panel');
   var waiterName;
@@ -183,8 +183,8 @@ function updateWaiters(waiterNames) {
     newContribution = $('.waiters-item').clone();
     newContribution.removeClass('empty');
     newContribution.text(waiterName);
-    console.log('new contribution:');
-    console.log(newContribution);
+    //console.log('new contribution:');
+    //console.log(newContribution);
     parent.append(newContribution);
   }
 }
@@ -204,7 +204,7 @@ function handleWriterStatus() {
     $('.invisible-as-writer').show();
   }
 
-  console.log('is:', isUserTurn, isWriter);
+  //console.log('is:', isUserTurn, isWriter);
   if (isUserTurn === false && isWriter === true) {
     $('.visible-as-writer-not-on-turn').show();
   } else {
@@ -213,10 +213,10 @@ function handleWriterStatus() {
 }
 function handleUserTurn() {
   if ((userId !== '') && (isUserTurn === true)) {
-    console.log('YES TURN');
+    //console.log('YES TURN');
     $('.visible-on-turn').show();
   } else {
-    console.log('NO TURN');
+    //console.log('NO TURN');
     $('.visible-on-turn').hide();
   }
 }
@@ -225,6 +225,6 @@ function nearBottomOfPage() {
   var proximityThreshold = 0;
   var bottomWindow = $(window).scrollTop() + $(window).height();
   var bottomDocument = $(document).height();
-  console.log('bottoms:', bottomWindow, bottomDocument, proximityThreshold);
+  //console.log('bottoms:', bottomWindow, bottomDocument, proximityThreshold);
   return bottomWindow >= bottomDocument - proximityThreshold;
 }
