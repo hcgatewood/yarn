@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 // schema for the story model
 var storySchema = new mongoose.Schema({
@@ -11,6 +12,7 @@ var storySchema = new mongoose.Schema({
     username: String,
     text: String
   }],
+  contributors: [{type: Schema.Types.ObjectId, ref: 'User'}],
 
   // counts
   views: {type: Number, default: 0},
@@ -19,15 +21,13 @@ var storySchema = new mongoose.Schema({
 });
 
 // statics
-storySchema.statics.addContribution = function (storyId, username, text) {
-  this.findOneAndUpdate(
-    {_id: storyId},
-    {$push:
-      {orderedContributions: {username: username, text: text}}
-    },
-    function (err) {if (err) console.log(err)}
-  );
-}
+storySchema.statics.addContribution = function (storyId, username, text, userId) {
+  this.findById(storyId, function (err, story) {
+    story.orderedContributions.push({username: username, text: text});
+    story.contributors.push(userId);
+    story.save(function (err) {if (err) console.log('err:', err)});
+  });
+};
 
 // create and export the story model
 module.exports = mongoose.model('Story', storySchema);

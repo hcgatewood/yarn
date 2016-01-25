@@ -79,7 +79,10 @@ $(document).ready(function () {
     }
     handleWriterStatus();
   });
-
+  socket.on('new story', function (data) {
+    storyId = data.storyId;
+    $('.contribution').not('.empty').remove();
+  });
   // receiving story updates
   socket.on('story update', function (data) {
     console.log('story update:', data.userContribution);
