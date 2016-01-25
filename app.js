@@ -145,11 +145,11 @@ app.io.on('connection', function (socket) {
 
   socket.on('join as writer', function (data) {
     console.log('receiving join as writer request:', data.userId);
-    Room.addWriter(data.roomId, data.userId);
+    Room.addWriter(data.roomId, data.userId, data.username);
   });
   socket.on('leave as writer', function (data) {
     console.log('receiving leave as writer request:', data.userId);
-    Room.removeWriter(data.roomId, data.userId);
+    Room.removeWriter(data.roomId, data.userId, data.username);
   })
 
   // Receiving story update
