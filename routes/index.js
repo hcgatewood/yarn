@@ -60,47 +60,31 @@ module.exports = function (app, passport) {
     if(!(ObjectID.isValid(page_id))){
       res.redirect('/error')
     }
+    User.getFollowingUsername(page_id, function (followerIds) {
+      User.getFollowerUsername(page_id, function (followingIds){
+        console.log("THIS WORKS")
+        console.log(followingIds)
 
-    //get follower ids
-    User.findById(page_id, function (err, user) {
-      console.log(user)
-      if (user) {
-        var userIds = [];
-        user.following.forEach(function(item) {
-          userIds.push(ObjectID(item));
-        });
+        res.render('user_page', {
+          title: 'Rolling Story',
+          username: username,
+          id: id,
+          follow: followingIds,
+          follower: followerIds,
+          page_id: page_id,
+          status: 'Ready to upload',
+          newImage: 'http://placehold.it/175x175',
+          user: req.user,
+          belongs_to_user: belongs_to_user,
+          user_since: user_since,
+          startWriting: true
+        });   
 
-    User.find({ _id: {$in : userIds}},function (err, follow_user)  {
+      })
+    })
+  })     
 
-      //get follower ids/usernames
-      var user_follow = [];
-      follow_user.forEach(function(item) {
-        if (item.local.username){
-          user_follow.push([item.local.username, item._id])
-        }if (item.facebook.name){
-          user_follow.push([item.google.name, item._id])
-        }if (item.google.name){
-          user_follow.push([item.facebook.name, item._id])
-        }
-      });
 
-      res.render('user_page', {
-        title: 'Rolling Story',
-        username: username,
-        id: id,
-        follow: user_follow,
-        page_id: page_id,
-        status: 'Ready to upload',
-        newImage: 'http://placehold.it/175x175',
-        user: req.user,
-        belongs_to_user: belongs_to_user,
-        user_since: user_since,
-        startWriting: true
-      });   
-        });  
-      }
-    });
-  });
 
   //POST image upload
   app.post('/user/:id', upload.single('image'),function (req,res) {
@@ -132,30 +116,46 @@ module.exports = function (app, passport) {
     var id= getUserId(req);
     var page_id=req.body.page_id
 
-      if (req.body.submit){
-      User.findById(id, function (err, user) {
-      user.addFollower(page_id, function(err){
-        console.log(user.following)
-        });
-      console.log(user.following)
-      });
-    }
-
-
+      // if (req.body.submit){
+      // User.findById(id, function (err, user) {
+      //   user.addFollow(page_id, function (err){
+      //   console.log(user.following)
+      //   });
+      // console.log(user.following)
+      // });
+      User.find({ _id: {$in : [id,page_id]}},function (err, users)  {
+        console.log(users)
+        users[0].addFollow(page_id, function (err){
+          console.log(users[0].following)
+          if (err) throw err
+        })
+        users[1].addFollower(id, function (err){
+          if (err) throw err
+        })
+    })
   })
 
     app.post('/unfollow', function(req,res){
     var id= getUserId(req);
     var page_id=req.body.page_id
 
-      if (req.body.submit){
-      User.findById(id, function (err, user) {
-      user.removeFollower(page_id, function(err){
-        console.log(user.following)
-        });
-            console.log(user.following)
-      });
-    }
+    //   if (req.body.submit){
+    //   User.findById(id, function (err, user) {
+    //   user.removeFollow(page_id, function(err){
+    //     console.log(user.following)
+    //     });
+    //         console.log(user.following)
+    //   });
+    // }
+      User.find({ _id: {$in : [id,page_id]}},function (err, users)  {
+        users[0].removeFollow(page_id, function (err){
+          console.log(users[0].following)
+          if (err) throw err
+        })
+        users[1].removeFollower(id, function (err){
+          if (err) throw err
+        })
+      })
   })
 
 
