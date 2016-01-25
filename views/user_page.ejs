@@ -12,7 +12,7 @@
   <%- include partials/navbar.ejs %>
     <div class="row-fluid">
       <div class="col-md-3">
-      <div class='leftside'>
+      <div class='panel space-4'>
         <div class='upload_pic'>
         <div class="container">
           <img class="img_container" src="<%= newImage %>">
@@ -26,14 +26,18 @@
         </div>
         </div>
 
-        <div class='accInfo'>
+        <div class='accInfo panel row-space-4'>
+          <div class="panel-header">
           <h1>Account Info</h1>
+          </div>
+          <div class="panel-body">
             <ul>
               <li>Joined: <%= user_since %></li>
               <li>Published Articles: 2</li>
               <li>Followers: <%= follower.length %></li>
               <li>Follows:<%= follow.length %></li>
             </ul>
+          <div></div>>
             <% if (!belongs_to_user) { %>
             <button class="follow_btn btn btn-primary raised follow-toggle">Follow</button>
             <% } %>
