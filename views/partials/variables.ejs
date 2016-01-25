@@ -1,12 +1,10 @@
 <script>
   var username = '<%= username %>';
 
-  <% if (typeof storyId !== 'undefined') { %>
-    var storyId = '<%= storyId %>';
-  <% } %>
-
   <% if (typeof roomId !== 'undefined') { %>
+    var storyId = '<%= storyId %>';
     var roomId = '<%= roomId %>';
+    var roomInterval = '<%= roomInterval %>';
   <% } %>
 
   <% if (typeof userId !== 'undefined') { %>
