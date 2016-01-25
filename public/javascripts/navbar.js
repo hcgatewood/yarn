@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+  $('.search-bar').hide();
+
   $(".overlay, .modal").hide();
   $(".signin").click(function(){
     $(".overlay, #modal1").show();

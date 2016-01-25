@@ -69,12 +69,16 @@ userSchema.statics.follows = function (user_id, page_id, callback){
   var userModel = this;
 
   userModel.findById(page_id, function (err, user) {
-        console.log(user.follower)
-        console.log(user_id)
          return callback(user.follower.indexOf(user_id)> -1)
    });     
   };
  
+ userSchema.statics.getUser = function (user_id, callback){
+  var userModel = this;
+  userModel.findById(user_id, function (err, user) {
+         return callback(user)
+   });     
+  };
 
 userSchema.statics.getFollowingUsername = function (id, callback){
   var userModel = this;
@@ -135,21 +139,19 @@ userSchema.statics.getFollowerUsername = function (id, callback){
 
 //// add follower
 userSchema.methods.addFollow = function (followeeId) {
-  if (!(followeeId in this.following)){
+  //this.follower.indexOf(followerId)> -1
+  if (!(this.following.indexOf(followeeId)> -1)){
   this.following.push(followeeId);
   }
-  this.save(function (err){
-    if (err) return console.error(err);
-  });
+  this.save()
 }
 
 userSchema.methods.addFollower = function (followerId) {
-  if (!(followerId in this.follower)){
+  if (!(this.follower.indexOf(followerId)> -1)){
   this.follower.push(followerId);
   }
-  this.save(function (err){
-    if (err) throw err
-  });
+  this.save()
+
 }
 
 
@@ -160,9 +162,7 @@ userSchema.methods.removeFollow = function (followeeId) {
 }
 
 userSchema.methods.removeFollower = function (followerId) {
-  if (!(followerId in this.follower)){
   this.follower.remove(followerId);
-  }
   this.save()
 }
 

@@ -66,8 +66,6 @@ module.exports = function (app, passport) {
         User.follows(id, page_id, function (bool){
           console.log("THIS IS BOOL", bool)
           console.log("THIS IS BOOL", bool)
-          console.log("THIS IS BOOL", bool)
-          console.log("THIS IS BOOL", bool)
         res.render('user_page', {
           title: 'Rolling Story',
           username: username,
@@ -77,8 +75,6 @@ module.exports = function (app, passport) {
           follow: followingIds,
           follower: followerIds,
           page_id: page_id,
-          status: 'Ready to upload',
-          newImage: 'https://placehold.it/175x175',
           user: req.user,
           belongs_to_user: belongs_to_user,
           user_since: user_since,
@@ -91,54 +87,44 @@ module.exports = function (app, passport) {
   })     
 
 
-  app.post('/follow', function(req,res){
-    var id= getUserId(req);
-    var page_id=req.body.page_id
+  // app.post('/follow', function(req,res){
+  //   var id= getUserId(req);
+  //   var page_id=req.body.page_id
 
-      if (req.body.submit){
-        User.findById(id, function (err, user) {
-          User.findById(page_id, function (err, page_user){
-            user.addFollow(page_id, function (err){
-              if (err) throw err
-            }) 
-            page_user.addFollower(id, function (err){
-              if (err) throw err
-            })
+  //     if (req.body.submit){
+  //       User.findById(id, function (err, user) {
+  //         User.findById(page_id, function (err, page_user){
+  //           user.addFollow(page_id, function (err){
+  //             if (err) throw err
+  //           }) 
+  //           page_user.addFollower(id, function (err){
+  //             if (err) throw err
+  //           })
+  //       });
+  //     });
 
-      console.log("USER IS FOLLOWING", user.following)
-      console.log("USER FOLLOWS", user.follower)
-      console.log("PAGE IS FOLLOWING", page_user.following)
-      console.log("PAGE FOLLOWS", page_user.follower)
-        });
-      });
+  //   }
+  // });
 
-    }
-  });
+  //   app.post('/unfollow', function(req,res){
+  //   var id= getUserId(req);
+  //   var page_id=req.body.page_id
 
-    app.post('/unfollow', function(req,res){
-    var id= getUserId(req);
-    var page_id=req.body.page_id
+  //     if (req.body.submit){
+  //       User.findById(id, function (err, user) {
+  //         User.findById(page_id, function (err, page_user){
+  //           user.removeFollow(page_id, function (err){
+  //             if (err) throw err
+  //           }) 
+  //           page_user.removeFollower(id, function (err){
+  //             if (err) throw err
+  //           })
+  //       });
+  //     });
 
-      if (req.body.submit){
-        User.findById(id, function (err, user) {
-          User.findById(page_id, function (err, page_user){
-            user.removeFollow(page_id, function (err){
-              if (err) throw err
-            }) 
-            page_user.removeFollower(id, function (err){
-              if (err) throw err
-            })
+  //   }
 
-      console.log("USER IS FOLLOWING", user.following)
-      console.log("USER FOLLOWS", user.follower)
-      console.log("PAGE IS FOLLOWING", page_user.following)
-      console.log("PAGE FOLLOWS", page_user.follower)
-        });
-      });
-
-    }
-
-  })
+  // })
 
 
   // GET room page

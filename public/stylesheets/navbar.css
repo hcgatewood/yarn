@@ -18,7 +18,7 @@ body{
 .navbar * {
   text-decoration: none; /*no underline*/
 }
-.navbar .center {
+.navbar {
   display: table;
   margin: auto;
 }
@@ -75,7 +75,8 @@ body{
 .navigation {
   margin-left: 20px;
   position: relative;
-  top: -5px;
+  top: 10px;
+
 }
 .navigation .item {
   position: relative;
@@ -83,13 +84,15 @@ body{
   margin:0px 7px 0px 7px;
   display: inline-block;
   color: white;
-  top: 3px;
-}
+  }
 .navigation .item:hover {
   color: #ff5a5f;
   text-decoration: none;
   transition: all 0.3s ease 0.1s;
 }
+
+
+
 /*overlay for login*/
 .glyphicon-remove {
     z-index: 15;
