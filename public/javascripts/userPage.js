@@ -15,9 +15,9 @@ $(document).ready(function() {
     });
     	//if (user_id in page_id.follower) make button certain color
     if (follows){
-    	$('.follow-btn').addClass('btn-primary2')
-    	$('.follow-btn').removeClass('btn-primary')
-    	$('.follow-btn').text('Following')
+    	$('.follow_btn').addClass('btn-primary2')
+    	$('.follow_btn').removeClass('btn-primary')
+    	$('.follow_btn').text('Following')
 
     	}
   		

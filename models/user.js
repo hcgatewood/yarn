@@ -69,8 +69,10 @@ userSchema.statics.follows = function (user_id, page_id, callback){
   var userModel = this;
 
   userModel.findById(page_id, function (err, user) {
-          callback($.inArray(user_id,user.follower))
-        })
+        console.log(user.follower)
+        console.log(user_id)
+         return callback(user.follower.indexOf(user_id)> -1)
+   });     
   };
  
 

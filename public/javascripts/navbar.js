@@ -11,12 +11,26 @@ $(document).ready(function(){
     $(".overlay, #modal2").show();
   });
 
+  //$('sign-in').click(function() {
+    //$.ajax({
+      //url: '/login',
+      //data: {
+        //username: $('#us').val(),
+        //password: $('#pass').val()
+      //}
+    //})
+  //});
+
   $('.lg').click(function(e){
     e.preventDefault();
     $.ajax({
       url: "/login",
       type:"POST",
-      data:{username: $('#us').val(), password:$('#pass').val(), _id: _id},
+      data: {
+        username: $('#us').val(),
+        password:$('#pass').val(),
+        //_id: _id
+      },
     }).done(function (_id){window.location='/user/'+_id});
   });
 
@@ -25,7 +39,10 @@ $(document).ready(function(){
     $.ajax({
       url: "/signup",
       type:"POST",
-      data:{username: $('#us').val(),password:$('#pass').val()},
+      data: {
+        username: $('#us').val(),
+        password: $('#pass').val()
+      },
     }).done(function (_id){window.location='/user/'+_id});
   });
 
