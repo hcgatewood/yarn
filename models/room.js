@@ -23,6 +23,8 @@ module.exports = function (app) {
     readers: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
     orderedWriters: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
     orderedWaiters: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
+    orderedWriterNames: [String],
+    orderedWaiterNames: [String],
     bannedFromWriting: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
 
     // counts
@@ -102,9 +104,12 @@ module.exports = function (app) {
       IdToInterval.update(room.id, room.turnLenMs, roomModel);
       if (room.orderedWriters.length > 0) {
         var recentWriter = room.orderedWriters[0];
+        var recentUsername = room.orderedWriterNames[0];
         room.orderedWriters.pull(recentWriter);
+        room.orderedWriterNames.pull(recentUsername);
         if (! dropUser === true) {
           room.orderedWriters.addToSet(recentWriter);
+          room.orderedWriterNames.addToSet(recentUsername);
           room.currentTurns++;
         }
       }
@@ -133,6 +138,8 @@ module.exports = function (app) {
         app.io.to(roomId).emit('turn update', {
           orderedWriters: room.orderedWriters,
           currentWriter: room.orderedWriters[0],
+          writerNames: room.orderedWriterNames,
+          waiterNames: room.orderedWaiterNames,
           turnLenMs: room.turnLenMs
         });
       });
@@ -140,7 +147,7 @@ module.exports = function (app) {
   }
 
   // add user to writers list / waitlist
-  roomSchema.statics.addWriter = function (roomId, userId) {
+  roomSchema.statics.addWriter = function (roomId, userId, username) {
     // if there's room on the writers list add the user as a
     // writer, otherwise add the to the waitlist
     if (userId === '') return;
@@ -154,6 +161,8 @@ module.exports = function (app) {
         app.io.to(roomId).emit('turn update', {
           orderedWriters: [userId],
           currentWriter: userId,
+          writerNames: room.orderedWriterNames,
+          waiterNames: room.orderedWaiterNames,
           turnLenMs: room.turnLenMs
         });
       }
@@ -161,15 +170,19 @@ module.exports = function (app) {
       if (room.orderedWriters.length <= room.maxWriters) {
         console.log('ADDING ROOM WRITER');
         room.orderedWriters.addToSet(userId);
+        room.orderedWriterNames.addToSet(username);
+        console.log('post-add writers:', room.orderedWriterNames);
       } else {
+        console.log('ADDING ROOM WAITER');
         room.orderedWaiters.addToSet(userId);
+        room.orderedWaiterNames.addToSet(username);
       }
       room.save(function (err) {if (err) console.log('err:', err)});
     });
   }
 
   // remove user from writers / readers
-  roomSchema.statics.removeWriter = function (roomId, userId) {
+  roomSchema.statics.removeWriter = function (roomId, userId, username) {
     var roomModel = this;
     if (userId !== '') {
       this.findById(roomId, function (err, room) {
@@ -182,6 +195,8 @@ module.exports = function (app) {
         }
         room.orderedWriters.pull(userId);
         room.orderedWaiters.pull(userId);
+        room.orderedWriterNames.pull(username);
+        room.orderedWaiterNames.pull(username);
         room.save(function (err) {if (err) console.log('err:', err)});
       });
     }

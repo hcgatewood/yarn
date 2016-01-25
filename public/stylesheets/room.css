@@ -57,10 +57,15 @@ body {
   vertical-align: top;
   width: 39%;
 }
-.meta-item {
+.meta-container > * {
   display: block;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 20px;
+}
+.signup-prompt {
+  text-align: center;
+  margin-bottom: 30px;
 }
 .story-container {
   display: inline-block;
@@ -69,9 +74,6 @@ body {
 }
 .contribution:not(.empty) {
   margin-bottom: 20px;
-}
-.contribution.empty {
-  height: 0px;
 }
 .contribution-username {
   overflow: hidden;
@@ -83,4 +85,7 @@ body {
   width: 75%;
   display: inline-block;
   white-space: pre-wrap;
+}
+.empty {
+  display: none;
 }

@@ -10,7 +10,7 @@ $(document).ready(function () {
   var showTime = false;
   var pathname = window.location.pathname;
   var roomName = _.last(pathname.split('/'));
-  console.log('ready user id:', userId);
+  //console.log('ready user id:', userId);
 
   // set the timer going
   var timerRefresh = setInterval(function () {
@@ -27,24 +27,26 @@ $(document).ready(function () {
 
   // join the story as a writer/waiter
   $('.join-room').click(function () {
-    console.log('join as writer');
+    //console.log('join as writer');
     isWriter = true;
     handleWriterStatus();
     socket.emit('join as writer', {
       roomId: roomId,
-      userId: userId
+      userId: userId,
+      username: username
     });
   });
   // leave the story as a writer/waiter
   $('.leave-room').click(function () {
-    console.log('leave as writer');
+    //console.log('leave as writer');
     isWriter = false;
     isUserTurn = false;
     handleWriterStatus();
     handleUserTurn();
     socket.emit('leave as writer', {
       roomId: roomId,
-      userId: userId
+      userId: userId,
+      username: username
     });
   });
 
@@ -78,8 +80,11 @@ $(document).ready(function () {
   });
 
   socket.on('turn update', function (data) {
-    console.log('TURN UPDATE:', data.orderedWriters);
+    //console.log('TURN UPDATE:', data.orderedWriters);
     showTime = true;
+    console.log('data:', data);
+    updateWriters(data.writerNames);
+    updateWaiters(data.waiterNames);
     var tmp = (userId !== '' && data.orderedWriters[0] == userId);
     isUserTurn = tmp;
     handleUserTurn();
@@ -101,7 +106,7 @@ $(document).ready(function () {
     console.log('story update:', data.userContribution);
     // add new element
     var contributionParent = $('.main-story');
-    var newContribution = $('.contribution').first().clone()
+    var newContribution = $('.contribution').first().clone();
     newContribution.removeClass('empty');
     newContribution.children('.contribution-username').text(data.username);
     newContribution.children('.contribution-text').text(data.userContribution);
@@ -133,28 +138,62 @@ $(document).ready(function () {
 });
 
 
+// updates the writers list with the passed array of writer names
+function updateWriters(writerNames) {
+  console.log('writer names:', writerNames);
+  $('.writers-item').not('.empty').remove();
+  var parent = $('.writers-panel');
+  var writerName;
+  var newContribution;
+  for (var idx = 0; idx < writerNames.length; idx ++) {
+    writerName = writerNames[idx];
+    newContribution = $('.writers-item').clone();
+    newContribution.removeClass('empty');
+    newContribution.text(writerName);
+    console.log('new contribution:');
+    console.log(newContribution);
+    parent.append(newContribution);
+  }
+}
+// updates the waiters list with the passed array of waiter names
+function updateWaiters(waiterNames) {
+  console.log('waiter names:', waiterNames);
+  $('.waiters-item').not('.empty').remove();
+  var parent = $('.waiters-panel');
+  var waiterName;
+  var newContribution;
+  for (var idx = 0; idx < waiterNames.length; idx ++) {
+    waiterName = waiterNames[idx];
+    newContribution = $('.waiters-item').clone();
+    newContribution.removeClass('empty');
+    newContribution.text(waiterName);
+    console.log('new contribution:');
+    console.log(newContribution);
+    parent.append(newContribution);
+  }
+}
 function handleWriterStatus() {
   if (userId == '') {
-    console.log('NO WRITER');
+    //console.log('NO WRITER');
     $('.visible-as-writer').hide();
     $('.invisible-as-writer').hide();
   } else if (isWriter === true || isUserTurn === true) {
-    console.log('YES WRITER');
+    //console.log('YES WRITER');
     $('.visible-as-writer').show();
     $('.meta-item').css('display', 'block');
     $('.invisible-as-writer').hide();
   } else {
-    console.log('NO WRITER');
+    //console.log('NO WRITER');
     $('.visible-as-writer').hide();
     $('.invisible-as-writer').show();
   }
 }
 function handleUserTurn() {
   if ((userId !== '') && (isUserTurn === true)) {
-    console.log('YES TURN');
+    //console.log('YES TURN');
     $('.visible-on-turn').show();
   } else {
-    console.log('NO TURN');
+    //console.log('NO TURN');
     $('.visible-on-turn').hide();
   }
 }
