@@ -182,7 +182,9 @@ background:#fff;
     margin-left: 20px;
     list-style-type: none;
 }
-
+.user{
+    font-size: 1.5em;
+}
 
 .user:visited{
     text-decoration: none;
@@ -208,4 +210,9 @@ background:#fff;
     font-size: 2em;
     color:gray;
     text-align: center;
+    margin-top: 20px;
+}
+
+.name{
+    text-transform: uppercase;
 }
