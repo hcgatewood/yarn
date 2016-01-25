@@ -68,7 +68,7 @@
            
                   <div id="tab4" class="tab">
                   <% if (follow.length==0) { %>
-                    <p class="friends">No followers, just yet!</p>
+                    <p class="friends">Not following anyone, just yet!</p>
                     <% } %>
                       <% for (var idx = 0; idx < follow.length; idx++) { %>
                       <ul class="user-list">
@@ -78,6 +78,9 @@
                  </div>
 
                  <div id="tab5" class="tab">
+                    <% if (follower.length==0) { %>
+                    <p class="friends">No followers, just yet!</p>
+                    <% } %>
                       <h4> Followers: <%= follower.length %> </h4>
                       <% for (var idx = 0; idx < follower.length; idx++) { %>
                       <ul class="user-list">
