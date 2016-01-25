@@ -1,6 +1,7 @@
 $(document).ready(function () {
   $('.user-addition-input').textareaAutoSize();
-  console.log('###', isUserTurn);
+  isUserTurn = isUserTurn === 'true';
+  isWriter = isWriter === 'true';
   handleUserTurn();
   handleWriterStatus();
 
@@ -108,13 +109,16 @@ $(document).ready(function () {
 
 function handleWriterStatus() {
   if (userId == '') {
+    console.log('NO WRITER');
     $('.visible-as-writer').hide();
     $('.invisible-as-writer').hide();
-  } else if (isWriter === true) {
+  } else if (isWriter === true || isUserTurn === true) {
     console.log('YES WRITER');
     $('.visible-as-writer').show();
+    $('.meta-item').css('display', 'block');
     $('.invisible-as-writer').hide();
   } else {
+    console.log('NO WRITER');
     $('.visible-as-writer').hide();
     $('.invisible-as-writer').show();
   }
@@ -124,6 +128,7 @@ function handleUserTurn() {
     console.log('YES TURN');
     $('.visible-on-turn').show();
   } else {
+    console.log('NO TURN');
     $('.visible-on-turn').hide();
   }
 }

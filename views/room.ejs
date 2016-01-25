@@ -14,6 +14,7 @@
 
   <body>
     <%- include partials/navbar.ejs %>
+    <div class='meta-background'></div>
     <div class='room-container'>
       <div class='story-container'>
         <div class='main-story'>
@@ -31,8 +32,8 @@
         <div class='visible-on-turn user-additions'>
           <div class='additions-meta'>
             <div class='additions-meta-timer'>0:16</div>
-            <button class='additions-meta-skip' type='button'>Skip</button>
-            <button class='additions-meta-submit' type='button'>Submit</button>
+            <button class='additions-meta-skip btn btn-primary1 raised' type='button'>Skip</button>
+            <button class='additions-meta-submit btn btn-primary1 raised' type='button'>Submit</button>
           </div>
           <div class='additions-main'>
             <textarea class='user-addition-input' placeholder='Add your contribution here...'></textarea>
@@ -41,8 +42,8 @@
       </div>
 
       <div class='meta-container'>
-        <button class='join-room invisible-as-writer btn btn-primary1 btn-lg raised' type='button'>Join story</button>
-        <button class='leave-room visible-as-writer btn btn-primary1 btn-lg raised' type='button'>Leave story</button>
+        <button class='join-room meta-item invisible-as-writer btn btn-primary1 btn-lg raised' type='button'>Join story</button>
+        <button class='leave-room meta-item visible-as-writer btn btn-primary1 btn-lg raised' type='button'>Leave story</button>
       </div>
     </div>
   </body>
