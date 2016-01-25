@@ -21,6 +21,10 @@
     var follower= '<%= follower %>';
   <% } %>
 
+  <% if (typeof follows !== 'undefined') { %>
+    var follows= '<%= follows %>';
+  <% } %>
+
   <% if (typeof roomId !== 'undefined') { %>
     var storyId = '<%= storyId %>';
     var roomId = '<%= roomId %>';

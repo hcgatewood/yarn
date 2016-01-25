@@ -54,18 +54,26 @@ module.exports = function (app, passport) {
     var page_id=req.params.id
     var username = getUsername(req);
     var user_since = getInsertDate(req);
-    var belongs_to_user = (id==req.params.id);
+    var belongs_to_user = (id==page_id);
 
     //redirects to 404 page
     if(!(ObjectID.isValid(page_id))){
       res.redirect('/error')
     }
-    User.getFollowingUsername(page_id, function (followerIds) {
-      User.getFollowerUsername(page_id, function (followingIds){
+  User.getPageUsername(page_id, function (page_username){
+    User.getFollowingUsername(page_id, function (followingIds) {
+      User.getFollowerUsername(page_id, function (followerIds){
+        User.follows(id, page_id, function (bool){
+          console.log("THIS IS BOOL", bool)
+          console.log("THIS IS BOOL", bool)
+          console.log("THIS IS BOOL", bool)
+          console.log("THIS IS BOOL", bool)
         res.render('user_page', {
           title: 'Rolling Story',
           username: username,
+          page_username: page_username,
           id: id,
+          follows: bool, 
           follow: followingIds,
           follower: followerIds,
           page_id: page_id,
@@ -75,84 +83,61 @@ module.exports = function (app, passport) {
           belongs_to_user: belongs_to_user,
           user_since: user_since,
           startWriting: true
-        });   
-
+          })
+         });   
+        });
       })
     })
   })     
 
 
-
-  //POST image upload
-  app.post('/user/:id', upload.single('image'),function (req,res) {
-    var id= getUserId(req);
-    var page_id=req.params.id
-    var username = getUsername(req);
-    var user_since = getInsertDate(req);
-    var belongs_to_user = (id==req.params.id)
-
-    var mau = new MAU(req.file, function (err, newImagePath){
-    if(req.file){
-      res.render('user_page', {
-      status: 'Finished uploading',
-      newImage: './uploads/'+req.file.filename,
-      title: 'Rolling Story',
-      username: username,
-      page_id: page_id,
-      id: id,
-      user: req.user,
-      belongs_to_user: belongs_to_user,
-      user_since: user_since,
-      startWriting: true
-        });
-      }
-    });
-  });
-
   app.post('/follow', function(req,res){
     var id= getUserId(req);
     var page_id=req.body.page_id
 
-      // if (req.body.submit){
-      // User.findById(id, function (err, user) {
-      //   user.addFollow(page_id, function (err){
-      //   console.log(user.following)
-      //   });
-      // console.log(user.following)
-      // });
-      User.find({ _id: {$in : [id,page_id]}},function (err, users)  {
-        console.log(users)
-        users[0].addFollow(page_id, function (err){
-          console.log(users[0].following)
-          if (err) throw err
-        })
-        users[1].addFollower(id, function (err){
-          if (err) throw err
-        })
-    })
-  })
+      if (req.body.submit){
+        User.findById(id, function (err, user) {
+          User.findById(page_id, function (err, page_user){
+            user.addFollow(page_id, function (err){
+              if (err) throw err
+            }) 
+            page_user.addFollower(id, function (err){
+              if (err) throw err
+            })
+
+      console.log("USER IS FOLLOWING", user.following)
+      console.log("USER FOLLOWS", user.follower)
+      console.log("PAGE IS FOLLOWING", page_user.following)
+      console.log("PAGE FOLLOWS", page_user.follower)
+        });
+      });
+
+    }
+  });
 
     app.post('/unfollow', function(req,res){
     var id= getUserId(req);
     var page_id=req.body.page_id
 
-    //   if (req.body.submit){
-    //   User.findById(id, function (err, user) {
-    //   user.removeFollow(page_id, function(err){
-    //     console.log(user.following)
-    //     });
-    //         console.log(user.following)
-    //   });
-    // }
-      User.find({ _id: {$in : [id,page_id]}},function (err, users)  {
-        users[0].removeFollow(page_id, function (err){
-          console.log(users[0].following)
-          if (err) throw err
-        })
-        users[1].removeFollower(id, function (err){
-          if (err) throw err
-        })
-      })
+      if (req.body.submit){
+        User.findById(id, function (err, user) {
+          User.findById(page_id, function (err, page_user){
+            user.removeFollow(page_id, function (err){
+              if (err) throw err
+            }) 
+            page_user.removeFollower(id, function (err){
+              if (err) throw err
+            })
+
+      console.log("USER IS FOLLOWING", user.following)
+      console.log("USER FOLLOWS", user.follower)
+      console.log("PAGE IS FOLLOWING", page_user.following)
+      console.log("PAGE FOLLOWS", page_user.follower)
+        });
+      });
+
+    }
+
   })
 
 
