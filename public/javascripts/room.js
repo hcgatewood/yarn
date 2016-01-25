@@ -106,6 +106,7 @@ $(document).ready(function () {
     handleWriterStatus();
   });
   socket.on('new story', function (data) {
+    $('.new-story-prompt').show();
     $('.contribution').not('.empty').remove();
     console.log('GETTING NEW STORY:', storyId);
     $('.recent-story').attr('href', '/stories/' + storyId);
