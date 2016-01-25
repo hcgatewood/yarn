@@ -78,7 +78,7 @@ module.exports = function (app, passport) {
           follower: followerIds,
           page_id: page_id,
           status: 'Ready to upload',
-          newImage: 'http://placehold.it/175x175',
+          newImage: 'https://placehold.it/175x175',
           user: req.user,
           belongs_to_user: belongs_to_user,
           user_since: user_since,
