@@ -131,7 +131,8 @@ app.io.on('connection', function (socket) {
       console.log('text:', data.userContribution);
       // add the contribution
       Room.changeWriterTurns(data.roomId);
-      Story.addContribution(data.storyId, data.username, data.userContribution);
+      Story.addContribution(
+        data.storyId, data.username, data.userContribution, data.userId);
       io.to(data.roomId).emit('story update', data);
     });
   });
