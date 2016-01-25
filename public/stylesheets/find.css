@@ -65,12 +65,17 @@ h3{
     margin: 0px 0px 0px 40px;
 }
 
+.name{
+  margin-top:100px;
+}
+
 .block1{
     position: relative;
     margin: 20px 0px 100px 40px;
     height: 150px;
     width: 150px;
     background-color: #66B2FF;
+    text-align: center;
 }
 
 .block2{
@@ -79,6 +84,8 @@ h3{
     height: 150px;
     width: 150px;
     background-color: #FFFF80;
+    text-align: center;
+
 }
 
 .block3{
@@ -87,6 +94,8 @@ h3{
     height: 150px;
     width: 150px;
     background-color: #E12939;
+    text-align: center;
+
 }
 
 .block4{
@@ -95,6 +104,8 @@ h3{
     height: 150px;
     width: 150px;
     background-color: #B9F5CA;
+    text-align: center;
+    margin:auto;
 }
 .btn-lg {
   font-size: 15px;
