@@ -1,6 +1,11 @@
 $(document).ready(function () {
   $('.user-addition-input').textareaAutoSize();
   $('.remaining-turns').hide();
+  if ($('.contribution').length === 1) {
+    $('.new-story-prompt').show();
+  } else {
+    $('.new-story-prompt').hide();
+  }
   isUserTurn = isUserTurn === 'true';
   isWriter = isWriter === 'true';
   handleUserTurn();
@@ -106,6 +111,7 @@ $(document).ready(function () {
   // receiving story updates
   socket.on('story update', function (data) {
     console.log('story update:', data.userContribution);
+    $('.new-story-prompt').hide();
     // add new element
     var contributionParent = $('.main-story');
     var newContribution = $('.contribution').first().clone();
@@ -115,6 +121,7 @@ $(document).ready(function () {
     contributionParent.append(newContribution);
     // scroll to bottom of page
     var nearBottom = nearBottomOfPage();
+    console.log('near bottom:', nearBottom);
     if (nearBottom) {
       $('html, body').animate(
         {scrollTop: $(document).height()},
@@ -192,6 +199,13 @@ function handleWriterStatus() {
     $('.visible-as-writer').hide();
     $('.invisible-as-writer').show();
   }
+
+  console.log('is:', isUserTurn, isWriter);
+  if (isUserTurn === false && isWriter === true) {
+    $('.visible-as-writer-not-on-turn').show();
+  } else {
+    $('.visible-as-writer-not-on-turn').hide();
+  }
 }
 function handleUserTurn() {
   if ((userId !== '') && (isUserTurn === true)) {
@@ -207,5 +221,6 @@ function nearBottomOfPage() {
   var proximityThreshold = 0;
   var bottomWindow = $(window).scrollTop() + $(window).height();
   var bottomDocument = $(document).height();
+  console.log('bottoms:', bottomWindow, bottomDocument, proximityThreshold);
   return bottomWindow >= bottomDocument - proximityThreshold;
 }
