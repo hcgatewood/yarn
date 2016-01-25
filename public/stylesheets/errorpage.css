@@ -6,3 +6,12 @@
    text-align: center;
    padding-top: 200px;
 }
+
+#img3{
+  position: relative;
+  margin: auto;
+  height: 150px;
+  width: 150px;
+  background-image: url("../siteArt/Spin.jpg");
+
+}
