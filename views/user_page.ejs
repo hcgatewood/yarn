@@ -10,8 +10,7 @@
 
   <body>  
   <%- include partials/navbar.ejs %>
-
-    <div class-'col-lg-3'>
+    <div class="row-fluid">
       <div class='leftside'>
         <div class='upload_pic'>
         <div class="container">
@@ -40,11 +39,11 @@
             <% } %>
         </div>
       </div>
-    </div>
 
       <div class="col-lg-9">
-          <div class="tabs">
-          <ul class="tab-links">
+          <div class="tabs clearfix">
+          <div class="container-fluid">
+              <ul class="tab-links">
                   <li class="active"><a href="#tab1">Published</a></li>
                   <li><a href="#tab2">Hearts</a></li>
                   <li><a href="#tab3">Recent</a></li>
@@ -83,11 +82,10 @@
                       </ul>
                       <% } %>
                  </div>
-              
-
+              </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
   </body>
 </html>
