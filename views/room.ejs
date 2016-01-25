@@ -43,8 +43,9 @@
       </div>
 
       <div class='meta-container'>
+        <div class='turn-prompt meta-prompt visible-on-turn'>It's your turn!</div>
         <% if (! user) { %>
-        <div class='signup-prompt'>Sign up/in to get started!</div>
+        <div class='signup-prompt meta-prompt'>Sign up/in to get started!</div>
         <% } %>
         <button class='join-room meta-item invisible-as-writer btn btn-primary1 btn-lg raised' type='button'>Join story</button>
         <button class='leave-room meta-item visible-as-writer btn btn-primary1 btn-lg raised' type='button'>Leave story</button>

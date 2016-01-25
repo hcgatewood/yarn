@@ -190,10 +190,10 @@ function handleWriterStatus() {
 }
 function handleUserTurn() {
   if ((userId !== '') && (isUserTurn === true)) {
-    //console.log('YES TURN');
+    console.log('YES TURN');
     $('.visible-on-turn').show();
   } else {
-    //console.log('NO TURN');
+    console.log('NO TURN');
     $('.visible-on-turn').hide();
   }
 }
