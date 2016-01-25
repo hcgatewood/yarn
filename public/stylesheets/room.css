@@ -57,11 +57,11 @@ body {
   vertical-align: top;
   width: 39%;
 }
-.meta-container > * {
+.meta-item, .meta-container > * {
   display: block;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .meta-prompt {
   text-align: center;

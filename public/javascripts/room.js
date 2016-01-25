@@ -89,6 +89,7 @@ $(document).ready(function () {
     //console.log('TURN UPDATE:', data.orderedWriters);
     showTime = true;
     console.log('data:', data);
+    //data.recentStory
     updateWriters(data.writerNames);
     updateWaiters(data.waiterNames);
     var tmp = (userId !== '' && data.orderedWriters[0] == userId);
@@ -105,8 +106,10 @@ $(document).ready(function () {
     handleWriterStatus();
   });
   socket.on('new story', function (data) {
-    storyId = data.storyId;
     $('.contribution').not('.empty').remove();
+    console.log('GETTING NEW STORY:', storyId);
+    $('.recent-story').attr('href', '/stories/' + storyId);
+    storyId = data.storyId;
   });
   // receiving story updates
   socket.on('story update', function (data) {

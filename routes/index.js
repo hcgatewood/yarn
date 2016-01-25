@@ -157,6 +157,23 @@ module.exports = function (app, passport) {
       })
   })
 
+  // GET story by id
+  app.get('/stories/:storyId', function (req, res, next) {
+    var storyId = req.params.storyId;
+    var username = getUsername(req);
+    console.log('about to get story text...');
+    Story.getStoryText(storyId, function (storyText) {
+      res.render('story', {
+        title: 'Story',
+        storyText: storyText,
+        username: username,
+        startWriting: true,
+        user: req.user
+      });
+    }, function () {
+      res.redirect('/error');
+    });
+  });
 
   // GET room page
   app.get('/rooms/:roomName', function (req, res, next) {
@@ -184,6 +201,7 @@ module.exports = function (app, passport) {
         userId: userId,
         id: id,
         user: req.user,
+        recentStory: room.recentlyPublishedStoryId,
         startWriting: true,
         isWriter: isWriter,
         isUserTurn: isUserTurn

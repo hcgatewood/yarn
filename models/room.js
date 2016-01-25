@@ -26,6 +26,7 @@ module.exports = function (app) {
     orderedWriterNames: [String],
     orderedWaiterNames: [String],
     bannedFromWriting: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
+    recentlyPublishedStoryId: {type: String, default: ''},
 
     // counts
     numReaders: {type: Number, min: 0, default: 0},
@@ -117,6 +118,7 @@ module.exports = function (app) {
       console.log('room num turns:', room.currentTurns, room.totalTurns);
       if (room.currentTurns === room.totalTurns) {
         var oldStoryId = room.story;
+        room.recentlyPublishedStoryId = oldStoryId;
         Story.findById(oldStoryId, function (err, story) {
           if (err) console.log('err:', err);
           story.isFinished = true;
@@ -140,6 +142,7 @@ module.exports = function (app) {
           currentWriter: room.orderedWriters[0],
           writerNames: room.orderedWriterNames,
           waiterNames: room.orderedWaiterNames,
+          recentStory: room.recentlyPublishedStoryId,
           turnLenMs: room.turnLenMs,
           remainingTurns: room.totalTurns - room.currentTurns
         });
@@ -164,6 +167,7 @@ module.exports = function (app) {
           currentWriter: userId,
           writerNames: room.orderedWriterNames,
           waiterNames: room.orderedWaiterNames,
+          recentStory: room.recentlyPublishedStoryId,
           turnLenMs: room.turnLenMs,
           remainingTurns: room.totalTurns - room.currentTurns
         });

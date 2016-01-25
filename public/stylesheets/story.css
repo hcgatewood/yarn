@@ -1,0 +1,10 @@
+.story-container {
+  white-space: pre-wrap;
+  /*padding: 90px;*/
+  margin-right: auto;
+  margin-left: auto;
+  width: 60%;
+  font-size: 16px;
+  margin-top: 130px;
+  margin-bottom: 80px;
+}
