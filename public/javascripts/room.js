@@ -121,7 +121,6 @@ $(document).ready(function () {
     if (secondsLeft < 0) {
       showTime = false;
     } else {
-      showTime = true;
     }
     // below stolen from:
     // http://stackoverflow.com/questions/1322732/convert-seconds-to-hh-mm-ss-with-javascript
