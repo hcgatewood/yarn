@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 var helpers = require('../lib/helpers');
+var Schema = mongoose.Schema;
+
 
 // define the schema for our user model
 var userSchema = new mongoose.Schema({
@@ -10,7 +12,8 @@ var userSchema = new mongoose.Schema({
   recentlyViewedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
   contributedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
   savedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
-  following: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
+  following: [String],
+  follower: [String],
 
   //currentStory: {type: Schema.Types.ObjectId, ref: 'Story'},
 
@@ -53,25 +56,38 @@ userSchema.virtual('username').get(function () {
   //if (err) {console.log(err)}
 //}
 //// add follower
-//userSchema.methods.addFollower = function (followeeId) {
-  //this.following.push(followeeId);
-  //this.save(defaultCallback);
-//}
+userSchema.methods.addFollower = function (followeeId) {
+  if (!(followeeId in this.following)){
+  this.following.push(followeeId);
+  }
+  this.save(function (err){
+    if (err) return console.error(err);
+  });
+}
+
+////remove follower
+userSchema.methods.removeFollower = function (followeeId) {
+  this.following.remove(followeeId);
+  this.save(function (err){
+    if (err) return console.error(err);
+  });
+}
+
 //// add recently viewed story
-//userSchema.methods.addRecentlyViewedStory = function (storyId) {
-  //this.recentlyViewedStories.push(storyId);
+userSchema.methods.addRecentlyViewedStory = function (storyId) {
+  this.recentlyViewedStories.push(storyId);
   //this.save(defaultCallback);
-//}
+}
 //// add contributed story
-//userSchema.methods.addContributedStory = function (storyId) {
-  //this.contributedStories.push(storyId);
+userSchema.methods.addContributedStory = function (storyId) {
+  this.contributedStories.push(storyId);
   //this.save(defaultCallback);
-//}
+}
 //// add saved story
-//userSchema.methods.addSavedStory = function (storyId) {
-  //this.savedStories.push(storyId);
+userSchema.methods.addSavedStory = function (storyId) {
+  this.savedStories.push(storyId);
   //this.save(defaultCallback);
-//}
+}
 
 
 // passport.js

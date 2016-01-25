@@ -1,3 +1,5 @@
+var ObjectID = require('mongodb').ObjectID;
+
 module.exports = function (app, passport) {
   var Room = app.models.room;
   var Story = app.models.story;
@@ -15,7 +17,9 @@ module.exports = function (app, passport) {
 })
   var upload = multer({ storage: storage})
   var MAU = require('../lib/modify-and-upload.js');
-
+  //var User = require('mongoose').model('User').schema
+  var User = require('../models/user.js');
+  var mongodb = require("mongodb")
 
 
   // GET home page
@@ -46,32 +50,66 @@ module.exports = function (app, passport) {
 
   // GET user page
   app.get('/user/:id', upload.single('image'),function (req, res, next) {
-    var id = getUserId(req);
+    var id=getUserId(req);
+    var page_id=req.params.id
     var username = getUsername(req);
     var user_since = getInsertDate(req);
-    var belongs_to_user = (id == req.params.id)
+    var belongs_to_user = (id==req.params.id);
 
-    res.render('user_page', {
-      title: 'Rolling Story',
-      username: username,
-      id: id,
-      status: 'Ready to upload',
-      newImage: 'http://placehold.it/175x175',
-      user: req.user,
-      belongs_to_user: belongs_to_user,
-      user_since: user_since,
-      startWriting: true
+    //redirects to 404 page
+    if(!(ObjectID.isValid(page_id))){
+      res.redirect('/error')
+    }
+
+    //get follower ids
+    User.findById(page_id, function (err, user) {
+      console.log(user)
+      if (user) {
+        var userIds = [];
+        user.following.forEach(function(item) {
+          userIds.push(ObjectID(item));
+        });
+
+    User.find({ _id: {$in : userIds}},function (err, follow_user)  {
+
+      //get follower ids/usernames
+      var user_follow = [];
+      follow_user.forEach(function(item) {
+        if (item.local.username){
+          user_follow.push([item.local.username, item._id])
+        }if (item.facebook.name){
+          user_follow.push([item.google.name, item._id])
+        }if (item.google.name){
+          user_follow.push([item.facebook.name, item._id])
+        }
+      });
+
+      res.render('user_page', {
+        title: 'Rolling Story',
+        username: username,
+        id: id,
+        follow: user_follow,
+        page_id: page_id,
+        status: 'Ready to upload',
+        newImage: 'http://placehold.it/175x175',
+        user: req.user,
+        belongs_to_user: belongs_to_user,
+        user_since: user_since,
+        startWriting: true
+      });   
+        });  
+      }
     });
   });
 
   //POST image upload
   app.post('/user/:id', upload.single('image'),function (req,res) {
     var id= getUserId(req);
+    var page_id=req.params.id
     var username = getUsername(req);
     var user_since = getInsertDate(req);
     var belongs_to_user = (id==req.params.id)
 
-    console.log(req.file)
     var mau = new MAU(req.file, function (err, newImagePath){
     if(req.file){
       res.render('user_page', {
@@ -79,15 +117,46 @@ module.exports = function (app, passport) {
       newImage: './uploads/'+req.file.filename,
       title: 'Rolling Story',
       username: username,
+      page_id: page_id,
       id: id,
       user: req.user,
-      follow_btn: belongs_to_user,
+      belongs_to_user: belongs_to_user,
       user_since: user_since,
       startWriting: true
         });
       }
     });
   });
+
+  app.post('/follow', function(req,res){
+    var id= getUserId(req);
+    var page_id=req.body.page_id
+
+      if (req.body.submit){
+      User.findById(id, function (err, user) {
+      user.addFollower(page_id, function(err){
+        console.log(user.following)
+        });
+      console.log(user.following)
+      });
+    }
+
+
+  })
+
+    app.post('/unfollow', function(req,res){
+    var id= getUserId(req);
+    var page_id=req.body.page_id
+
+      if (req.body.submit){
+      User.findById(id, function (err, user) {
+      user.removeFollower(page_id, function(err){
+        console.log(user.following)
+        });
+            console.log(user.following)
+      });
+    }
+  })
 
 
   // GET room page
@@ -112,6 +181,20 @@ module.exports = function (app, passport) {
         // TODO below needs to change
         userTurn: true
       });
+    });
+  });
+
+
+  //GET error page
+  app.get('/error', function (req, res, next) {
+    var id = getUserId(req);
+    var username = getUsername(req);
+    res.render('errorpage', {
+      title: 'Rolling Story',
+      username: username,
+      id: id,
+      user: req.user,
+      startWriting: true
     });
   });
 
@@ -142,13 +225,6 @@ module.exports = function (app, passport) {
               res.redirect('/user/'+req.user._id)
         }
     });
-  // PASSPORT
-  // GET passport-info
-  app.get('/passport-info', function (req, res) {
-    res.render('passport-info', {
-      user: req.user
-    });
-  });
   // GET login
   // TODO: permanent login
   app.get('/', function (req, res) {
@@ -163,12 +239,10 @@ module.exports = function (app, passport) {
     function (req, res){
       if (req.user){
         res.send(req.user._id)
-        res.redirect('/user/'+req.user._id)
+        //res.redirect('/user/'+req.user._id)
       }
     }
     );
-
-
   app.post('/login', passport.authenticate("local-login", {
     failureRedirect: '/',
     failureFlash: true
@@ -176,17 +250,19 @@ module.exports = function (app, passport) {
     function (req, res){
       if (req.user){
         res.send(req.user._id)
-        res.redirect('/user/'+req.user._id)
+        //res.redirect('/user/'+req.user._id)
       }
     }
   );
-
-
   // POST logout
   app.get('/logout', function (req, res) {
     req.logout();
     res.redirect(req.get('referer'));  // Redirect back to same page
   });
+
+  app.get('*', function(req, res){
+      res.redirect('/error')
+});
 
   function getInsertDate(req){
     if (req.user){

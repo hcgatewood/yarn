@@ -1,6 +1,22 @@
 <script>
   var username = '<%= username %>';
 
+  <% if (typeof storyId !== 'undefined') { %>
+    var storyId = '<%= storyId %>';
+  <% } %>
+
+  <% if (typeof page_id !== 'undefined') { %>
+    var page_id= "<%= page_id %>";
+  <% } %>
+
+  <% if (typeof id !== 'undefined') { %>
+    var id= "<%= id %>";
+  <% } %>
+
+  <% if (typeof follow !== 'undefined') { %>
+    var follow= "<%= follow %>";
+  <% } %>
+
   <% if (typeof roomId !== 'undefined') { %>
     var storyId = '<%= storyId %>';
     var roomId = '<%= roomId %>';

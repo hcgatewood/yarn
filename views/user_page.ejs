@@ -4,11 +4,13 @@
     <%- include partials/meta.ejs %>
     <link rel='stylesheet' href='/stylesheets/navbar.css'/>
     <link rel='stylesheet' type='text/css' href='/stylesheets/userPage.css' />
+    <script src="javascripts/navbar.js"></script>
      <script src='/javascripts/userPage.js'></script>
   </head>
 
   <body>  
   <%- include partials/navbar.ejs %>
+
     <div class-'col-lg-3'>
       <div class='leftside'>
         <div class='upload_pic'>
@@ -30,7 +32,7 @@
               <li>Joined: <%= user_since %></li>
               <li>Published Articles: 2</li>
               <li>Followers: 3</li>
-              <li>Follows:12</li>
+              <li>Follows:<%= follow.length %></li>
               <li>Hearts: 3</li>
             </ul>
             <% if (!belongs_to_user) { %>
@@ -46,7 +48,8 @@
                   <li class="active"><a href="#tab1">Published</a></li>
                   <li><a href="#tab2">Hearts</a></li>
                   <li><a href="#tab3">Recent</a></li>
-                  <li><a href="#tab4">Followers</a></li>
+                  <li><a href="#tab4">Following</a></li>
+                  <li><a href="#tab5">Followers</a></li>
               </ul>
            
               <div class="tab-content">
@@ -66,8 +69,22 @@
                   </div>
            
                   <div id="tab4" class="tab">
-                      <p>Tab #4 content goes here!</p>
-                      <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! .</p>
+                      <% for (var idx = 0; idx < follow.length; idx++) { %>
+                      <ul class="user-list">
+                      <a class="user" href="/user/<%= follow[idx][1]%>"><li><%= follow[idx][0] %></li></a>
+                      </ul>
+                      <% } %>
+                 </div>
+
+                 <div id="tab5" class="tab">
+                      <% for (var idx = 0; idx < follow.length; idx++) { %>
+                      <ul class="user-list">
+                      <a class="user" href="/user/<%= follow[idx][1]%>"><li><%= follow[idx][0] %></li></a>
+                      </ul>
+                      <% } %>
+                 </div>
+              
+
             </div>
           </div>
         </div>
