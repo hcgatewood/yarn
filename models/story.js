@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var storySchema = new mongoose.Schema({
 
   title: {type: String, default: 'Untitled'},
+  originRoom: String,
   isFinished: {type: Boolean, default: false},
   // dateStamp automatically handled by mongoose
   orderedContributions: [{
@@ -21,7 +22,18 @@ var storySchema = new mongoose.Schema({
 
 });
 
+// virtuals
+storySchema.virtual('firstChars').get(function () {
+  return this.text.split(/\s+/).slice(0, 10).join(' ') + '...';
+});
+
 // statics
+// find most recent stories
+storySchema.statics.mostRecentStories = function (callback) {
+  this.where('text').ne('').where('isFinished').equals(true).sort('-date').limit(10).exec(function (err, stories) {
+    callback(stories);
+  });
+}
 storySchema.statics.addContribution = function (storyId, username, text, userId) {
   this.findById(storyId, function (err, story) {
     if (err) console.log('err:', err);

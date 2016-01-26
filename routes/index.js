@@ -39,15 +39,18 @@ module.exports = function (app, passport) {
   app.get('/find', function (req, res){
     var id = getUserId(req);
     var username = getUsername(req);
-    User.find({}, function (err, users){
-    res.render('find', {
-      title:'Find a Story!',
-      username: username,
-      id: id,
-      users: users,
-      startWriting: true,
-      user: req.user
-     });
+    User.find({}, function (err, users) {
+      Story.mostRecentStories(function (stories) {
+        res.render('find', {
+          title:'Find a Story!',
+          username: username,
+          id: id,
+          users: users,
+          stories: stories,
+          startWriting: true,
+          user: req.user
+        });
+      });
     });
   });
 
