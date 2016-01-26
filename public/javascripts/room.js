@@ -219,6 +219,11 @@ function handleUserTurn() {
   if ((userId !== '') && (isUserTurn === true)) {
     //console.log('YES TURN');
     $('.visible-on-turn').show();
+    // scroll to bottom of page
+    $('html, body').animate(
+      {scrollTop: $(document).height()},
+      'slow'
+    );
   } else {
     //console.log('NO TURN');
     $('.visible-on-turn').hide();
