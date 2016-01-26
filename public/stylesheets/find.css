@@ -23,9 +23,6 @@ body{
   color: white;
   text-align: center;
   line-height: 300px;
-  font-family: 'Amatic SC';
-  font-size: 45px;
-  font-weight: bold;
       width: 100%;
     padding:0px;
     background-size: cover;
@@ -43,26 +40,31 @@ a:hover{
 
 
 .img1{
-  opacity: 0.4;
   background-image:url("../siteArt/horror.svg");
 }
 .img2{
-  opacity: 0.4;
   background-image:url("../siteArt/comedy.svg");
 }
 .img3{
-  opacity: 0.4;
   background-image:url("../siteArt/sciFi.svg");
 }
 .img4{
-  opacity: 0.4;
   background-image:url("../siteArt/Mystery.svg");
-
 }
 
-.titles{
+.titles {
   z-index: 0px;
-  opacity: 10px;
+  /*font-family: 'Amatic SC';*/
+  /*font-size: 45px;*/
+  font-family: 'Circular';
+  font-size: 30px;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
 }
 
 
@@ -73,7 +75,7 @@ a:hover{
 }
 .room_buttons {
   width: auto;
-  margin-top: 60px;
+  margin-top: 40px;
   margin-bottom: 60px;
   text-align: center;
 }
