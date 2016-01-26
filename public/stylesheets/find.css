@@ -156,3 +156,6 @@ a:hover{
     margin-bottom: -3px;
     margin-top: 3px;
 }
+.friends img {
+  max-width: 150px;
+}
