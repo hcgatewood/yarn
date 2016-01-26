@@ -106,35 +106,36 @@ app.use(function(err, req, res, next) {
 app.io.on('connection', function (socket) {
 
   socket.on('follow', function (data) {
-    //console.log(data.follows)
-    console.log(data.follows)
-    user.getUser(data.id, function (user_info){
-      user.getUser(data.page_id, function (page_info){
-        user_info.addFollow(data.page_id, function (){
-          page_info.addFollower(data.page_id, function (err){
-          if (err) throw err
-          })
-        })  
-      });
-    console.log(user_info.following)
-    console.log(page_info.follower)
+    console.log('received message: follow');
+    console.log(data.follows);
+    socket.emit('addFollower',{
+      num_followers: ++data.followers.length  
     })
-  }) 
+    user.addFollower(data.page_id, data.id, function (err){
+      if (err) throw err
+    });
+    user.addFollowing(data.page_id, data.id, function (err){
+      if (err) throw err
+    });
+
+  })
+ 
 
   socket.on('unfollow', function (data) {
-    console.log(data.follows)
-    user.getUser(data.id, function (user_info){
-      user.getUser(data.page_id, function (page_info){
-        user_info.removeFollow(data.page_id, function (){
-          page_info.removeFollower(data.page_id, function (err){
-          if (err) throw err
-          })
-        })
-      });
-    console.log(user_info.following)
-    console.log(page_info.follower)
+    console.log('received message: unfollow');
+    console.log(data.follows);
+    socket.emit('removeFollower',{
+      num_followers: --data.followers.length 
     })
+    user.removeFollower(data.page_id, data.id, function (err){
+      if (err) throw err
+    });
+    user.removeFollowing(data.page_id, data.id, function (err){
+      if (err) throw err
+    });
+
   }) 
+
 
 
   socket.on('join room', function (data) {
