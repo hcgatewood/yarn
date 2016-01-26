@@ -89,7 +89,7 @@ a:hover{
   float: left;
   width: 47%;
 }
-.stories-panel {
+.stories-container {
   display: inline-block;
   float: right;
   margin-right: 20px;
@@ -99,12 +99,15 @@ a:hover{
 .stories-panel .badge {
   margin-left: 7px;
 }
+.stories-panel {
+  border: none;
+}
 
-.browse-users {
-    position:relative;
-    text-decoration: none;
-    font-size: 25px;
-    margin: 0px 0px 0px 40px;
+.browse-item {
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  font-size: 25px;
 }
 
 .name{

@@ -31,7 +31,7 @@
     <!--Active Friends Row-->
 
     <div class='users-container'>
-      <h3 class='browse-users'>Browse Users: <%= users.length %></h3>
+      <h3 class='browse-item browse-users'>Browse users</h3>
       <div class="row friends">
         <div class="col-lg-3 one"></div>
 
@@ -43,20 +43,20 @@
       </div>
     </div>
 
-    <div class='stories-panel panel panel-default'>
-      <div class='panel-heading'>
-        <h3 class='panel-title'>Recent stories</h3>
+    <div class ='stories-container'>
+      <h3 class='browse-item'>Recent stories</h3>
+      <div class='stories-panel panel panel-default'>
+        <ul class='list-group'>
+          <% for (var idx = 0; idx < stories.length; idx++) { %>
+          <a href='/stories/<%= stories[idx].id %>'>
+            <li class='empty story-item list-group-item'>
+              <%= stories[idx].firstChars %>
+              <span class='badge'><%= stories[idx].originRoom %></span>
+            </li>
+          </a>
+          <% } %>
+        </ul>
       </div>
-      <ul class='list-group'>
-        <% for (var idx = 0; idx < stories.length; idx++) { %>
-        <a href='/stories/<%= stories[idx].id %>'>
-          <li class='empty story-item list-group-item'>
-            <%= stories[idx].firstChars %>
-            <span class='badge'><%= stories[idx].originRoom %></span>
-          </li>
-        </a>
-        <% } %>
-      </ul>
     </div>
 
 
