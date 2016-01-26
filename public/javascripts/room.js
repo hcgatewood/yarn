@@ -226,7 +226,7 @@ function handleUserTurn() {
 }
 
 function nearBottomOfPage() {
-  var proximityThreshold = 0;
+  var proximityThreshold = 50;
   var bottomWindow = $(window).scrollTop() + $(window).height();
   var bottomDocument = $(document).height();
   //console.log('bottoms:', bottomWindow, bottomDocument, proximityThreshold);
