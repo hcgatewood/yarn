@@ -73,7 +73,7 @@ module.exports = function (app, passport) {
         res.render('user_page', {
           title: 'Yarn',
           username: username,
-          page_username: page_username,
+          page_username: titleize(page_username),
           id: id,
           follows: bool,
           follow: followingIds,
@@ -91,44 +91,15 @@ module.exports = function (app, passport) {
   })
 
 
-  // app.post('/follow', function(req,res){
-  //   var id= getUserId(req);
-  //   var page_id=req.body.page_id
+  app.post('/user/:id',function (req, res, next) {
+    
 
-  //     if (req.body.submit){
-  //       User.findById(id, function (err, user) {
-  //         User.findById(page_id, function (err, page_user){
-  //           user.addFollow(page_id, function (err){
-  //             if (err) throw err
-  //           })
-  //           page_user.addFollower(id, function (err){
-  //             if (err) throw err
-  //           })
-  //       });
-  //     });
-
-  //   }
-  // });
-
-  //   app.post('/unfollow', function(req,res){
-  //   var id= getUserId(req);
-  //   var page_id=req.body.page_id
-
-  //     if (req.body.submit){
-  //       User.findById(id, function (err, user) {
-  //         User.findById(page_id, function (err, page_user){
-  //           user.removeFollow(page_id, function (err){
-  //             if (err) throw err
-  //           })
-  //           page_user.removeFollower(id, function (err){
-  //             if (err) throw err
-  //           })
-  //       });
-  //     });
-
-  //   }
-
-  // })
+    //redirects to 404 page
+    if(!(ObjectID.isValid(page_id))){
+      res.redirect('/error')
+    }
+ 
+  })
 
   // GET story by id
   app.get('/stories/:storyId', function (req, res, next) {
