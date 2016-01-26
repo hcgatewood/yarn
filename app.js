@@ -108,9 +108,9 @@ app.io.on('connection', function (socket) {
   socket.on('follow', function (data) {
     console.log('received message: follow');
     console.log(data.follows);
-    socket.emit('addFollower',{
-      num_followers: ++data.followers.length  
-    })
+    // socket.emit('addFollower',{
+    //   num_followers: ++data.followers.length  
+    // })
     user.addFollower(data.page_id, data.id, function (err){
       if (err) throw err
     });
@@ -124,9 +124,9 @@ app.io.on('connection', function (socket) {
   socket.on('unfollow', function (data) {
     console.log('received message: unfollow');
     console.log(data.follows);
-    socket.emit('removeFollower',{
-      num_followers: --data.followers.length 
-    })
+    // socket.emit('removeFollower',{
+    //   num_followers: --data.followers.length 
+    // })
     user.removeFollower(data.page_id, data.id, function (err){
       if (err) throw err
     });

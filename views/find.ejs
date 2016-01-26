@@ -13,10 +13,10 @@
   <body>
     <%- include partials/navbar.ejs %>
   <div class="autoplay">
-    <a href="/rooms/horror"><div class="placeholder_image img3">HORROR</div></a>
-    <a href="/rooms/comedy"><div class="placeholder_image img4">COMEDY</div></a>
-    <a href="/rooms/scifi"><div class="placeholder_image img4">SCIFI</div></a>
-    <a href="/rooms/mystery"><div class="placeholder_image img4">MYSTERY</div></a>
+    <a href="/rooms/horror"><div class="placeholder_image img1"><span class="titles">HORROR</span></div></a>
+    <a href="/rooms/comedy"><div class="placeholder_image img2"><span class="titles">COMEDY</span></div></a>
+    <a href="/rooms/scifi"><div class="placeholder_image img3"><span class="titles">SCIFI</span></div></a>
+    <a href="/rooms/mystery"><div class="placeholder_image img4"><span class="titles">MYSTERY</span></div></a>
   </div>
 
     <!--Room Buttons-->
@@ -31,7 +31,9 @@
     <!--Active Friends Row-->
     <h3 class='browse-users'>Browse Users: <%= users.length %></h3>
     <div class="row friends">
-      <div class="col-lg-3 one"></div>
+      <div class="col-lg-3 one">
+        
+      </div>
 
       <div class="col-lg-3 two"></div>
 
