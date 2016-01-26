@@ -28,7 +28,7 @@ module.exports = function (app, passport) {
     var username = getUsername(req);
     res.render('index', {
       title: 'Yarn',
-      username: username,
+      username: titleize(username),
       id: id,
       user: req.user,
       startWriting: true
@@ -43,7 +43,7 @@ module.exports = function (app, passport) {
       Story.mostRecentStories(function (stories) {
         res.render('find', {
           title:'Find a Story!',
-          username: username,
+          username: titleize(username),
           id: id,
           users: users,
           stories: stories,
