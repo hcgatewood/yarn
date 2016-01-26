@@ -1,4 +1,5 @@
-// load all the things we need
+//borrowed code from scotch.io/tutorials/easy-node-authentication-google
+
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
