@@ -16,7 +16,7 @@ body{
   margin: auto;
   height: 200px;
   width: 200px;
-  background-image: url("../siteArt/Spool.svg");
+  background-image: url("../siteArt/spool200.svg");
 }
 
 #img2{
@@ -32,7 +32,7 @@ body{
   margin: auto;
   height: 200px;
   width: 200px;
-  background-image: url("../siteArt/Spin.svg");
+  background-image: url("../siteArt/spin200.svg");
 }
 
 .responsive-layer{

@@ -15,9 +15,12 @@
     <div class="row-fluid">
       <div class="col-md-3">
       <div class='panel space-4'>
+      <img class="img_container"></img>
         <div class='panel-body'>
-            <img class="img_container"></img>
-            <h2><%= page_username %></h2>
+            <ul class="list-unstyled text-center">
+              <li class="username"><%= page_username %></li>
+              <li><a class="btn btn-primary btn-block text-wrap space-top-1">Choose Avatar</a></li>
+            </ul>
         </div>
       </div>
 
@@ -44,7 +47,6 @@
           <div class="container-fluid">
               <ul class="tab-links">
                   <li class="active"><a href="#tab1">Published</a></li>
-                  <li><a href="#tab2">Hearts</a></li>
                   <li><a href="#tab3">Recent</a></li>
                   <li><a href="#tab4">Following</a></li>
                   <li><a href="#tab5">Followers</a></li>
@@ -54,11 +56,6 @@
                   <div id="tab1" class="tab active">
                       <p>Tab #1 content goes here!</p>
                       <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum risus ornare mollis.</p>
-                  </div>
-           
-                  <div id="tab2" class="tab">
-                      <p>Tab #2 content goes here!</p>
-                      <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! </p>
                   </div>
            
                   <div id="tab3" class="tab">
@@ -83,7 +80,6 @@
                     <% if (follower.length==0) { %>
                     <p class="friends">No followers, just yet!</p>
                     <% } %>
-                      <h4> Followers: <%= follower.length %> </h4>
                       <% for (var idx = 0; idx < follower.length; idx++) { %>
                       <ul class="user-list">
                       <% if (typeof follower[idx][0] !== 'undefined') {%>

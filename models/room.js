@@ -94,11 +94,11 @@ module.exports = function (app) {
   }
   // change writer turns
   roomSchema.statics.changeWriterTurns = function (roomId, dropUser) {
-    console.log('\n\n\nCHANGING WRITER TURN:', roomId, '\n\n\n');
+    //console.log('\n\n\nCHANGING WRITER TURN:', roomId, '\n\n\n');
     var roomModel = this;
     this.findById(roomId, function (err, room) {
       if (room === null) {
-        console.log('\n\ncannot find room by id:', roomId, '\n\n');
+        //console.log('\n\ncannot find room by id:', roomId, '\n\n');
         IdToInterval.remove(roomId);
         return;
       }
@@ -115,7 +115,7 @@ module.exports = function (app) {
         }
       }
       // publish the story if it's finished
-      console.log('room num turns:', room.currentTurns, room.totalTurns);
+     // console.log('room num turns:', room.currentTurns, room.totalTurns);
       if (room.currentTurns === room.totalTurns) {
         var oldStoryId = room.story;
         room.recentlyPublishedStoryId = oldStoryId;
@@ -124,7 +124,7 @@ module.exports = function (app) {
           story.isFinished = true;
           story.save(function (err) {if (err) console.log('err:', err)});
         });
-        console.log('\n\n### NEW STORY IN ROOM ###');
+        //console.log('\n\n### NEW STORY IN ROOM ###');
         var newStory = new Story();
         room.story = newStory;
         room.currentTurns = 0;
@@ -136,7 +136,7 @@ module.exports = function (app) {
       }
       room.save(function (err) {
         if (err) console.log('err:', err);
-        console.log('writers:', room.orderedWriters);
+        //console.log('writers:', room.orderedWriters);
         app.io.to(roomId).emit('turn update', {
           orderedWriters: room.orderedWriters,
           currentWriter: room.orderedWriters[0],
@@ -160,7 +160,7 @@ module.exports = function (app) {
       if (err) console.log('err:', err);
       // reset interval if they're the current writer now
       if (room.orderedWriters.length === 0) {
-        console.log('SINGLE WRITER:', userId);
+        //console.log('SINGLE WRITER:', userId);
         IdToInterval.update(room.id, room.turnLenMs, roomModel);
         app.io.to(roomId).emit('turn update', {
           orderedWriters: [userId],
@@ -174,12 +174,12 @@ module.exports = function (app) {
       }
       // add as either writer or reader
       if (room.orderedWriters.length <= room.maxWriters) {
-        console.log('ADDING ROOM WRITER');
+        //console.log('ADDING ROOM WRITER');
         room.orderedWriters.addToSet(userId);
         room.orderedWriterNames.addToSet(username);
         console.log('post-add writers:', room.orderedWriterNames);
       } else {
-        console.log('ADDING ROOM WAITER');
+        //console.log('ADDING ROOM WAITER');
         room.orderedWaiters.addToSet(userId);
         room.orderedWaiterNames.addToSet(username);
       }
@@ -193,7 +193,7 @@ module.exports = function (app) {
     if (userId !== '') {
       this.findById(roomId, function (err, room) {
         if (err) console.log('err:', err);
-        console.log('REMOVING WRITER');
+        //console.log('REMOVING WRITER');
         // TODO below is causing a fixable document lock-violation
         // when the current user leaves the room
         if (room.orderedWriters[0] == userId) {
@@ -211,7 +211,7 @@ module.exports = function (app) {
   // add reader to the room
   roomSchema.statics.addReader = function (roomId, userId) {
     if (userId) {
-      console.log('adding reader:', roomId, userId);
+      //console.log('adding reader:', roomId, userId);
       this.findById(roomId, function (err, room) {
         if (err) {
           console.log('err:', err);
@@ -229,23 +229,23 @@ module.exports = function (app) {
   // remove reader from the room
   roomSchema.statics.removeReader = function (roomId, userId) {
     if (userId) {
-      console.log('removing reader:', roomId, userId);
+      //console.log('removing reader:', roomId, userId);
       this.findById(roomId, function (err, room) {
         if (err) {
-          console.log('err:', err);
+          //console.log('err:', err);
           return;
         }
         if (room === null) {
-          console.log('\n\ncannot find room by id:', roomId, '\n\n');
+          //console.log('\n\ncannot find room by id:', roomId, '\n\n');
           return;
         }
-        console.log(room);
+        //console.log(room);
         room.readers.pull(userId);
         room.numReaders = room.readers.length;
         room.save(function (err) {if (err) console.log('err:', err)});
       });
     } else {
-      console.log('not removing reader');
+      //console.log('not removing reader');
     }
   }
 

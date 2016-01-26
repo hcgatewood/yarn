@@ -105,35 +105,35 @@ app.io.on('connection', function (socket) {
 
   socket.on('follow', function (data) {
     //console.log(data.follows)
+    console.log(data.follows)
     user.getUser(data.id, function (user_info){
       user.getUser(data.page_id, function (page_info){
+        user_info.addFollow(data.page_id, function (){
+          page_info.addFollower(data.page_id, function (err){
           if (err) throw err
-        })
-        page_info.removeFollower(data.page_id, function (err){
-          if (err) throw err
-      })
-        console.log(user_info.following)
-        console.log(page_info.follower)
-    });
-    //console.log(data.follows)
-  })
+          })
+        })  
+      });
+    console.log(user_info.following)
+    console.log(page_info.follower)
+    })
+  }) 
 
   socket.on('unfollow', function (data) {
-    //console.log(data.follows)
+    console.log(data.follows)
     user.getUser(data.id, function (user_info){
       user.getUser(data.page_id, function (page_info){
-        user_info.removeFollow(data.page_id, function (err){
+        user_info.removeFollow(data.page_id, function (){
+          page_info.removeFollower(data.page_id, function (err){
           if (err) throw err
+          })
         })
-          console.log(user_info.following)
-          console.log(page_info.follower)
-        page_info.removeFollower(data.page_id, function (err){
-          if (err) throw err
-        })
-      })
-    });
-    //console.log(data.follows)
-  })
+      });
+    console.log(user_info.following)
+    console.log(page_info.follower)
+    })
+  }) 
+
 
   socket.on('join room', function (data) {
     Room.addReader(data.roomId, data.userId);

@@ -69,6 +69,7 @@ userSchema.statics.follows = function (user_id, page_id, callback){
   var userModel = this;
 
   userModel.findById(page_id, function (err, user) {
+          console.log(user_id+" follows "+ user.username+' equals '+(user.follower.indexOf(user_id)> -1))
          return callback(user.follower.indexOf(user_id)> -1)
    });     
   };

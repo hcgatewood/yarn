@@ -66,8 +66,6 @@ module.exports = function (app, passport) {
     User.getFollowingUsername(page_id, function (followingIds) {
       User.getFollowerUsername(page_id, function (followerIds){
         User.follows(id, page_id, function (bool){
-          console.log("THIS IS BOOL", bool)
-          console.log("THIS IS BOOL", bool)
         res.render('user_page', {
           title: 'Rolling Story',
           username: username,
