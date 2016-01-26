@@ -8,7 +8,7 @@ body{
   margin: auto;
   height: 150px;
   width: 150px;
-  background-color:   #ffcc5c;
+  background-color: #ffcc5c;
 }
 
 #img1{
@@ -39,8 +39,7 @@ body{
   margin-top: 0px;
 }
 .jumbotron{
-  background-color:#EBEAEE;
-  /*height: auto;*/
+  background-color: white;
   height: auto;
   min-height: 93vh;
   display: flex;
