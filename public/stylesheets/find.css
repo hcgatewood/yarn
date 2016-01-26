@@ -6,8 +6,9 @@ body{
 
 /*jumbotron*/
 .autoplay{
+  border:none;
   position: relative;
-  margin-top:66px;
+  margin-top:65px;
   height: 300px;
   width: 100%;
   height: auto;
@@ -39,6 +40,7 @@ a:hover{
 .slick-slide:focus {
   outline: none;
 }
+
 
 .img1{
   opacity: 0.4;
