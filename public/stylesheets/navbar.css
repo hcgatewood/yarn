@@ -192,11 +192,6 @@ body{
   z-index: 11
 }
 
-.modal .btn-primary {
-  color: #fff;
-  background-color: #ff7583;
-  border-color: #ff7583;
-}
 .btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,
 .open .dropdown-toggle.btn-primary {
   color: #fff;

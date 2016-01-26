@@ -1,5 +1,6 @@
 
 $(document).ready(function(){
+  if (typeof id === 'undefined') id = '';
   window.onresize = function(event) {
     var win = $(this); //this = window
     if (win.height() >= 820) {

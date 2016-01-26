@@ -13,10 +13,10 @@
   <body>
     <%- include partials/navbar.ejs %>
   <div class="autoplay">
-    <a href="/rooms/horror"><div class="placeholder_image img1"><span class="titles">HORROR</span></div></a>
-    <a href="/rooms/comedy"><div class="placeholder_image img2"><span class="titles">COMEDY</span></div></a>
-    <a href="/rooms/scifi"><div class="placeholder_image img3"><span class="titles">SCIFI</span></div></a>
-    <a href="/rooms/mystery"><div class="placeholder_image img4"><span class="titles">MYSTERY</span></div></a>
+    <a href="/rooms/horror"><div class="placeholder_image img1"></div><div class="titles">HORROR</div></a>
+    <a href="/rooms/comedy"><div class="placeholder_image img2"></div><div class="titles">COMEDY</div></a>
+    <a href="/rooms/scifi"><div class="placeholder_image img3"></div><div class="titles">SCI-FI</div></a>
+    <a href="/rooms/mystery"><div class="placeholder_image img4"></div><div class="titles">MYSTERY</div></a>
   </div>
 
     <!--Room Buttons-->
@@ -31,7 +31,7 @@
     <!--Active Friends Row-->
 
     <div class='users-container'>
-      <h3 class='browse-users'>Browse Users: <%= users.length %></h3>
+      <h3 class='browse-item browse-users'>Browse users</h3>
       <div class="row friends">
         <div class="col-lg-3 one"></div>
 
@@ -43,20 +43,20 @@
       </div>
     </div>
 
-    <div class='stories-panel panel panel-default'>
-      <div class='panel-heading'>
-        <h3 class='panel-title'>Recent stories</h3>
+    <div class ='stories-container'>
+      <h3 class='browse-item'>Recent stories</h3>
+      <div class='stories-panel panel panel-default'>
+        <ul class='list-group'>
+          <% for (var idx = 0; idx < stories.length; idx++) { %>
+          <a href='/stories/<%= stories[idx].id %>'>
+            <li class='empty story-item list-group-item'>
+              <%= stories[idx].firstChars %>
+              <span class='badge'><%= stories[idx].originRoom %></span>
+            </li>
+          </a>
+          <% } %>
+        </ul>
       </div>
-      <ul class='list-group'>
-        <% for (var idx = 0; idx < stories.length; idx++) { %>
-        <a href='/stories/<%= stories[idx].id %>'>
-          <li class='empty story-item list-group-item'>
-            <%= stories[idx].firstChars %>
-            <span class='badge'><%= stories[idx].originRoom %></span>
-          </li>
-        </a>
-        <% } %>
-      </ul>
     </div>
 
 
