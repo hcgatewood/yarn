@@ -13,31 +13,50 @@
   <body>
     <%- include partials/navbar.ejs %>
   <div class="autoplay">
-    <a href="/rooms/horror"><div class="placeholder_image img3">HORROR</div></a>
-    <a href="/rooms/comedy"><div class="placeholder_image img4">COMEDY</div></a>
-    <a href="/rooms/scifi"><div class="placeholder_image img4">SCIFI</div></a>
-    <a href="/rooms/mystery"><div class="placeholder_image img4">MYSTERY</div></a>
+    <a href="/rooms/horror"><div class="placeholder_image img1"><span class="titles">HORROR</span></div></a>
+    <a href="/rooms/comedy"><div class="placeholder_image img2"><span class="titles">COMEDY</span></div></a>
+    <a href="/rooms/scifi"><div class="placeholder_image img3"><span class="titles">SCIFI</span></div></a>
+    <a href="/rooms/mystery"><div class="placeholder_image img4"><span class="titles">MYSTERY</span></div></a>
   </div>
 
     <!--Room Buttons-->
     <div class="room_buttons">
       <a href='/rooms/main'>
-        <button class="btn btn-primary btn-lg raised" id="button_one" type="button">Main Room</button>
+        <button class="action-button btn btn-primary raised" id="button_one" type="button">Main Room</button>
       </a>
       <a href='/rooms/demo'>
-        <button class="btn btn-primary btn-lg raised" id="button_one" type="button">Demo Room</button>
+        <button class="action-button btn btn-primary raised" id="button_one" type="button">Demo Room</button>
       </a>
     </div>
     <!--Active Friends Row-->
-    <h3 class='browse-users'>Browse Users: <%= users.length %></h3>
-    <div class="row friends">
-      <div class="col-lg-3 one"></div>
 
-      <div class="col-lg-3 two"></div>
+    <div class='users-container'>
+      <h3 class='browse-users'>Browse Users: <%= users.length %></h3>
+      <div class="row friends">
+        <div class="col-lg-3 one"></div>
 
-      <div class="col-lg-3 three"></div>
+        <div class="col-lg-3 two"></div>
 
-      <div class="col-lg-3 four"></div>
+        <div class="col-lg-3 three"></div>
+
+        <div class="col-lg-3 four"></div>
+      </div>
+    </div>
+
+    <div class='stories-panel panel panel-default'>
+      <div class='panel-heading'>
+        <h3 class='panel-title'>Recent stories</h3>
+      </div>
+      <ul class='list-group'>
+        <% for (var idx = 0; idx < stories.length; idx++) { %>
+        <a href='/stories/<%= stories[idx].id %>'>
+          <li class='empty story-item list-group-item'>
+            <%= stories[idx].firstChars %>
+            <span class='badge'><%= stories[idx].originRoom %></span>
+          </li>
+        </a>
+        <% } %>
+      </ul>
     </div>
 
 

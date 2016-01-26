@@ -22,27 +22,33 @@ $(document).ready(function(){
 
   for (var idx = 0; idx<users.length; idx++){
     var url=users[idx]["_id"]
-    var name=users[idx]["username"]
-    if (idx%4==0) {
+    if (users[idx]["local"]){
+      var name=users[idx]["local"]["username"]
+    }
+    else if (users[idx]["google"]){
+      var name=users[idx]["google"]["name"]
+    }
+    else if (users[idx]["google"]){
+      var name=users[idx]["google"]["name"]
+    }
+
+    var rand=Math.floor(Math.random() * 9) + 1  
+  if (idx%4==0) {
       if(url==id){
-       $('.one').append("<a href='/user/" + url + "'><div class='block1'><span class='name'>"+"You!"+"</span></div>") 
+       $('.one').append("<a href='/user/" + url + "'><div class='block1'><img src='../siteArt/userYarn"+rand+".svg'>" +"You!"+"</img></div>") 
       }
       else{
-      //$('.row .friends').append("<div class=''><div class='block1'></div></div>")
-      $('.one').append("<a href='/user/" + url + "'><div class='block1'>"+name+"</div>")
+      $('.one').append("<a href='/user/" + url + "'><div class='block1'><img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
       }
     }
     if (idx%4==1) {
-      $('.two').append("<a href='/user/" + url + "'><div class='block2'>"+name+"</div>")
-      //$('.col-lg-3').append("<div class='block2'></div>")
+      $('.two').append("<a href='/user/" + url + "'><div class='block1'><img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
     }
     if (idx%4==2) {
-      $('.three').append("<a href='/user/" + url + "'><div class='block3'>"+name+"</div>")
-      //$('.row .friends').append("<div class='col-lg-3'><div class='block3'></div></div>")
+      $('.three').append("<a href='/user/" + url + "'><div class='block1'><img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
     }
     if (idx%4==3) {
-      $('.four').append("<a href='/user/" + url + "'><div class='block4'>"+name+"</div>")
-      //$('.row .friends').append("<div class='col-lg-3'><div class='block4'></div></div>")
+      $('.four').append("<a href='/user/" + url + "'><div class='block1'><img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
     }
   }
   

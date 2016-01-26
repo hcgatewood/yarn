@@ -130,6 +130,7 @@ module.exports = function (app) {
         room.recentlyPublishedStoryId = oldStoryId;
         Story.findById(oldStoryId, function (err, story) {
           if (err) console.log('err:', err);
+          story.originRoom = room.name;
           story.isFinished = true;
           story.save(function (err) {if (err) console.log('err:', err)});
         });

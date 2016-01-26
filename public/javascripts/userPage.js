@@ -9,15 +9,12 @@ $(document).ready(function() {
     });
 
   	// $(".user_modal").hide();
-
   	// $(".yarn_btn").click(function(){
    //  	$(".user_modal").show();
   	// });
   	// $(".close").click(function(){
    //  	$(".user_modal").hide();
   	// });
-
-
     // $(".first").click(function(){
     //   $ajax({
     //     url: "/user/:id",
