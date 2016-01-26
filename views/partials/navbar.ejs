@@ -2,7 +2,7 @@
   <div class='center'>
     <!-- LogoName -->
     <div class='navbar-item logoname pull-left'>
-      <a class='logo nav-font' href='/'>Rolling Story</a>
+      <a class='logo nav-font' href='/'>Yarn</a>
     </div>
 
     <!--Search Bar -->
@@ -18,14 +18,14 @@
     <!--Logout & Settings-->
     <div class='navbar-item nav-font logout-settings navigation pull-right'>
       <% if (startWriting) { %>
-      <a href='/rooms/main' class='writing item'>Start writing</a>
+      <a href='/rooms/main' class='writing item'>start writing</a>
       <% } %>
-      <a href='/rooms/main' class='current item'>Current room</a>
+      <a href='/find' class='current item'>find a story</a>
       <% if (user) { %>
       <a href='/user/<%= user.id %>' class='name item'><%= username %></a>
-      <a href='/logout' class='login-choice item'>Sign out</a>
+      <a href='/logout' class='login-choice item'>sign out</a>
       <% } else { %>
-      <a class='login-choice item signin'>Sign in/up</a>
+      <a class='login-choice item signin'>sign in/up</a>
       <% } %>
 
     <!--Overlay #1-->
@@ -37,7 +37,7 @@
         <h3 id='login_header'>Sign in or create an account</h3>
       </div>
         <div class="row" id="alignsignup_btn">
-            <a href="/auth/facebook"><button class="btn btn-primary1 btn-lg raised signin-btn fa fa-facebook" type="button"><span class="b2">Sign in with Facebook</span></button></a>
+            <!--<a href="/auth/facebook"><button class="btn btn-primary1 btn-lg raised signin-btn fa fa-facebook" type="button"><span class="b2">Sign in with Facebook</span></button></a>-->
         </div>
 
         <div class="row">

@@ -1,4 +1,5 @@
 var ObjectID = require('mongodb').ObjectID;
+var titleize = require('underscore.string/titleize');
 
 module.exports = function (app, passport) {
   var Room = app.models.room;
@@ -66,14 +67,12 @@ module.exports = function (app, passport) {
     User.getFollowingUsername(page_id, function (followingIds) {
       User.getFollowerUsername(page_id, function (followerIds){
         User.follows(id, page_id, function (bool){
-          console.log("THIS IS BOOL", bool)
-          console.log("THIS IS BOOL", bool)
         res.render('user_page', {
           title: 'Rolling Story',
           username: username,
           page_username: page_username,
           id: id,
-          follows: bool, 
+          follows: bool,
           follow: followingIds,
           follower: followerIds,
           page_id: page_id,
@@ -82,11 +81,11 @@ module.exports = function (app, passport) {
           user_since: user_since,
           startWriting: true
           })
-         });   
+         });
         });
       })
     })
-  })     
+  })
 
 
   // app.post('/follow', function(req,res){
@@ -98,7 +97,7 @@ module.exports = function (app, passport) {
   //         User.findById(page_id, function (err, page_user){
   //           user.addFollow(page_id, function (err){
   //             if (err) throw err
-  //           }) 
+  //           })
   //           page_user.addFollower(id, function (err){
   //             if (err) throw err
   //           })
@@ -117,7 +116,7 @@ module.exports = function (app, passport) {
   //         User.findById(page_id, function (err, page_user){
   //           user.removeFollow(page_id, function (err){
   //             if (err) throw err
-  //           }) 
+  //           })
   //           page_user.removeFollower(id, function (err){
   //             if (err) throw err
   //           })
@@ -161,9 +160,11 @@ module.exports = function (app, passport) {
         if (room.orderedWriters[idx] == userId) isWriter = true;
       }
       console.log('is user turn, is writer:', isUserTurn, isWriter);
+      console.log('rendering:', story.orderedContributions);
       // render the room
       res.render('room', {
         title: roomName,
+        roomName: titleize(roomName),
         contributions: story.orderedContributions,
         username: username,
         storyId: story.id,

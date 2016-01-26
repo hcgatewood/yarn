@@ -1,4 +1,4 @@
-@font-face { font-family: Circular; src: url('../CircularStd-Book.otf'); } 
+@font-face { font-family: Circular; src: url('../CircularStd-Book.otf'); }
 body{
   font-family: Circular;
 }
@@ -10,29 +10,36 @@ body{
   margin-top:66px;
   height: 300px;
   width: 100%;
+  height: auto;
 }
 
 .placeholder_image{
   color: black;
   text-align: center;
-  line-height: 300px;
+  line-height: 200px;
+  font-family: 'Amatic SC';
+  font-size: 45px;
+  font-weight: bold;
 }
 a:hover{
   text-decoration: none;
 }
+.slick-slide:focus {
+  outline: none;
+}
 
-.img1{
-  background-color:#ee4035;
-}
-.img2{
-  background-color:#f37736;
-}
-.img3{
-  background-color:#fdf498;
-}
-.img4{
-  background-color:#0392cf;
-}
+/*.img1{*/
+  /*background-color:#ee4035;*/
+/*}*/
+/*.img2{*/
+  /*background-color:#f37736;*/
+/*}*/
+/*.img3{*/
+  /*background-color:#fdf498;*/
+/*}*/
+/*.img4{*/
+  /*background-color:#0392cf;*/
+/*}*/
 
 /*room buttons*/
 .container-fluid {
@@ -58,7 +65,7 @@ a:hover{
     margin-right: 30px;
 }
 
-h3{
+.browse-users {
     position:relative;
     text-decoration: none;
     font-size: 25px;

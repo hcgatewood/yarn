@@ -111,6 +111,10 @@ $(document).ready(function () {
     //console.log('GETTING NEW STORY:', storyId);
     $('.recent-story').attr('href', '/stories/' + storyId);
     storyId = data.storyId;
+    //console.log('reload:', data.reload, data.reload === true);
+    if (data.reload === true) {
+      location.reload();
+    }
   });
   // receiving story updates
   socket.on('story update', function (data) {
@@ -222,7 +226,7 @@ function handleUserTurn() {
 }
 
 function nearBottomOfPage() {
-  var proximityThreshold = 0;
+  var proximityThreshold = 50;
   var bottomWindow = $(window).scrollTop() + $(window).height();
   var bottomDocument = $(document).height();
   //console.log('bottoms:', bottomWindow, bottomDocument, proximityThreshold);

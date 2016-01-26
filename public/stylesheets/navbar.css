@@ -32,20 +32,27 @@ body{
   white-space: nowrap;
   margin: 0px 25px 9px 18px;
 }
+.logoname {
+  margin-left: 22px;
+  margin-bottom: 0px;
+}
 .logo {
   display: inline-block;
   text-decoration: none;/*no underline*/
   position: relative;/*positioned relative to its normal position*/
   color: white;
   border: none;
-  font-size: 40px;
+  font-size: 42px;
   z-index: 1;
 }
-
 .logo:hover {
+  text-decoration: none;
   color: #ff5a5f;
   text-decoration: none;
   transition: all 0.3s ease 0.1s;
+}
+.logo:active {
+  text-decoration: none;
 }
 /*search*/
 .search-bar {
@@ -81,9 +88,13 @@ body{
 .navigation .item {
   position: relative;
   text-decoration: none;
-  margin:0px 7px 0px 7px;
   display: inline-block;
   color: white;
+  margin:0px 7px 16px 7px;
+  letter-spacing: -2px;
+  font-size: 24px;
+  font-weight: normal;
+  font-family: 'Circular';
   }
 .navigation .item:hover {
   color: #ff5a5f;
@@ -122,7 +133,7 @@ body{
     text-align: center;
     z-index: 11; /* 1 higher than the overlay layer */
 }
-.modal > {
+.modal {
   display: inline-block;
 }
 #login_header{
@@ -157,19 +168,19 @@ body{
   z-index: 11
 }
 
-.btn2{
+.modal .btn2{
   width:100px;
   font-family: Circular;
 
 }
-.btn-lg {
+.modal .btn-lg {
   font-size: 15px;
   line-height: 1.33;
   border-radius: 6px;
   z-index: 11
 }
 
-.btn-primary {
+.modal .btn-primary {
   color: #fff;
   background-color: #ff5a5f;
   border-color: #ff5a5f;
@@ -180,7 +191,7 @@ body{
   background-color: #ff5a5f;
   border-color: #ff5a5f;
 }
-.btn-primary.raised {
+.modal .btn-primary.raised {
     box-shadow: 0 3px 0 0 #e00007;
 }
 .btn-primary.raised:active, .btn-primary1.raised.active {
@@ -190,7 +201,7 @@ body{
     margin-top: 3px;
 }
 
-.btn-primary1 {
+.modal .btn-primary1 {
   color: #fff;
   background-color: #3B5998;
   border-color: #3B5998;
@@ -211,7 +222,7 @@ body{
     margin-top: 3px;
 }
 
-.btn-primary2 {
+.modal .btn-primary2 {
   color: #fff;
   background-color: #4285f4;
   border-color: #4285f4;

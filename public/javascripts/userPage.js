@@ -1,17 +1,26 @@
 $(document).ready(function() {
-	//var id
-	//var page_id
     $('.tabs .tab-links a').on('click', function(e)  {
         var currentAttrValue = $(this).attr('href');
- 
         // Show/Hide Tabs
         $('.tabs ' + currentAttrValue).show().siblings().hide();
- 
         // Change/remove current tab to active
         $(this).parent('li').addClass('active').siblings().removeClass('active');
- 
         e.preventDefault();
     });
+
+  	$(".overlay, .modal").hide();
+  	$(".signin").click(function(){
+    $(".overlay, #modal1").show();
+  	});
+  	$(".glyphicon-remove").click(function(){
+    $(".overlay, .modal").hide();
+  	});
+  	$("#login_footer").click(function(){
+    $("#modal1").hide();
+    $(".overlay, #modal2").show();
+  	});
+
+
     	//if (user_id in page_id.follower) make button certain color
   	var socket = io.connect();
 

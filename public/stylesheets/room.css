@@ -1,22 +1,22 @@
 /* Room page */
 html {
-  height: 100%;
 }
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin-top: 90px;
-  height: 100%;
 }
 .meta-background {
-  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
   left: 60%;
-  width: 40%;
-  height: 100%;
   background-color: #f1f1f1;
   z-index: -1;
 }
 .room-container {
   padding-top: 100px;
+  padding-bottom: 50px;
 }
 .user-addition-input {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -30,13 +30,13 @@ body {
   border: none;
   background: #f1f1f1;
 }
-.additions-meta-skip {
+.additions-meta * {
+  margin: 0px auto 4px auto;
   display: block;
-  margin-top: 4px;
+  text-align: center;
 }
-.additions-meta-submit {
-  display: block;
-  margin-top: 4px;
+.additions-meta-timer {
+  font-size: 23px;
 }
 .additions-main {
   display: inline-block;
@@ -54,6 +54,8 @@ body {
 
 .meta-container {
   display: inline-block;
+  padding-right: 15px;
+  padding-left: 15px;
   vertical-align: top;
   width: 39%;
 }
@@ -69,6 +71,9 @@ body {
 }
 .remaining-turns {
   margin-top: 30px;
+}
+.turn-prompt, .remaining-turns > * {
+  font-size: 23px;
 }
 .story-container {
   display: inline-block;
