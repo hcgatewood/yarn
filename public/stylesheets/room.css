@@ -18,6 +18,9 @@ body {
   padding-top: 100px;
   padding-bottom: 50px;
 }
+.room-container a {
+  text-decoration: none;
+}
 .user-addition-input {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: black;
@@ -96,4 +99,26 @@ body {
 }
 .empty {
   display: none;
+}
+
+
+.btn-primary {
+  color: #fff;
+  background-color: #ff5a5f;
+  border-color: #ff5a5f;
+}
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #ff5a5f;
+  border-color: #ff5a5f;
+}
+.btn-primary.raised {
+    box-shadow: 0 3px 0 0 #e00007;
+}
+.btn-primary.raised:active, .btn-primary1.raised.active {
+    background: #ff5a5f;
+    box-shadow: none;
+    margin-bottom: -3px;
+    margin-top: 3px;
 }

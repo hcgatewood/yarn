@@ -34,8 +34,8 @@
         <div class='visible-on-turn user-additions'>
           <div class='additions-meta'>
             <div class='additions-meta-timer'></div>
-            <!--<button class='additions-meta-skip btn btn-primary1 raised' type='button'>Skip</button>-->
-            <button class='additions-meta-submit btn btn-primary1 raised' type='button'>Submit</button>
+            <!--<button class='additions-meta-skip btn btn-primary raised' type='button'>Skip</button>-->
+            <button class='additions-meta-submit btn btn-primary raised' type='button'>Submit</button>
           </div>
           <div class='additions-main'>
             <textarea class='user-addition-input' placeholder='Add your contribution here...'></textarea>
@@ -48,10 +48,10 @@
         <% if (! user) { %>
         <div class='signup-prompt meta-prompt'>Sign up/in to get started!</div>
         <% } %>
-        <button class='join-room meta-item invisible-as-writer btn btn-primary1 btn-lg raised' type='button'>Join story</button>
-        <button class='leave-room meta-item visible-as-writer btn btn-primary1 btn-lg raised' type='button'>Leave story</button>
+        <button class='join-room meta-item invisible-as-writer btn btn-primary btn-lg raised' type='button'>Join story</button>
+        <button class='leave-room meta-item visible-as-writer btn btn-primary btn-lg raised' type='button'>Leave story</button>
         <a href='/stories/<%= recentStory %>' class='recent-story'>
-          <button class='meta-item btn btn-primary1 btn-lg raised' type='button'>This room's last story</button>
+          <button class='meta-item btn btn-primary btn-lg raised' type='button'>Previous story</button>
         </a>
         <% if (user) { %>
         <div class='turn-prompt meta-prompt visible-on-turn'>It's your turn!</div>
