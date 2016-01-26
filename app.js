@@ -15,10 +15,12 @@ var user = require('./models/user');
 app.models.user = user;
 var Story = require('./models/story');
 app.models.story = Story;
-var Room = require('./models/room')(app);
-app.models.room = Room;
 
 var bootstrapSync = require('./config/bootstrapSync')(app);
+app.bootstrapSync = bootstrapSync;
+
+var Room = require('./models/room')(app);
+app.models.room = Room;
 
 // passport
 var mongoose = require('mongoose');

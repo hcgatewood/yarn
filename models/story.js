@@ -31,6 +31,11 @@ storySchema.statics.addContribution = function (storyId, username, text, userId)
     story.save(function (err) {if (err) console.log('err:', err)});
   });
 };
+storySchema.methods.addContribution = function (username, text, userId) {
+  this.orderedContributions.push({username: username, text: text});
+  this.contributors.addToSet(userId);
+  this.text = this.text + '\n\n' + text;
+};
 
 storySchema.statics.getStoryText = function (storyId, success, fail) {
   this.findById(storyId, function (err, story) {

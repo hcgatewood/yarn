@@ -6,6 +6,7 @@ module.exports = function (app) {
   var _ = require('underscore');
   var IdToInterval = require('./intervals');
   var helpers = require('../lib/helpers');
+  var bootstrapSync = app.bootstrapSync;
   var Story = app.models.story;
 
   // schema for the room model
@@ -15,6 +16,7 @@ module.exports = function (app) {
     name: String,
     story: {type: Schema.Types.ObjectId, ref: 'Story'},
     turnLenMs: {type: Number, min: 1*1000, default: 50*1000},
+    //genre: {type: String, default: 'default'},
     //isActive: Boolean,
 
     // user lists
@@ -57,7 +59,14 @@ module.exports = function (app) {
             .findOne({name: roomName})
             .populate('story')
             .exec(function (err, room) {
-              callback(room, room.story);
+              // if this is the demo room reload its data
+              if (room.name === 'demo') {
+                bootstrapSync.reloadRoomData(room, story, function () {
+                  callback(room, story);
+                });
+              } else {
+                callback(room, story);
+              }
             });
         });
       } else {
@@ -129,9 +138,19 @@ module.exports = function (app) {
         room.story = newStory;
         room.currentTurns = 0;
         newStory.save(function () {
-          app.io.to(roomId).emit('new story', {
-            storyId: room.story.id
-          });
+          // if this is the demo room reload its data
+          if (room.name === 'demo') {
+            bootstrapSync.reloadRoomData(room, newStory, function () {
+              app.io.to(roomId).emit('new story', {
+                storyId: newStory.id,
+                reload: true
+              });
+            });
+          } else {
+            app.io.to(roomId).emit('new story', {
+              storyId: newStory.id
+            });
+          }
         });
       }
       room.save(function (err) {
