@@ -37,4 +37,8 @@
     var userId = '<%= userId %>';
   <% } %>
 
+  <% if (typeof users !== 'undefined') { %>
+    var users = <%- JSON.stringify(users) %>;
+  <% } %>
+
 </script>

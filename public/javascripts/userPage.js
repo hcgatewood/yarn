@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	//var id
 	//var page_id
-
     $('.tabs .tab-links a').on('click', function(e)  {
         var currentAttrValue = $(this).attr('href');
  
@@ -16,7 +15,8 @@ $(document).ready(function() {
     	//if (user_id in page_id.follower) make button certain color
   	var socket = io.connect();
 
-  	$(".follow_btn").click(function() {
+  	$(".follow_btn").click(function (event) {
+  		event.preventDefault();
   		var $this = $(this);
   		// Tell the server to follow page
   		if (!follows){
