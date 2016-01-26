@@ -15,7 +15,7 @@ module.exports = function (app) {
     // meta
     name: String,
     story: {type: Schema.Types.ObjectId, ref: 'Story'},
-    turnLenMs: {type: Number, min: 1*1000, default: 50*1000},
+    turnLenMs: {type: Number, min: 1*1000, default: 60*1000},
     //genre: {type: String, default: 'default'},
     //isActive: Boolean,
 

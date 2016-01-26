@@ -219,6 +219,11 @@ function handleUserTurn() {
   if ((userId !== '') && (isUserTurn === true)) {
     //console.log('YES TURN');
     $('.visible-on-turn').show();
+    // scroll to bottom of page
+    $('html, body').animate(
+      {scrollTop: $(document).height()},
+      'slow'
+    );
   } else {
     //console.log('NO TURN');
     $('.visible-on-turn').hide();
@@ -226,7 +231,7 @@ function handleUserTurn() {
 }
 
 function nearBottomOfPage() {
-  var proximityThreshold = 0;
+  var proximityThreshold = 50;
   var bottomWindow = $(window).scrollTop() + $(window).height();
   var bottomDocument = $(document).height();
   //console.log('bottoms:', bottomWindow, bottomDocument, proximityThreshold);

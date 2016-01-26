@@ -13,20 +13,23 @@
   <body>
     <%- include partials/navbar.ejs %>
   <div class="autoplay">
-    <a href="/rooms/demo"><div class="placeholder_image img1">DEMO</div></a>
-    <a href="/rooms/main"><div class="placeholder_image img2">MAIN</div></a>
     <a href="/rooms/horror"><div class="placeholder_image img3">HORROR</div></a>
     <a href="/rooms/comedy"><div class="placeholder_image img4">COMEDY</div></a>
     <a href="/rooms/scifi"><div class="placeholder_image img4">SCIFI</div></a>
+    <a href="/rooms/mystery"><div class="placeholder_image img4">MYSTERY</div></a>
   </div>
 
     <!--Room Buttons-->
     <div class="room_buttons">
-        <button class="btn btn-primary btn-lg raised" id="button_one" type="button">Random Room</button>
-        <button class="btn btn-primary btn-lg raised" id="button_one" type="button">Custom Room</button>
+      <a href='/rooms/main'>
+        <button class="btn btn-primary btn-lg raised" id="button_one" type="button">Main Room</button>
+      </a>
+      <a href='/rooms/demo'>
+        <button class="btn btn-primary btn-lg raised" id="button_one" type="button">Demo Room</button>
+      </a>
     </div>
     <!--Active Friends Row-->
-    <h3>Browse Users: <%= users.length %></h3>
+    <h3 class='browse-users'>Browse Users: <%= users.length %></h3>
     <div class="row friends">
       <div class="col-lg-3 one"></div>
 
@@ -37,7 +40,7 @@
       <div class="col-lg-3 four"></div>
     </div>
 
-    
+
 
     <script type="text/javascript" src="/slick/slick.min.js"></script>
   </body>

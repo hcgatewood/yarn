@@ -34,7 +34,7 @@
         <div class='visible-on-turn user-additions'>
           <div class='additions-meta'>
             <div class='additions-meta-timer'></div>
-            <button class='additions-meta-skip btn btn-primary1 raised' type='button'>Skip</button>
+            <!--<button class='additions-meta-skip btn btn-primary1 raised' type='button'>Skip</button>-->
             <button class='additions-meta-submit btn btn-primary1 raised' type='button'>Submit</button>
           </div>
           <div class='additions-main'>
@@ -45,10 +45,7 @@
 
       <div class='meta-container'>
         <h2 class='room-name meta-prompt'><%= roomName %></h2>
-        <% if (user) { %>
-        <div class='turn-prompt meta-prompt visible-on-turn'>It's your turn!</div>
-        <div class='turn-prompt meta-prompt visible-as-writer-not-on-turn'>It's not your turn yet</div>
-        <% } else { %>
+        <% if (! user) { %>
         <div class='signup-prompt meta-prompt'>Sign up/in to get started!</div>
         <% } %>
         <button class='join-room meta-item invisible-as-writer btn btn-primary1 btn-lg raised' type='button'>Join story</button>
@@ -56,6 +53,10 @@
         <a href='/stories/<%= recentStory %>' class='recent-story'>
           <button class='meta-item btn btn-primary1 btn-lg raised' type='button'>This room's last story</button>
         </a>
+        <% if (user) { %>
+        <div class='turn-prompt meta-prompt visible-on-turn'>It's your turn!</div>
+        <div class='turn-prompt meta-prompt visible-as-writer-not-on-turn'>It's not your turn yet</div>
+        <% } %>
         <div class='remaining-turns meta-prompt'>
           <span class='remaining-turns-text'>Remaining turns:</span>
           <span class='remaining-turns-number'></span>

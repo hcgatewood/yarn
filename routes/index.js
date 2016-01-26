@@ -27,7 +27,7 @@ module.exports = function (app, passport) {
     var id = getUserId(req);
     var username = getUsername(req);
     res.render('index', {
-      title: 'Rolling Story',
+      title: 'Yarn',
       username: username,
       id: id,
       user: req.user,
@@ -68,7 +68,7 @@ module.exports = function (app, passport) {
       User.getFollowerUsername(page_id, function (followerIds){
         User.follows(id, page_id, function (bool){
         res.render('user_page', {
-          title: 'Rolling Story',
+          title: 'Yarn',
           username: username,
           page_username: titleize(page_username),
           id: id,
@@ -158,7 +158,7 @@ module.exports = function (app, passport) {
     var id = getUserId(req);
     var username = getUsername(req);
     res.render('errorpage', {
-      title: 'Rolling Story',
+      title: 'Yarn',
       username: username,
       id: id,
       user: req.user,

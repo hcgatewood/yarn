@@ -24,7 +24,7 @@ body{
 a:hover{
   text-decoration: none;
 }
-.slick-slide {
+.slick-slide:focus {
   outline: none;
 }
 
@@ -65,7 +65,7 @@ a:hover{
     margin-right: 30px;
 }
 
-h3{
+.browse-users {
     position:relative;
     text-decoration: none;
     font-size: 25px;
