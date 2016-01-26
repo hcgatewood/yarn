@@ -5,6 +5,10 @@ body{
   padding: 0px;
 }
 /*navbar filling*/
+.navbar-default{
+  border-color: #329ca9;
+  border:none;
+}
 .navbar {
   height: auto;
   width: 100%; /*navbar fills width of page*/
