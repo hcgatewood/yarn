@@ -37,6 +37,13 @@ body{
   margin-left: 29px;
   margin-bottom: 0px;
 }
+.yarn-logo {
+  vertical-align: top;
+  height: auto;
+  width: auto;
+  max-width: 50px;
+  margin: 2px 6px 3px 0px;
+}
 .logo {
   display: inline-block;
   text-decoration: none;/*no underline*/
