@@ -56,6 +56,7 @@
 
               <div class="tab-content">
                 <div id="tab1" class="tab active">
+                  <% if (published.length > 0) { %>
                   <div class='published-panel panel panel-default'>
                     <ul class='list-group'>
                       <% for (var idx = 0; idx < published.length; idx++) { %>
@@ -68,11 +69,14 @@
                       <% } %>
                     </ul>
                   </div>
+                  <% } else { %>
+                  <p class="friends">No stories yet!</p>
+                  <% } %>
                 </div>
 
                   <div id="tab4" class="tab">
                   <% if (follow.length==0) { %>
-                    <p class="friends">Not following anyone, just yet!</p>
+                    <p class="friends">No followees yet!</p>
                     <% } %>
                       <% for (var idx = 0; idx < follow.length; idx++) { %>
                       <ul class="user-list">
@@ -85,7 +89,7 @@
 
                  <div id="tab5" class="tab">
                     <% if (follower.length==0) { %>
-                    <p class="friends">No followers, just yet!</p>
+                    <p class="friends">No followers yet!</p>
                     <% } %>
                       <% for (var idx = 0; idx < follower.length; idx++) { %>
                       <ul class="user-list">
