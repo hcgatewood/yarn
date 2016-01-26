@@ -59,6 +59,7 @@ module.exports = function (app, passport) {
     var id=getUserId(req);
     var page_id=req.params.id
     var username = getUsername(req);
+    console.log('username:', username);
     var user_since = getInsertDate(req);
     var belongs_to_user = (id==page_id);
 

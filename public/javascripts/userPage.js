@@ -8,13 +8,13 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-  	// $(".user_modal").hide();
-  	// $(".yarn_btn").click(function(){
-   //  	$(".user_modal").show();
-  	// });
-  	// $(".close").click(function(){
-   //  	$(".user_modal").hide();
-  	// });
+    // $(".user_modal").hide();
+    // $(".yarn_btn").click(function(){
+   //   $(".user_modal").show();
+    // });
+    // $(".close").click(function(){
+   //   $(".user_modal").hide();
+    // });
     // $(".first").click(function(){
     //   $ajax({
     //     url: "/user/:id",
@@ -25,15 +25,15 @@ $(document).ready(function() {
     //   });
 
 
-  	var escCode = 27;
-  	$(document).keyup(function (keyEvent) {
+    var escCode = 27;
+    $(document).keyup(function (keyEvent) {
     if (keyEvent.keyCode == escCode) {
       $('.user_modal').hide();
     }
   });
 
-    	//if (user_id in page_id.follower) make button certain color
-  	var socket = io.connect();
+      //if (user_id in page_id.follower) make button certain color
+    var socket = io.connect();
 
     console.log(follows)
 
@@ -48,10 +48,10 @@ $(document).ready(function() {
       $(".follow_btn").addClass('btn-primary')
     }
     
-  	$(".follow_btn").click(function (event) {
+    $(".follow_btn").click(function (event) {
       var $this = $(this);
-  		event.preventDefault();
-  		if (!follows){
+      event.preventDefault();
+      if (!follows){
         follows = true
         $this.text('Following')
         $this.addClass('btn-primary2')
@@ -76,7 +76,7 @@ $(document).ready(function() {
             follower:follower
             });
 
-        }	
+        } 
 
         socket.on('addFollower', function (data){
           console.log(data.num_followers)
@@ -85,7 +85,7 @@ $(document).ready(function() {
         socket.on('addFollower', function (data){
           $(".follow").text(data.num_followers);
           $(".follower").text(data.num_followers);
-        })  	
+        })    
   });
 });
 

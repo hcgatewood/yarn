@@ -295,11 +295,6 @@ background:#fff;
     margin-top: 20px;
 }
 
-.name{
-    text-transform: uppercase;
-}
-
-
 /* Modal Content/Box */
 .modal-content {
     background-color: white;
