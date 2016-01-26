@@ -18,14 +18,14 @@
     <!--Logout & Settings-->
     <div class='navbar-item nav-font logout-settings navigation pull-right'>
       <% if (startWriting) { %>
-      <a href='/rooms/main' class='writing item'>Start writing</a>
+      <a href='/rooms/main' class='writing item'>start writing</a>
       <% } %>
-      <a href='/find' class='current item'>Find a story</a>
+      <a href='/find' class='current item'>find a story</a>
       <% if (user) { %>
       <a href='/user/<%= user.id %>' class='name item'><%= username %></a>
-      <a href='/logout' class='login-choice item'>Sign out</a>
+      <a href='/logout' class='login-choice item'>sign out</a>
       <% } else { %>
-      <a class='login-choice item signin'>Sign in/up</a>
+      <a class='login-choice item signin'>sign in/up</a>
       <% } %>
 
     <!--Overlay #1-->

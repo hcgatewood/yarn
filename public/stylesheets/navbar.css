@@ -88,9 +88,13 @@ body{
 .navigation .item {
   position: relative;
   text-decoration: none;
-  margin:0px 7px 0px 7px;
   display: inline-block;
   color: white;
+  margin:0px 7px 16px 7px;
+  letter-spacing: -2px;
+  font-size: 24px;
+  font-weight: normal;
+  font-family: 'Circular';
   }
 .navigation .item:hover {
   color: #ff5a5f;
