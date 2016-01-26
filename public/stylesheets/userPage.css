@@ -9,6 +9,15 @@ body{
 
 /*---------Photo/Buttons ----------*/
 
+.get_started{
+    color:#329ca9;
+    text-decoration: none;
+}
+.get_started:hover{
+    text-decoration: none;
+    color:gray;
+}
+
 .text-center {
     text-align: center;
 }
