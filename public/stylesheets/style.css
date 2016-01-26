@@ -3,6 +3,14 @@ body{
   font-family: Circular;
 }
 
+.background-gif {
+  position: absolute;
+  z-index: -1;
+  top: 7vh;
+  width: 100vw;
+  opacity: 0.1;
+}
+
 .image{
   position: relative;
   margin: auto;
@@ -39,7 +47,7 @@ body{
   margin-top: 0px;
 }
 .jumbotron{
-  background-color: white;
+  background-color: transparent;
   height: auto;
   min-height: 93vh;
   display: flex;
