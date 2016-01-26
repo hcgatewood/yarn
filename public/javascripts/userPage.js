@@ -48,7 +48,7 @@ $(document).ready(function() {
       $(".follow_btn").addClass('btn-primary')
     }
     
-    $(".follow_btn").click(function (event) {
+    $(".follow_btn").mouseup(function (event) {
       var $this = $(this);
       event.preventDefault();
       if (!follows){
