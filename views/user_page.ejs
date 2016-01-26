@@ -16,10 +16,12 @@
       <div class="col-md-3">
       <div class='panel space-4'>
       <img class="img_container"></img>
-        <div class='panel-body'>
+        <div class='panel-body first_body'>
             <ul class="list-unstyled text-center">
               <li class="username"><%= page_username %></li>
-              <li><a class="btn btn-primary btn-block text-wrap space-top-1">Choose Avatar</a></li>
+<!--               <% if (belongs_to_user) { %>
+              <li><a class="btn btn-primary btn-block text-wrap space-top-1 yarn_btn">Choose Your Yarn</a></li>
+              <% } %> -->
             </ul>
         </div>
       </div>
@@ -32,8 +34,8 @@
             <ul>
               <li>Joined: <%= user_since %></li>
               <li>Published Articles: 2</li>
-              <li>Followers: <%= follower.length %></li>
-              <li>Follows:<%= follow.length %></li>
+              <li class="followers">Followers: <%= follower.length %></li>
+              <li class="follow">Follows:<%= follow.length %></li>
             </ul>
             <% if (!belongs_to_user) { %>
             <button class="follow_btn btn btn-primary raised follow-toggle">Follow</button>
@@ -90,6 +92,25 @@
                 </div>
               </div>
             </div>
+        </div>
       </div>
+      </div>
+
+<!--    
+      <div id="myModal" class="user_modal">
+
+    
+        <div class="modal-content">
+          <div class="col-md-4 first"><img src="../public/siteArt/userYarn1.svg"/></div>
+          <div class="col-md-4 second"><img src="../public/siteArt/userYarn2.svg"/></div>
+          <div class="col-md-4 third"><img src="../public/siteArt/userYarn3.svg"/></div>
+          <div class="col-md-4 four"><img src="../public/siteArt/userYarn4.svg"/></div>
+          <div class="col-md-4 five"><img src="../public/siteArt/userYarn5.svg"/></div>
+          <div class="col-md-4 six"><img src="../public/siteArt/userYarn6.svg"/></div>
+          <span class="close">x</span>
+        </div>
+
+      </div> -->
+
   </body>
 </html>

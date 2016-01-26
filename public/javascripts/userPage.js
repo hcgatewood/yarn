@@ -8,82 +8,87 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-  	$(".overlay, .modal").hide();
-  	$(".signin").click(function(){
-    $(".overlay, #modal1").show();
-  	});
-  	$(".glyphicon-remove").click(function(){
-    $(".overlay, .modal").hide();
-  	});
-  	$("#login_footer").click(function(){
-    $("#modal1").hide();
-    $(".overlay, #modal2").show();
-  	});
+  	// $(".user_modal").hide();
 
+  	// $(".yarn_btn").click(function(){
+   //  	$(".user_modal").show();
+  	// });
+  	// $(".close").click(function(){
+   //  	$(".user_modal").hide();
+  	// });
+
+
+    // $(".first").click(function(){
+    //   $ajax({
+    //     url: "/user/:id",
+    //     type: "POST"
+    //   }).done(function() {
+    //     $( this ).addClass( "done" );
+    //     });
+    //   });
+
+
+  	var escCode = 27;
+  	$(document).keyup(function (keyEvent) {
+    if (keyEvent.keyCode == escCode) {
+      $('.user_modal').hide();
+    }
+  });
 
     	//if (user_id in page_id.follower) make button certain color
   	var socket = io.connect();
 
+    console.log(follows)
+
+    if (follows=='true'){
+      $(".follow_btn").text('Following')
+      $(".follow_btn").addClass('btn-primary2')
+      $(".follow_btn").removeClass('btn-primary')
+    } else {
+      console.log("IT IS FALSE")
+      $(".follow_btn").text('Follow');
+      $(".follow_btn").removeClass('btn-primary2')  
+      $(".follow_btn").addClass('btn-primary')
+    }
+    
   	$(".follow_btn").click(function (event) {
+      var $this = $(this);
   		event.preventDefault();
-  		var $this = $(this);
-  		// Tell the server to follow page
   		if (!follows){
-  			//console.log("FOLLOWS")
-  			$this.text('Follow');
-	 		$this.addClass('btn-primary')
-	 		$this.removeClass('btn-primary2') 
-	 		console.log(follows)
-    		socket.emit('follow', {
-    			follows: true,
-    			page_id: page_id,
-    			id: id
-    			});
-		}
-		else{
-		//console.log("UNFOLLOWS")
-			$this.text('Following')
-    		$this.addClass('btn-primary2')
-	 		$this.removeClass('btn-primary') 
-  		//Tell the server to unfollow page
-  			console.log(follows)
-    		socket.emit('unfollow', {
-    			follows: false,
-    			page_id: page_id,
-    			id: id
-    			});
-    	}
-  	});
+        follows = true
+        $this.text('Following')
+        $this.addClass('btn-primary2')
+        $this.removeClass('btn-primary')
+        socket.emit('follow', {
+          follows: follows,
+          page_id: page_id,
+          id: id,
+          follower:follower
+              }); }
+      else{
+        $this.text('Follow');
+        $this.addClass('btn-primary')
+        $this.removeClass('btn-primary2')
 
+        follows = false
+        //Tell the server to unfollow page
+          socket.emit('unfollow', {
+            follows: follows,
+            page_id: page_id,
+            id: id,
+            follower:follower
+            });
 
-  //   $('.follow_btn').on('click', function (e){
-		// e.preventDefault();
+        }	
 
-  //   	var $this = $(this);
-	 //    //$this.toggleClass('.follow-toggle btn-primary');
-	 //    if(!follows){
-	 //        $this.text('Follow');
-	 //        $this.addClass('btn-primary')
-	 //        $this.removeClass('btn-primary2') 
-
-	 //        $.ajax({
-		//     url: "/unfollow",
-		//     type:"POST",
-		//     data:{submit:true, page_id:page_id, id:id,follows:false} 
-	 //    	})
-
-	 //    }
-	 //    else {
-	 //        $this.text('Following');
-	 //        $this.addClass('btn-primary2')
-	 //        $this.removeClass('btn-primary') 
-
-	 //        $.ajax({
-		//     url: "/follow",
-		//     type:"POST",
-		//     data:{submit:true, page_id:page_id, id:id,follows:true}
-		// 	})
-	 //    }
-  //   });
+        socket.on('addFollower', function (data){
+          console.log(data.num_followers)
+          $(".follower").text(data.num_followers);
+        })
+        socket.on('addFollower', function (data){
+          $(".follow").text(data.num_followers);
+          $(".follower").text(data.num_followers);
+        })  	
+  });
 });
 

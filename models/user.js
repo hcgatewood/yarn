@@ -13,9 +13,9 @@ var userSchema = new mongoose.Schema({
   recentlyViewedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
   contributedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
   savedStories: [ {type: Schema.Types.ObjectId, ref: 'Story'} ],
-  following: [String],
-  follower: [String],
-  //followers: [ {type: Schema.Types.ObjectId, ref: 'User'} ]
+  following: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  //follower: [String],
+  follower: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
 
   //currentStory: {type: Schema.Types.ObjectId, ref: 'Story'},
 
@@ -65,12 +65,13 @@ userSchema.statics.getPageUsername = function (id, callback){
   });
 }
 
+
 userSchema.statics.follows = function (user_id, page_id, callback){
   var userModel = this;
-
+  console.log("Hello")
   userModel.findById(page_id, function (err, user) {
-          console.log(user_id+" follows "+ user.username+' equals '+(user.follower.indexOf(user_id)> -1))
-         return callback(user.follower.indexOf(user_id)> -1)
+          //console.log(user_id+" follows "+ user.username+' equals '+(user.follower.indexOf(user_id)> -1))
+         callback(user.follower.indexOf(user_id)> -1);
    });     
   };
  
@@ -137,6 +138,65 @@ userSchema.statics.getFollowerUsername = function (id, callback){
     }
   });
 }
+
+
+//// add follower statics
+userSchema.statics.addFollower = function (followeeId, followerId) {
+  var userModel = this;
+  userModel.findById(followeeId, function (err, followee) {
+    
+      followee.follower.push(followerId);
+
+    followee.save( function (err) {
+        if (err) console.log('err:', err);
+      console.log('follower:', followee);
+    });
+
+    console.log('FOLLOWEE, FOLLOWERS LIST:',followee.follower)
+  });
+
+};
+
+
+userSchema.statics.addFollowing = function (followeeId, followerId) {
+  var userModel = this;
+  userModel.findById(followerId, function (err, follower) {
+    follower.following.push(followeeId);
+    follower.save(function (err) {
+        if (err) console.log('err:', err);
+      console.log('follower:', follower);
+    });
+
+    console.log('FOLLOWER, FOLLOWING LIST:',follower.following)
+  });
+
+};
+
+userSchema.statics.removeFollower = function (followeeId, followerId) {
+  var userModel = this;
+  userModel.findById(followeeId, function (err, followee) {
+    followee.follower.pull(followerId);
+    followee.save(function (err) {
+      if (err) console.log('err:', err);
+      //console.log('follower:', followee);
+    });
+  });
+
+};
+
+userSchema.statics.removeFollowing = function (followeeId, followerId) {
+  var userModel = this;
+  userModel.findById(followerId, function (err, follower) {
+    follower.following.pull(followeeId);
+    follower.save(function (err) {
+      if (err) console.log('err:', err);
+      //console.log('follower:', follower);
+    });
+  });
+
+};
+
+
 
 //// add follower
 userSchema.methods.addFollow = function (followeeId) {
