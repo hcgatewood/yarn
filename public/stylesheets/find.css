@@ -24,7 +24,7 @@ body{
 a:hover{
   text-decoration: none;
 }
-.slick-slide {
+.slick-slide:focus {
   outline: none;
 }
 
