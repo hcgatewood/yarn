@@ -70,7 +70,6 @@ userSchema.statics.follows = function (user_id, page_id, callback){
   var userModel = this;
   console.log("Hello")
   userModel.findById(page_id, function (err, user) {
-          //console.log(user_id+" follows "+ user.username+' equals '+(user.follower.indexOf(user_id)> -1))
          callback(user.follower.indexOf(user_id)> -1);
    });
   };
@@ -84,7 +83,6 @@ userSchema.statics.follows = function (user_id, page_id, callback){
 
 userSchema.statics.getFollowingUsername = function (id, callback){
   var userModel = this;
-
   userModel.findById(id, function (err, user) {
     if (user) {
       var userIds = [];
@@ -97,11 +95,9 @@ userSchema.statics.getFollowingUsername = function (id, callback){
       following_user.forEach(function(item) {
         if (item.local.username){
           following.push([item.local.username, item._id])
-        }if (item.facebook.name){
-          following.push([item.google.name, item._id])
         }if (item.google.name){
-          following.push([item.facebook.name, item._id])
-          }
+          following.push([item.google.name, item._id])
+        }
         });
 
         callback(following);
@@ -120,17 +116,15 @@ userSchema.statics.getFollowerUsername = function (id, callback){
         userIds.push(ObjectID(item));
       });
       userModel.find({ _id: {$in : userIds}},function (err, follower_user)  {
-
       //get follower ids/usernames
       var follower = [];
       follower_user.forEach(function(item) {
+        console.log("Google Name is:",item.google.name)
         if (item.local.username){
           follower.push([item.local.username, item._id])
-        }if (item.facebook.name){
+        }else if (item.google.name){
           follower.push([item.google.name, item._id])
-        }if (item.google.name){
-          follower.push([item.facebook.name, item._id])
-          }
+        }
         });
 
         callback(follower)
@@ -151,8 +145,6 @@ userSchema.statics.addFollower = function (followeeId, followerId) {
         if (err) console.log('err:', err);
       console.log('follower:', followee);
     });
-
-    console.log('FOLLOWEE, FOLLOWERS LIST:',followee.follower)
   });
 
 };
@@ -166,8 +158,6 @@ userSchema.statics.addFollowing = function (followeeId, followerId) {
         if (err) console.log('err:', err);
       console.log('follower:', follower);
     });
-
-    console.log('FOLLOWER, FOLLOWING LIST:',follower.following)
   });
 
 };

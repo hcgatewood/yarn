@@ -33,7 +33,7 @@
           <div class="panel-body">
             <ul>
               <li>Joined: <%= user_since %></li>
-              <li>Published Articles: 2</li>
+              <li>Published Articles: <%= published.length %></li>
               <li class="followers">Followers: <%= follower.length %></li>
               <li class="follow">Follows:<%= follow.length %></li>
             </ul>
@@ -78,7 +78,9 @@
                   <% if (follow.length==0) { %>
                     <p class="friends">No followees yet!</p>
                     <% } %>
-                      <% for (var idx = 0; idx < follow.length; idx++) { %>
+                      <% for (var idx = 0; idx < follow.length; idx++) { 
+                        console.log("This is the followers",follow[idx])
+                        %>
                       <ul class="user-list">
                       <% if (typeof follow[idx][0] !== 'undefined') {%>
                       <a class="user" href="/user/<%= follow[idx][1]%>"><li><%= follow[idx][0] %></li></a>
@@ -91,7 +93,9 @@
                     <% if (follower.length==0) { %>
                     <p class="friends">No followers yet!</p>
                     <% } %>
-                      <% for (var idx = 0; idx < follower.length; idx++) { %>
+                      <% for (var idx = 0; idx < follower.length; idx++) { 
+                        console.log("This is the followees",follow[idx])
+                        %>
                       <ul class="user-list">
                       <% if (typeof follower[idx][0] !== 'undefined') {%>
                       <a class="user" href="/user/<%= follower[idx][1]%>"><li><%= follower[idx][0] %></li></a>

@@ -266,21 +266,21 @@ background:#fff;
 
 .btn-primary2 {
   color: #fff;
-  background-color: #4285f4;
-  border-color: #4285f4;
+  background-color: #329ca9;
+  border-color: #329ca9;
 }
 .btn-primary2:hover,.btn-primary2:focus,.btn-primary2:active,.btn-primary2.active,
 .open .dropdown-toggle.btn-primary2 {
   color: #fff;
-  background-color: #4285f4;
-  border-color: #4285f4;
+  background-color: #46A5B1;
+  border-color: #329ca9;
 }
 
 .btn-primary2.raised {
-    box-shadow: 0 3px 0 0 #2e5daa;
+    box-shadow: 0 3px 0 0 #287C87;
 }
 .btn-primary2.raised:active, .btn-primary2.raised.active {
-    background: #4285f4;
+    background: #329ca9;
     box-shadow: none;
     margin-bottom: -3px;
     margin-top: 3px;

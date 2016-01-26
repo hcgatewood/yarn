@@ -72,6 +72,8 @@ module.exports = function (app, passport) {
         User.getFollowerUsername(page_id, function (followerIds){
           User.follows(id, page_id, function (bool){
             Story.published(page_id, function (published) {
+
+              console.log(page_id)
               console.log(published);
               res.render('user_page', {
                 title: 'Yarn',

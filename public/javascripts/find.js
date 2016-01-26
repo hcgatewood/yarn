@@ -21,6 +21,7 @@ $(document).ready(function(){
 
 
   for (var idx = 0; idx<users.length; idx++){
+    //console.log("")
     var url=users[idx]["_id"]
     if (users[idx]["local"]){
       var name=users[idx]["local"]["username"]
