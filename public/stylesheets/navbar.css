@@ -14,6 +14,7 @@ body{
   margin-bottom: 0px;
   position: fixed;
   top: 0px;
+  border-width: 0;
 }
 .navbar * {
   text-decoration: none; /*no underline*/
@@ -47,7 +48,7 @@ body{
 }
 .logo:hover {
   text-decoration: none;
-  color: #ff5a5f;
+  color: #ff7583;
   text-decoration: none;
   transition: all 0.3s ease 0.1s;
 }
@@ -97,7 +98,7 @@ body{
   font-family: 'Circular';
   }
 .navigation .item:hover {
-  color: #ff5a5f;
+  color: #ff7583;
   text-decoration: none;
   transition: all 0.3s ease 0.1s;
 }

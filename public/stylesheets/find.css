@@ -50,7 +50,7 @@ a:hover{
 }
 .img3{
   opacity: 0.4;
-  color:black;
+  background-image:url("../siteArt/sciFi.svg");
 }
 .img4{
   opacity: 0.4;
