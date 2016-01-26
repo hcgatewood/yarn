@@ -46,7 +46,7 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 90px 0px 0px 0px;
+  padding: 50px 0px 0px 0px;
   margin: 0px;
 }
 .blurb{
