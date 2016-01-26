@@ -13,7 +13,7 @@ var storySchema = new mongoose.Schema({
     username: String,
     text: String
   }],
-  contributors: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  contributors: [String],
   text: {type: String, default: ''},
 
   // counts
@@ -28,6 +28,14 @@ storySchema.virtual('firstChars').get(function () {
 });
 
 // statics
+storySchema.statics.published = function (userId, callback) {
+  this
+    .find({contributors: {$in: [userId]}})
+    .exec(function (err, contributed) {
+      callback(contributed);
+    });
+}
+
 // find most recent stories
 storySchema.statics.mostRecentStories = function (callback) {
   this.where('text').ne('').where('isFinished').equals(true).sort('-date').limit(10).exec(function (err, stories) {

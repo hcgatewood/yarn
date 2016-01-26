@@ -10,7 +10,7 @@
      <script src='/javascripts/userPage.js'></script>
   </head>
 
-  <body>  
+  <body>
   <%- include partials/navbar.ejs %>
     <div class="row-fluid">
       <div class="col-md-3">
@@ -48,23 +48,28 @@
           <div class="tabs clearfix">
           <div class="container-fluid">
               <ul class="tab-links">
-                  <li class="active"><a href="#tab1">Published</a></li>
-                  <li><a href="#tab3">Recent</a></li>
+                  <li class="active"><a href="#tab1">Stories</a></li>
+                  <!--<li><a href="#tab3">Recent</a></li>-->
                   <li><a href="#tab4">Following</a></li>
                   <li><a href="#tab5">Followers</a></li>
               </ul>
-           
+
               <div class="tab-content">
-                  <div id="tab1" class="tab active">
-                      <p>Tab #1 content goes here!</p>
-                      <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum risus ornare mollis.</p>
+                <div id="tab1" class="tab active">
+                  <div class='published-panel panel panel-default'>
+                    <ul class='list-group'>
+                      <% for (var idx = 0; idx < published.length; idx++) { %>
+                      <a href='/stories/<%= published[idx].id %>'>
+                        <li class='empty story-item list-group-item'>
+                          <%= published[idx].firstChars %>
+                          <span class='badge'><%= published[idx].originRoom %></span>
+                        </li>
+                      </a>
+                      <% } %>
+                    </ul>
                   </div>
-           
-                  <div id="tab3" class="tab">
-                      <p>Tab #3 content goes here!</p>
-                      <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum ri.</p>
-                  </div>
-           
+                </div>
+
                   <div id="tab4" class="tab">
                   <% if (follow.length==0) { %>
                     <p class="friends">Not following anyone, just yet!</p>
@@ -96,10 +101,10 @@
       </div>
       </div>
 
-<!--    
+<!--
       <div id="myModal" class="user_modal">
 
-    
+
         <div class="modal-content">
           <div class="col-md-4 first"><img src="../public/siteArt/userYarn1.svg"/></div>
           <div class="col-md-4 second"><img src="../public/siteArt/userYarn2.svg"/></div>

@@ -66,39 +66,43 @@ module.exports = function (app, passport) {
     if(!(ObjectID.isValid(page_id))){
       res.redirect('/error')
     }
-  User.getPageUsername(page_id, function (page_username){
-    User.getFollowingUsername(page_id, function (followingIds) {
-      User.getFollowerUsername(page_id, function (followerIds){
-        User.follows(id, page_id, function (bool){
-        res.render('user_page', {
-          title: 'Yarn',
-          username: username,
-          page_username: titleize(page_username),
-          id: id,
-          follows: bool,
-          follow: followingIds,
-          follower: followerIds,
-          page_id: page_id,
-          user: req.user,
-          belongs_to_user: belongs_to_user,
-          user_since: user_since,
-          startWriting: true
-          })
-         });
+    User.getPageUsername(page_id, function (page_username){
+      User.getFollowingUsername(page_id, function (followingIds) {
+        User.getFollowerUsername(page_id, function (followerIds){
+          User.follows(id, page_id, function (bool){
+            Story.published(page_id, function (published) {
+              console.log(published);
+              res.render('user_page', {
+                title: 'Yarn',
+                username: username,
+                page_username: titleize(page_username),
+                id: id,
+                follows: bool,
+                published: published,
+                follow: followingIds,
+                follower: followerIds,
+                page_id: page_id,
+                user: req.user,
+                belongs_to_user: belongs_to_user,
+                user_since: user_since,
+                startWriting: true
+              });
+            });
+          });
         });
-      })
-    })
-  })
+      });
+    });
+  });
 
 
   app.post('/user/:id',function (req, res, next) {
-    
+
 
     //redirects to 404 page
     if(!(ObjectID.isValid(page_id))){
       res.redirect('/error')
     }
- 
+
   })
 
   // GET story by id

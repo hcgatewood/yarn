@@ -72,14 +72,14 @@ userSchema.statics.follows = function (user_id, page_id, callback){
   userModel.findById(page_id, function (err, user) {
           //console.log(user_id+" follows "+ user.username+' equals '+(user.follower.indexOf(user_id)> -1))
          callback(user.follower.indexOf(user_id)> -1);
-   });     
+   });
   };
- 
+
  userSchema.statics.getUser = function (user_id, callback){
   var userModel = this;
   userModel.findById(user_id, function (err, user) {
          return callback(user)
-   });     
+   });
   };
 
 userSchema.statics.getFollowingUsername = function (id, callback){
@@ -133,7 +133,7 @@ userSchema.statics.getFollowerUsername = function (id, callback){
           }
         });
 
-        callback(follower) 
+        callback(follower)
       });
     }
   });
@@ -144,7 +144,7 @@ userSchema.statics.getFollowerUsername = function (id, callback){
 userSchema.statics.addFollower = function (followeeId, followerId) {
   var userModel = this;
   userModel.findById(followeeId, function (err, followee) {
-    
+
       followee.follower.push(followerId);
 
     followee.save( function (err) {
