@@ -32,20 +32,27 @@ body{
   white-space: nowrap;
   margin: 0px 25px 9px 18px;
 }
+.logoname {
+  margin-left: 22px;
+  margin-bottom: 0px;
+}
 .logo {
   display: inline-block;
   text-decoration: none;/*no underline*/
   position: relative;/*positioned relative to its normal position*/
   color: white;
   border: none;
-  font-size: 40px;
+  font-size: 42px;
   z-index: 1;
 }
-
 .logo:hover {
+  text-decoration: none;
   color: #ff5a5f;
   text-decoration: none;
   transition: all 0.3s ease 0.1s;
+}
+.logo:active {
+  text-decoration: none;
 }
 /*search*/
 .search-bar {
