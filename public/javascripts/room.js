@@ -146,10 +146,13 @@ $(document).ready(function () {
     }
     // below stolen from:
     // http://stackoverflow.com/questions/1322732/convert-seconds-to-hh-mm-ss-with-javascript
-    var time = (showTime === true)
-      ? (new Date).clearTime().addSeconds(secondsLeft).toString('mm:ss')
-      : '';
-    $('.additions-meta-timer').text(time);
+    var time = (new Date).clearTime().addSeconds(secondsLeft).toString('mm:ss');
+    var roomTime = (showTime === true) ? time : '';
+    var metaTime = (showTime === true) ? time : 'current writer';
+    $('.additions-meta-timer').text(roomTime);
+    $('.writers-panel').first()
+      .find('.writers-item').not('.empty').first()
+      .find('.badge').text(metaTime);
   }
 
 });
