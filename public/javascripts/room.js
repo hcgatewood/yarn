@@ -87,7 +87,7 @@ $(document).ready(function () {
 
   socket.on('turn update', function (data) {
     console.log('TURN UPDATE:', data.orderedWriters);
-    showTime = true;
+    showTime = (data.writerNames.length > 0);
     //console.log('data:', data);
     //data.recentStory
     updateWriters(data.writerNames);
