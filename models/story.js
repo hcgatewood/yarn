@@ -48,7 +48,7 @@ storySchema.statics.roomStories = function (roomName, callback) {
 
 // find most recent stories
 storySchema.statics.mostRecentStories = function (callback) {
-  this.where('text').ne('').where('isFinished').equals(true).sort('-date').limit(10).exec(function (err, stories) {
+  this.where('text').ne('').where('isFinished').equals(true).sort('-date').limit(20).exec(function (err, stories) {
     callback(stories);
   });
 }
