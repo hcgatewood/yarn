@@ -46,7 +46,10 @@
       <div class='meta-container'>
         <h2 class='room-name meta-prompt'><%= roomName %></h2>
         <% if (! user) { %>
-        <div class='signup-prompt meta-prompt'>Sign up/in to get started!</div>
+        <!--<div class='signup-prompt meta-prompt'>Sign up/in to get started!</div>-->
+        <a class='signin'>
+          <button class='meta-item signup-prompt meta-prompt btn btn-primary btn-lg raised'>Sign up/in to get started!</button>
+        </a>
         <% } %>
         <button class='join-room meta-item invisible-as-writer btn btn-primary btn-lg raised' type='button'>Join story</button>
         <button class='leave-room meta-item visible-as-writer btn btn-primary btn-lg raised' type='button'>Leave story</button>
