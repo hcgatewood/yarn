@@ -8,7 +8,12 @@ module.exports = function (app) {
     // Boostrap room data synchronously
     // NOTE: deletes db.rooms data
     reloadRoomData: function (room, story, callback) {
-      var roomTextDir = '/bootstrap-data/room-text';
+      //var roomTextDir = path.join('/bootstrap-data', '/room-text/');
+      //roomTextDir = path.join(__dirname, roomTextDir);
+      console.log('dirname:', __dirname);
+      var root = path.dirname(__dirname);
+      var roomTextDir = path.join(root, '/bootstrap-data/room-text');
+      console.log('room text dir:', roomTextDir);
       var filenames = fs.readdirSync(roomTextDir);
       var filePath;
       var filename;
@@ -18,6 +23,7 @@ module.exports = function (app) {
       for (var idx = 0; idx < filenames.length; idx++) {
         filename = filenames[idx];
         filePath = path.join(roomTextDir, filename);
+        console.log('filename:', filename);
         text = fs.readFileSync(filePath, 'utf8');
         story.addContribution(filename, text);
       }
