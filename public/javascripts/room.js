@@ -86,7 +86,7 @@ $(document).ready(function () {
   });
 
   socket.on('turn update', function (data) {
-    //console.log('TURN UPDATE:', data.orderedWriters);
+    console.log('TURN UPDATE:', data.orderedWriters);
     showTime = true;
     //console.log('data:', data);
     //data.recentStory
@@ -167,7 +167,7 @@ function updateWriters(writerNames) {
   var newContribution;
   for (var idx = 0; idx < writerNames.length; idx ++) {
     writerName = writerNames[idx];
-    newContribution = $('.writers-item').clone();
+    newContribution = $('.writers-item').first().clone();
     newContribution.removeClass('empty');
     newContribution.text(writerName);
     //console.log('new contribution:');
@@ -184,7 +184,7 @@ function updateWaiters(waiterNames) {
   var newContribution;
   for (var idx = 0; idx < waiterNames.length; idx ++) {
     waiterName = waiterNames[idx];
-    newContribution = $('.waiters-item').clone();
+    newContribution = $('.waiters-item').first().clone();
     newContribution.removeClass('empty');
     newContribution.text(waiterName);
     //console.log('new contribution:');

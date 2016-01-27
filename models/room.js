@@ -203,7 +203,18 @@ module.exports = function (app) {
         room.orderedWaiters.addToSet(userId);
         room.orderedWaiterNames.addToSet(username);
       }
-      room.save(function (err) {if (err) console.log('err:', err)});
+      room.save(function (err) {
+        if (err) console.log('err:', err);
+        app.io.to(roomId).emit('turn update', {
+          orderedWriters: room.orderedWriters,
+          currentWriter: room.orderedWriters[0],
+          writerNames: room.orderedWriterNames,
+          waiterNames: room.orderedWaiterNames,
+          recentStory: room.recentlyPublishedStoryId,
+          turnLenMs: room.turnLenMs,
+          remainingTurns: room.totalTurns - room.currentTurns
+        });
+      });
     });
   }
 
@@ -223,7 +234,18 @@ module.exports = function (app) {
         room.orderedWaiters.pull(userId);
         room.orderedWriterNames.pull(username);
         room.orderedWaiterNames.pull(username);
-        room.save(function (err) {if (err) console.log('err:', err)});
+        room.save(function (err) {
+          if (err) console.log('err:', err);
+          app.io.to(roomId).emit('turn update', {
+            orderedWriters: room.orderedWriters,
+            currentWriter: room.orderedWriters[0],
+            writerNames: room.orderedWriterNames,
+            waiterNames: room.orderedWaiterNames,
+            recentStory: room.recentlyPublishedStoryId,
+            turnLenMs: room.turnLenMs,
+            remainingTurns: room.totalTurns - room.currentTurns
+          });
+        });
       });
     }
   }
