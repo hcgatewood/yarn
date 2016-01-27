@@ -9,6 +9,10 @@ body{
 
 /*---------Photo/Buttons ----------*/
 
+.follow_button{
+    width:100px;
+}
+
 .get_started{
     color:#329ca9;
     text-decoration: none;

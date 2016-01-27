@@ -19,8 +19,8 @@ $(document).ready(function() {
       $(".follow_btn").removeClass('btn-primary2')  
       $(".follow_btn").addClass('btn-primary')
     }
-    $(".follow_btn").mouseup(function (event) {
-      var $this = $(this);
+    $(".follow_button").click(function (event) {
+      var $this = $(".follow_btn")
       event.preventDefault();
       if (follows==='false'){
         follows = 'true'

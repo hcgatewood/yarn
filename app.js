@@ -120,7 +120,6 @@ app.io.on('connection', function (socket) {
 
   })
  
-
   socket.on('unfollow', function (data) {
     console.log('received message: unfollow');
     console.log(data.follows);
@@ -135,8 +134,6 @@ app.io.on('connection', function (socket) {
     });
 
   }) 
-
-
 
   socket.on('join room', function (data) {
     Room.addReader(data.roomId, data.userId);
