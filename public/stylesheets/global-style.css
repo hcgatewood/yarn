@@ -1,3 +1,7 @@
 .btn-primary {
   transition: background-color 0.3s ease;
 }
+button:focus , button:active {
+  outline: 0 !important;
+  border: none;
+}
