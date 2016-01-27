@@ -53,9 +53,10 @@
         <% } %>
         <button class='join-room meta-item invisible-as-writer btn btn-primary btn-lg raised' type='button'>Join story</button>
         <button class='leave-room meta-item visible-as-writer btn btn-primary btn-lg raised' type='button'>Leave story</button>
-        <a href='/stories/<%= recentStory %>' class='recent-story'>
-          <button class='meta-item btn btn-primary btn-lg raised' type='button'>Previous story</button>
-        </a>
+        <!--<a href='/stories/<%= recentStory %>' class='recent-story'>-->
+          <!--<button class='meta-item btn btn-primary btn-lg raised' type='button'>Previous story</button>-->
+        <!--</a>-->
+
         <% if (user) { %>
         <div class='turn-prompt meta-prompt visible-on-turn'>It's your turn!</div>
         <div class='turn-prompt meta-prompt visible-as-writer-not-on-turn'>It's not your turn yet</div>
@@ -83,6 +84,24 @@
             <!--<li class='empty waiters-item list-group-item'></li>-->
           <!--</ul>-->
         <!--</div>-->
+
+        <% if (stories.length > 0) { %>
+        <div class='stories-panel panel panel-default'>
+          <div class='panel-heading'>
+            <h3 class='panel-title'>Published from <%= roomName %></h3>
+          </div>
+          <ul class='list-group'>
+            <% for (var idx = 0; idx < stories.length; idx++) { %>
+            <a href='/stories/<%= stories[idx].id %>'>
+              <li class='story-item list-group-item'>
+                <%= stories[idx].firstChars %>
+              </li>
+            </a>
+            <% } %>
+          </ul>
+        </div>
+        <% } %>
+
       </div>
     </div>
   </body>

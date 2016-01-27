@@ -38,6 +38,13 @@ storySchema.statics.published = function (userId, callback) {
       callback(contributed);
     });
 }
+storySchema.statics.roomStories = function (roomName, callback) {
+  this
+    .find({originRoom: roomName})
+    .exec(function (err, roomStories) {
+      callback(roomStories);
+    });
+}
 
 // find most recent stories
 storySchema.statics.mostRecentStories = function (callback) {
@@ -54,11 +61,6 @@ storySchema.statics.addContribution = function (storyId, username, text, userId)
     story.save(function (err) {if (err) console.log('err:', err)});
   });
 };
-storySchema.methods.addContribution = function (username, text, userId) {
-  this.orderedContributions.push({username: username, text: text});
-  this.contributors.addToSet(userId);
-  this.text = this.text + '\n\n' + text;
-};
 
 storySchema.statics.getStoryText = function (storyId, success, fail) {
   this.findById(storyId, function (err, story) {
@@ -71,6 +73,14 @@ storySchema.statics.getStoryText = function (storyId, success, fail) {
     }
   });
 }
+
+// methods
+storySchema.methods.addContribution = function (username, text, userId) {
+  this.orderedContributions.push({username: username, text: text});
+  this.contributors.addToSet(userId);
+  this.text = this.text + '\n\n' + text;
+};
+
 
 // create and export the story model
 module.exports = mongoose.model('Story', storySchema);

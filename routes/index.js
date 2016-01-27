@@ -142,22 +142,25 @@ module.exports = function (app, passport) {
       }
       console.log('is user turn, is writer:', isUserTurn, isWriter);
       console.log('rendering:', story.orderedContributions);
-      // render the room
-      res.render('room', {
-        title: roomName,
-        roomName: titleize(roomName),
-        contributions: story.orderedContributions,
-        username: titleize(username),
-        storyId: story.id,
-        roomId: room.id,
-        roomInterval: room.turnLenMs,
-        userId: userId,
-        id: id,
-        user: req.user,
-        recentStory: room.recentlyPublishedStoryId,
-        startWriting: true,
-        isWriter: isWriter,
-        isUserTurn: isUserTurn
+      Story.roomStories(roomName, function (roomStories) {
+        // render the room
+        res.render('room', {
+          title: roomName,
+          roomName: titleize(roomName),
+          contributions: story.orderedContributions,
+          username: titleize(username),
+          storyId: story.id,
+          roomId: room.id,
+          roomInterval: room.turnLenMs,
+          userId: userId,
+          id: id,
+          stories: roomStories,
+          user: req.user,
+          recentStory: room.recentlyPublishedStoryId,
+          startWriting: true,
+          isWriter: isWriter,
+          isUserTurn: isUserTurn
+        });
       });
     });
   });
