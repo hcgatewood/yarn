@@ -8,6 +8,7 @@ $(document).ready(function () {
   }
   isUserTurn = isUserTurn === 'true';
   isWriter = isWriter === 'true';
+  storyIsFinished = false;
   handleUserTurn();
   handleWriterStatus();
 
@@ -86,6 +87,9 @@ $(document).ready(function () {
   });
 
   socket.on('turn update', function (data) {
+    console.log('TURN UPDATE', storyIsFinished);
+    if (storyIsFinished === true) return;
+
     console.log('TURN UPDATE:', data.orderedWriters);
     showTime = (data.writerNames.length > 0);
     //console.log('data:', data);
@@ -109,15 +113,28 @@ $(document).ready(function () {
     handleWriterStatus();
   });
   socket.on('new story', function (data) {
-    $('.new-story-prompt').show();
-    $('.contribution').not('.empty').remove();
-    //console.log('GETTING NEW STORY:', storyId);
-    $('.recent-story').attr('href', '/stories/' + storyId);
+    console.log('NEW STORY');
+    storyIsFinished = true;
+    isUserTurn = false;
+    isWriter = false;
+    showTime = false;
     storyId = data.storyId;
-    //console.log('reload:', data.reload, data.reload === true);
-    if (data.reload === true) {
+    updateTurnsRemaining(0);
+    updateTimer(true);
+    handleUserTurn();
+    handleWriterStatus();
+    setTimeout(function () {
       location.reload();
-    }
+    }, 15*1000);
+    //$('.new-story-prompt').show();
+    //$('.contribution').not('.empty').remove();
+    ////console.log('GETTING NEW STORY:', storyId);
+    //$('.recent-story').attr('href', '/stories/' + storyId);
+    //storyId = data.storyId;
+    ////console.log('reload:', data.reload, data.reload === true);
+    //if (data.reload === true) {
+      //location.reload();
+    //}
   });
   // receiving story updates
   socket.on('story update', function (data) {
@@ -141,7 +158,7 @@ $(document).ready(function () {
     }
   });
 
-  function updateTimer() {
+  function updateTimer(overrideBadge) {
     // hide the timer if thing's are looking grim
     if (secondsLeft < 0) {
       showTime = false;
@@ -155,7 +172,7 @@ $(document).ready(function () {
     $('.additions-meta-timer').text(roomTime);
     var badge = $('.writers-panel').first()
       .find('.writers-item').not('.empty').first().find('.badge')
-    if (showTime === true) {
+    if (showTime === true || overrideBadge === true) {
       badge.text(metaTime);
     }
   }
