@@ -205,8 +205,8 @@ body{
 .btn-primary.raised:active, .btn-primary1.raised.active {
     background: #ff7583;
     box-shadow: none;
-    margin-bottom: -3px;
-    margin-top: 3px;
+    /*margin-bottom: -3px;*/
+    /*margin-top: 3px;*/
 }
 
 .modal .btn-primary1 {
@@ -248,8 +248,8 @@ body{
 .btn-primary2.raised:active, .btn-primary2.raised.active {
     background: #4285f4;
     box-shadow: none;
-    margin-bottom: -3px;
-    margin-top: 3px;
+    /*margin-bottom: -3px;*/
+    /*margin-top: 3px;*/
 }
 
 /*overlay for signup/signin*/
