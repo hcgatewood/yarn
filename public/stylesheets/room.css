@@ -93,6 +93,8 @@ body {
   vertical-align: top;
 }
 .contribution-text {
+  max-width: 900px;
+  word-wrap: break-word;
   width: 75%;
   display: inline-block;
   white-space: pre-wrap;
