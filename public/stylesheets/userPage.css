@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700');
 @import url(https://fonts.googleapis.com/css?family=Amatic+SC:400,700);
-@font-face { font-family: Circular; src: url('../CircularStd-Book.otf'); } 
+@font-face { font-family: Circular; src: url('../CircularStd-Book.otf'); }
 
 body{
   font-family: Circular;
@@ -9,9 +9,22 @@ body{
 
 /*---------Photo/Buttons ----------*/
 
-.follow_button{
-    width:100px;
+.follow_button, .follow_btn {
+  display: block;
+  height: auto;
+  width: auto;
+  margin: auto;
+  text-decoration: none !important;
 }
+.follow_button {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.follow_btn{
+  font-weight: bold;
+  font-size: 14px;
+}
+
 
 .get_started{
     color:#329ca9;
@@ -136,21 +149,6 @@ h2{
 	font-size:1.2em;
 }
 
-.follow_btn{
-    display: inline-block;
-    margin: 0 auto;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-left: 90px;
-    padding: 7px 21px;
-    font-size: 14px;
-    text-align: center;
-    width: 100px; 
-    border: 1px solid;
-    vertical-align: middle;
-    line-height: 1.43;
-}
-
 /*---------Tabs ----------*/
 
 .col-md-9{
@@ -181,7 +179,7 @@ h2{
         float:left;
         list-style:none;
     }
- 
+
 .tab-links a {
     padding:9px 15px;
     display:inline-block;
