@@ -160,3 +160,16 @@ a:hover{
   margin: 0px;
   display: inline-block;
 }
+
+.placeholder_image {
+  transition: opacity 0.5s ease;
+}
+.slick-slide:hover .placeholder_image {
+  opacity: 0.6;
+}
+.titles {
+  transition: color 0.3s ease;
+}
+.slick-slide:hover .titles {
+  color: #ff7583;
+}

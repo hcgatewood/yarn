@@ -5,3 +5,6 @@ button:focus , button:active {
   outline: 0 !important;
   border: none;
 }
+div {
+  transition: color 0.3s ease;
+}

@@ -194,7 +194,7 @@ function updateWriters(writerNames) {
     writerName = 'None right now';
     newContribution = $('.writers-item').first().clone();
     newContribution.removeClass('empty');
-    newContribution.find('.badge').text(':(');
+    newContribution.find('.badge').text(':)');
     newContribution.find('.writer').text(writerName);
     parent.append(newContribution);
   }
