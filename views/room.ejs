@@ -23,6 +23,8 @@
             <div class='meta-prompt-no-contributions'>No contributions right now :(</div>
             <% if (user) { %>
             <a class='join-room meta-prompt-join invisible-as-writer'>Join this story to start creating.</a>
+            <% } else { %>
+            <a class='signin signup-prompt join-room meta-prompt-signup'>Sign up/in to start creating.</a>
             <% } %>
           </div>
           <div class='contribution empty'>

@@ -79,11 +79,11 @@ body {
 .meta-prompt-no-contributions {
   color: gray;
 }
-.meta-prompt-join {
+.meta-prompt-join, .meta-prompt-signup {
   color: #329ca9;
   cursor: pointer;
 }
-.meta-prompt-join:hover {
+.meta-prompt-join:hover , .meta-prompt-signup:hover {
   color: gray;
 }
 .remaining-turns {
