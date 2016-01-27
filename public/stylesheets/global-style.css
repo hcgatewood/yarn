@@ -8,3 +8,10 @@ button:focus , button:active {
 div {
   transition: color 0.3s ease;
 }
+.panel-default a {
+  color: #329ca9;
+  transition: color 0.3s ease;
+}
+.panel-default a:hover {
+  color: gray;
+}

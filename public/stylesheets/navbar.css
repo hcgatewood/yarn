@@ -61,12 +61,12 @@ body{
   border: none;
   font-size: 42px;
   z-index: 1;
+  transition: all 0.3s ease;
 }
 .logo:hover {
   text-decoration: none;
-  color: #ff7583;
+  color: #e1e1e1;
   text-decoration: none;
-  transition: all 0.3s ease 0.1s;
 }
 .logo:active {
   text-decoration: none;
@@ -112,11 +112,11 @@ body{
   font-size: 24px;
   font-weight: normal;
   font-family: 'Circular';
+  transition: all 0.3s ease;
   }
 .navigation .item:hover {
-  color: #ff7583;
+  color: #e1e1e1;
   text-decoration: none;
-  transition: all 0.3s ease 0.1s;
 }
 
 
