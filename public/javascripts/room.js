@@ -169,7 +169,11 @@ function updateWriters(writerNames) {
     writerName = writerNames[idx];
     newContribution = $('.writers-item').first().clone();
     newContribution.removeClass('empty');
-    newContribution.text(writerName);
+    var badgeText = idx === 0
+      ? 'current writer'
+      : getOrdinal(idx + 1);
+    newContribution.find('.badge').text(badgeText);
+    newContribution.find('.writer').text(writerName);
     //console.log('new contribution:');
     //console.log(newContribution);
     parent.append(newContribution);
@@ -186,7 +190,11 @@ function updateWaiters(waiterNames) {
     waiterName = waiterNames[idx];
     newContribution = $('.waiters-item').first().clone();
     newContribution.removeClass('empty');
-    newContribution.text(waiterName);
+    var badgeText = idx === 0
+      ? 'current writer'
+      : getOrdinal(idx + 1);
+    newContribution.find('.badge').text(badgeText);
+    newContribution.find('.writer').text(waiterName);
     //console.log('new contribution:');
     //console.log(newContribution);
     parent.append(newContribution);
@@ -236,4 +244,11 @@ function nearBottomOfPage() {
   var bottomDocument = $(document).height();
   //console.log('bottoms:', bottomWindow, bottomDocument, proximityThreshold);
   return bottomWindow >= bottomDocument - proximityThreshold;
+}
+
+// Stolen from:
+// http://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
+function getOrdinal(n) {
+  var s=["th","st","nd","rd"], v=n%100;
+  return n+(s[(v-20)%10]||s[v]||s[0]);
 }
