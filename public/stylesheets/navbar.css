@@ -280,3 +280,12 @@ body{
 .fa-google-plus:before {
     padding-right: 6px;
 }
+.fa-google-plus {
+  border: none;
+  outline: none;
+  background-color: #2196F3;
+  transition: background-color 0.3s ease;
+}
+.fa-google-plus:hover {
+  background-color: #42A5F5;
+}
