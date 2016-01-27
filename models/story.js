@@ -24,6 +24,9 @@ var storySchema = new mongoose.Schema({
 
 // virtuals
 storySchema.virtual('firstChars').get(function () {
+  if (this.text.split(" ")[0].length>60){
+    return this.text.slice(1,60) + '...'
+  }
   return this.text.split(/\s+/).slice(0, 10).join(' ') + '...';
 });
 
