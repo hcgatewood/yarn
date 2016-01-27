@@ -74,6 +74,7 @@ body {
 }
 .new-story-prompt > * {
   margin: 5px auto;
+  transition: color 0.3s ease;
 }
 .meta-prompt-no-contributions {
   color: gray;

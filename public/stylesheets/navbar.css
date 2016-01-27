@@ -160,7 +160,11 @@ body{
   text-align: center;
   font-size:15px;
   color: #329ca9;
-  z-index: 11
+  z-index: 11;
+  transition: color 0.3s ease;
+}
+#login_footer:hover {
+  color: gray;
 }
 
 .signin-btn{
