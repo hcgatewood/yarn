@@ -22,8 +22,8 @@ $(document).ready(function() {
     $(".follow_btn").mouseup(function (event) {
       var $this = $(this);
       event.preventDefault();
-      if (follows=='false'){
-        follows = true
+      if (follows==='false'){
+        follows = 'true'
         $this.text('Following')
         $this.addClass('btn-primary2')
         $this.removeClass('btn-primary')
@@ -34,7 +34,7 @@ $(document).ready(function() {
           follower:follower
               }); }
       else{
-        follows = false
+        follows = 'false'
         $this.text('Follow');
         $this.addClass('btn-primary')
         $this.removeClass('btn-primary2')

@@ -1,17 +1,6 @@
 
 $(document).ready(function(){
   if (typeof id === 'undefined') id = '';
-  window.onresize = function(event) {
-    var win = $(this); //this = window
-    if (win.height() >= 820) {
-      ('.footer').css({
-        position: 'static',
-        bottom: 'auto',
-        left: 'auto'
-      });
-      //if (win.width() >= 1280) { [> ... <] }
-    }
-  }
 
   $('.autoplay').slick({
     slidesToShow: 3,
@@ -37,20 +26,25 @@ $(document).ready(function(){
     var rand=Math.floor(Math.random() * 9) + 1  
   if (idx%4==0) {
       if(url==id){
-       $('.one').append("<a href='/user/" + url + "'><div class='block1'><img src='../siteArt/userYarn"+rand+".svg'>" +"You!"+"</img></div>") 
+       $('.one').append("<a href='/user/" + url + "'><div class='block1'>
+        <img src='../siteArt/userYarn"+rand+".svg'>" +"You!"+"</img></div>") 
       }
       else{
-      $('.one').append("<a href='/user/" + url + "'><div class='block1'><img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
+      $('.one').append("<a href='/user/" + url + "'><div class='block1'>
+        <img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
       }
     }
     if (idx%4==1) {
-      $('.two').append("<a href='/user/" + url + "'><div class='block1'><img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
+      $('.two').append("<a href='/user/" + url + "'><div class='block1'>
+        <img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
     }
     if (idx%4==2) {
-      $('.three').append("<a href='/user/" + url + "'><div class='block1'><img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
+      $('.three').append("<a href='/user/" + url + "'><div class='block1'>
+        <img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
     }
     if (idx%4==3) {
-      $('.four').append("<a href='/user/" + url + "'><div class='block1'><img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
+      $('.four').append("<a href='/user/" + url + "'><div class='block1'>
+        <img src='../siteArt/userYarn"+rand+".svg''>" +name+"</img></div>")
     }
   }
   
