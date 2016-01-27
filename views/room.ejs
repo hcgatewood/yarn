@@ -19,7 +19,12 @@
     <div class='room-container'>
       <div class='story-container'>
         <div class='main-story'>
-          <div class='new-story-prompt meta-prompt'>No contributions to this story right now :(</div>
+          <div class='new-story-prompt meta-prompt'>
+            <div class='meta-prompt-no-contributions'>No contributions right now :(</div>
+            <% if (user) { %>
+            <a class='join-room meta-prompt-join invisible-as-writer'>Join this story to start creating.</a>
+            <% } %>
+          </div>
           <div class='contribution empty'>
             <div class='contribution-username'></div>
             <div class='contribution-text'></div>

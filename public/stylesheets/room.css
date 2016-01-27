@@ -72,6 +72,19 @@ body {
   text-align: center;
   margin-bottom: 30px;
 }
+.new-story-prompt > * {
+  margin: 5px auto;
+}
+.meta-prompt-no-contributions {
+  color: gray;
+}
+.meta-prompt-join {
+  color: #329ca9;
+  cursor: pointer;
+}
+.meta-prompt-join:hover {
+  color: gray;
+}
 .remaining-turns {
   margin-top: 30px;
 }
