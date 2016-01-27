@@ -136,8 +136,8 @@ app.io.on('connection', function (socket) {
   }) 
 
   socket.on('join room', function (data) {
-    Room.addReader(data.roomId, data.userId);
     socket.join(data.roomId);
+    Room.addReader(data.roomId, data.userId);
   });
   socket.on('leaving room', function (data) {
     Room.removeReader(data.roomId, data.userId);

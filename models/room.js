@@ -252,20 +252,23 @@ module.exports = function (app) {
 
   // add reader to the room
   roomSchema.statics.addReader = function (roomId, userId) {
-    if (userId) {
-      //console.log('adding reader:', roomId, userId);
-      this.findById(roomId, function (err, room) {
-        if (err) {
-          console.log('err:', err);
-          return;
-        }
-        room.readers.addToSet(userId);
-        room.numReaders = room.readers.length;
-        room.save(function (err) {if (err) console.log('err:', err)});
+    this.findById(roomId, function (err, room) {
+      if (err) {
+        console.log('err:', err);
+        return;
+      }
+      if (userId) room.readers.addToSet(userId);
+      room.numReaders = room.readers.length;
+      room.save(function (err) {if (err) console.log('err:', err)});
+      app.io.to(roomId).emit('turn update', {
+        orderedWriters: room.orderedWriters,
+        currentWriter: room.orderedWriters[0],
+        writerNames: room.orderedWriterNames,
+        waiterNames: room.orderedWaiterNames,
+        recentStory: room.recentlyPublishedStoryId,
+        remainingTurns: room.totalTurns - room.currentTurns
       });
-    } else {
-      console.log('not adding reader');
-    }
+    });
   }
 
   // remove reader from the room

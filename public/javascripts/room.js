@@ -12,7 +12,7 @@ $(document).ready(function () {
   handleWriterStatus();
 
   // TODO assign this intentionally
-  var secondsLeft = 120;
+  var secondsLeft = -1;
   var showTime = false;
   var pathname = window.location.pathname;
   var roomName = _.last(pathname.split('/'));
@@ -153,9 +153,11 @@ $(document).ready(function () {
     var roomTime = (showTime === true) ? time : '';
     var metaTime = (showTime === true) ? time : 'current writer';
     $('.additions-meta-timer').text(roomTime);
-    $('.writers-panel').first()
-      .find('.writers-item').not('.empty').first()
-      .find('.badge').text(metaTime);
+    var badge = $('.writers-panel').first()
+      .find('.writers-item').not('.empty').first().find('.badge')
+    if (showTime === true) {
+      badge.text(metaTime);
+    }
   }
 
 });
@@ -171,6 +173,14 @@ function updateWriters(writerNames) {
   var parent = $('.writers-panel');
   var writerName;
   var newContribution;
+  if (writerNames.length === 0) {
+    writerName = 'None right now';
+    newContribution = $('.writers-item').first().clone();
+    newContribution.removeClass('empty');
+    newContribution.find('.badge').text(':(');
+    newContribution.find('.writer').text(writerName);
+    parent.append(newContribution);
+  }
   for (var idx = 0; idx < writerNames.length; idx ++) {
     writerName = writerNames[idx];
     newContribution = $('.writers-item').first().clone();
