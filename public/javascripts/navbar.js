@@ -34,7 +34,8 @@ $(document).ready(function(){
         password:$('#pass').val(),
         //_id: _id
       },
-    }).done(function (_id){window.location='/user/'+_id});
+    }).done(function (_id){window.location='/rooms/main'});
+    //}).done(function (_id){window.location='/user/'+_id});
   });
 
   $('.sp').click(function(e){
@@ -46,7 +47,8 @@ $(document).ready(function(){
         username: $('#us').val(),
         password: $('#pass').val()
       },
-    }).done(function (_id){window.location='/user/'+_id});
+    }).done(function (_id){window.location='/rooms/main'});
+    //}).done(function (_id){window.location='/user/'+_id});
   });
 
   // close overlay with <esc>

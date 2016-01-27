@@ -189,7 +189,8 @@ module.exports = function (app, passport) {
         passport.authenticate('facebook', {failureRedirect : '/'}),
           function (req, res){
             if (req.user){
-            res.redirect('/user/'+req.user._id)
+            //res.redirect('/user/'+req.user._id)
+              res.redirect('/rooms/main');
             }
           }
         );
@@ -203,7 +204,8 @@ module.exports = function (app, passport) {
             passport.authenticate('google', {failureRedirect : '/'}),
             function (req, res){
               if (req.user){
-              res.redirect('/user/'+req.user._id)
+              //res.redirect('/user/'+req.user._id)
+              res.redirect('/rooms/main');
         }
     });
   // GET login
