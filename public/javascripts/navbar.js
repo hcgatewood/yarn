@@ -14,6 +14,10 @@ $(document).ready(function(){
     $(".overlay, #modal2").show();
   });
 
+  $('.yarn-logo').click(function () {
+    window.location = '/';
+  });
+
   //$('sign-in').click(function() {
     //$.ajax({
       //url: '/login',

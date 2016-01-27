@@ -42,6 +42,7 @@ body{
   margin-bottom: 0px;
 }
 .yarn-logo {
+  cursor: pointer;
   vertical-align: top;
   height: auto;
   width: auto;
