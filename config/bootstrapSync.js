@@ -8,7 +8,7 @@ module.exports = function (app) {
     // Boostrap room data synchronously
     // NOTE: deletes db.rooms data
     reloadRoomData: function (room, story, callback) {
-      var roomTextDir = 'bootstrap-data/room-text';
+      var roomTextDir = './bootstrap-data/room-text';
       var filenames = fs.readdirSync(roomTextDir);
       var filePath;
       var filename;
