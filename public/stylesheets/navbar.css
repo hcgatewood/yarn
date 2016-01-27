@@ -9,6 +9,9 @@ body{
   border-color: #329ca9;
   border:none;
 }
+.signin:hover {
+  cursor: pointer;
+}
 .navbar {
   height: auto;
   width: 100%; /*navbar fills width of page*/
