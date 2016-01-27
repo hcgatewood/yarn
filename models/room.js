@@ -213,7 +213,6 @@ module.exports = function (app) {
           writerNames: room.orderedWriterNames,
           waiterNames: room.orderedWaiterNames,
           recentStory: room.recentlyPublishedStoryId,
-          turnLenMs: room.turnLenMs,
           remainingTurns: room.totalTurns - room.currentTurns
         });
       });
@@ -244,7 +243,6 @@ module.exports = function (app) {
             writerNames: room.orderedWriterNames,
             waiterNames: room.orderedWaiterNames,
             recentStory: room.recentlyPublishedStoryId,
-            turnLenMs: room.turnLenMs,
             remainingTurns: room.totalTurns - room.currentTurns
           });
         });

@@ -100,8 +100,11 @@ $(document).ready(function () {
     for (var idx = 0; idx < data.orderedWriters.length; idx++) {
       if (data.orderedWriters[idx] == userId) isWriter = true;
     }
-    secondsLeft = parseInt(data.turnLenMs/1000, 10);
-    updateTimer();
+    // update timers if a time len was sent
+    if (typeof data.turnLenMs !== 'undefined') {
+      secondsLeft = parseInt(data.turnLenMs/1000, 10);
+      updateTimer();
+    }
     updateTurnsRemaining(data.remainingTurns);
     handleWriterStatus();
   });
