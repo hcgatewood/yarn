@@ -187,36 +187,6 @@ userSchema.statics.removeFollowing = function (followeeId, followerId) {
 };
 
 
-
-//// add follower
-userSchema.methods.addFollow = function (followeeId) {
-  //this.follower.indexOf(followerId)> -1
-  if (!(this.following.indexOf(followeeId)> -1)){
-  this.following.push(followeeId);
-  }
-  this.save()
-}
-
-userSchema.methods.addFollower = function (followerId) {
-  if (!(this.follower.indexOf(followerId)> -1)){
-  this.follower.push(followerId);
-  }
-  this.save()
-
-}
-
-
-////remove follower
-userSchema.methods.removeFollow = function (followeeId) {
-  this.following.remove(followeeId);
-  this.save()
-}
-
-userSchema.methods.removeFollower = function (followerId) {
-  this.follower.remove(followerId);
-  this.save()
-}
-
 //// add recently viewed story
 userSchema.methods.addRecentlyViewedStory = function (storyId) {
   this.recentlyViewedStories.push(storyId);

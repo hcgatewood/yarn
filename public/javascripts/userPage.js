@@ -8,50 +8,21 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-    // $(".user_modal").hide();
-    // $(".yarn_btn").click(function(){
-   //   $(".user_modal").show();
-    // });
-    // $(".close").click(function(){
-   //   $(".user_modal").hide();
-    // });
-    // $(".first").click(function(){
-    //   $ajax({
-    //     url: "/user/:id",
-    //     type: "POST"
-    //   }).done(function() {
-    //     $( this ).addClass( "done" );
-    //     });
-    //   });
-
-
-    var escCode = 27;
-    $(document).keyup(function (keyEvent) {
-    if (keyEvent.keyCode == escCode) {
-      $('.user_modal').hide();
-    }
-  });
-
-      //if (user_id in page_id.follower) make button certain color
     var socket = io.connect();
-
-    console.log(follows)
 
     if (follows=='true'){
       $(".follow_btn").text('Following')
       $(".follow_btn").addClass('btn-primary2')
       $(".follow_btn").removeClass('btn-primary')
     } else {
-      console.log("IT IS FALSE")
       $(".follow_btn").text('Follow');
       $(".follow_btn").removeClass('btn-primary2')  
       $(".follow_btn").addClass('btn-primary')
     }
-    
     $(".follow_btn").mouseup(function (event) {
       var $this = $(this);
       event.preventDefault();
-      if (!follows){
+      if (follows=='false'){
         follows = true
         $this.text('Following')
         $this.addClass('btn-primary2')
@@ -63,11 +34,10 @@ $(document).ready(function() {
           follower:follower
               }); }
       else{
+        follows = false
         $this.text('Follow');
         $this.addClass('btn-primary')
         $this.removeClass('btn-primary2')
-
-        follows = false
         //Tell the server to unfollow page
           socket.emit('unfollow', {
             follows: follows,
