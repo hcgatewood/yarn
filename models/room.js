@@ -192,17 +192,19 @@ module.exports = function (app) {
           remainingTurns: room.totalTurns - room.currentTurns
         });
       }
+      // TODO commented below out so that everyone is a writer,
+      // but probably want to change it back eventually
       // add as either writer or reader
-      if (room.orderedWriters.length <= room.maxWriters) {
+      //if (room.orderedWriters.length <= room.maxWriters) {
         //console.log('ADDING ROOM WRITER');
-        room.orderedWriters.addToSet(userId);
-        room.orderedWriterNames.addToSet(username);
-        console.log('post-add writers:', room.orderedWriterNames);
-      } else {
-        //console.log('ADDING ROOM WAITER');
-        room.orderedWaiters.addToSet(userId);
-        room.orderedWaiterNames.addToSet(username);
-      }
+      room.orderedWriters.addToSet(userId);
+      room.orderedWriterNames.addToSet(username);
+      console.log('post-add writers:', room.orderedWriterNames);
+      //} else {
+        ////console.log('ADDING ROOM WAITER');
+        //room.orderedWaiters.addToSet(userId);
+        //room.orderedWaiterNames.addToSet(username);
+      //}
       room.save(function (err) {
         if (err) console.log('err:', err);
         app.io.to(roomId).emit('turn update', {
