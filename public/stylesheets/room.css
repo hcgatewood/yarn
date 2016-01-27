@@ -116,6 +116,9 @@ body {
 .empty {
   display: none;
 }
+.panel-default .writer {
+  color: #329ca9;
+}
 
 
 .btn-primary {
