@@ -5,10 +5,12 @@ body{
 
 .background-gif {
   position: absolute;
+  top: 3vh;
+  width: 1150px;
+  height: 100vh;
   z-index: -1;
-  top: 7vh;
-  width: 100vw;
-  opacity: 0.1;
+  min-width: 100vw;
+  opacity: 0.4;
 }
 
 .image{
